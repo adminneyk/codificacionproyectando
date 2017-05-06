@@ -45,6 +45,16 @@
             <?php
         }
         ?>
+        <?php
+        if (in_array('revision', $this->session->userdata('permisos')) == true) {
+            ?>
+            <li class="active">
+                <a href="<?= base_url() ?>revision">Revision de Entregable</a>
+            </li>
+            <?php
+        }
+        ?>    
+            
 
 
         <li>

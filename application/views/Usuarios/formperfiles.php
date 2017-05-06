@@ -5,13 +5,13 @@ $permisos = "";
 $id = "";
 $arraypermisos = array();
 if (isset($_GET['id']) && isset($listaperfiles)) {
-    $id=$_GET['id'];
+    $id = $_GET['id'];
     foreach ($listaperfiles->result() as $perfil) {
         $idpefil = $perfil->id_perfil;
         $nombreperfil = $perfil->nombre_perfil;
         $permisos = $perfil->permisos;
     }
-    
+
 
     $permisos = explode(",", $permisos);
     for ($y = 0; $y < count($permisos); $y++) {
@@ -61,6 +61,12 @@ $dataparametrizacion = array(
     'value' => 'parametrizacion',
     'checked' => validar('parametrizacion', $arraypermisos)
 );
+$datarevision = array(
+    'name' => 'permisos[]',
+    'id' => 'permisos[]',
+    'value' => 'revision',
+    'checked' => validar('revision', $arraypermisos)
+);
 
 echo form_open(base_url() . 'perfiles/validar', $arrayform);
 ?>
@@ -74,9 +80,10 @@ echo form_open(base_url() . 'perfiles/validar', $arrayform);
         <div class="form-group">
             <label class="col-md-4 control-label" for="textinput">Nombre de Perfil</label>  
             <div class="col-md-4">
-<?php echo form_input($arrayperfil);
-echo form_error('clave', '<div class="alert alert-danger">', '</div>');
-?>
+                <?php
+                echo form_input($arrayperfil);
+                echo form_error('clave', '<div class="alert alert-danger">', '</div>');
+                ?>
             </div>
         </div>
 
@@ -86,9 +93,9 @@ echo form_error('clave', '<div class="alert alert-danger">', '</div>');
             <div class="col-md-4">
                 <div class="checkbox">
                     <label for="checkboxes-0">
-<?php
-echo form_checkbox($dataperfiles);
-?>
+                        <?php
+                        echo form_checkbox($dataperfiles);
+                        ?>
                     </label>
                 </div>
             </div>
@@ -98,9 +105,9 @@ echo form_checkbox($dataperfiles);
             <div class="col-md-4">
                 <div class="checkbox">
                     <label for="checkboxes-0">
-<?php
-echo form_checkbox($datausuarios);
-?>
+                        <?php
+                        echo form_checkbox($datausuarios);
+                        ?>
                     </label>
                 </div>
             </div>
@@ -110,9 +117,9 @@ echo form_checkbox($datausuarios);
             <div class="col-md-4">
                 <div class="checkbox">
                     <label for="checkboxes-0">
-<?php
-echo form_checkbox($dataideas);
-?>
+                        <?php
+                        echo form_checkbox($dataideas);
+                        ?>
                     </label>
                 </div>
             </div>
@@ -122,9 +129,9 @@ echo form_checkbox($dataideas);
             <div class="col-md-4">
                 <div class="checkbox">
                     <label for="checkboxes-0">
-<?php
-echo form_checkbox($datareportes);
-?>
+                        <?php
+                        echo form_checkbox($datareportes);
+                        ?>
                     </label>
                 </div>
             </div>
@@ -135,9 +142,22 @@ echo form_checkbox($datareportes);
             <div class="col-md-4">
                 <div class="checkbox">
                     <label for="checkboxes-0">
-<?php
-echo form_checkbox($dataparametrizacion);
-?>
+                        <?php
+                        echo form_checkbox($dataparametrizacion);
+                        ?>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="checkboxes">REVISIONES</label>
+            <div class="col-md-4">
+                <div class="checkbox">
+                    <label for="checkboxes-0">
+                        <?php
+                        echo form_checkbox($datarevision);
+                        ?>
                     </label>
                 </div>
             </div>
@@ -152,6 +172,6 @@ echo form_checkbox($dataparametrizacion);
             </div>
         </div>
     </fieldset>
-    <input type="hidden" name="id" id="id" value="<?=$id;?>"> 
+    <input type="hidden" name="id" id="id" value="<?= $id; ?>"> 
 </form>
 <?php ?>
