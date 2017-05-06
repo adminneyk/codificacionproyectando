@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 //$config['base_url'] = 'http://localhost/proyectando/proyectando/CodeIgniter/index.php/';
 //CASA
- $config['base_url'] = 'http://localhost/miproyectando';
+ $config['base_url'] = 'http://localhost/Proyectando';
 /*
 |--------------------------------------------------------------------------
 | Index File
