@@ -22,21 +22,18 @@ class Parametrizacion_model extends CI_Model {
         }
     }
 
-    public function guardar($nombre, $permisos, $id = 0) {
-        $lpermisos = "";
-        for ($y = 0; $y < count($permisos); $y++) {
-            $lpermisos .= $permisos[$y] . ",";
-        }
-        $lpermisos = substr($lpermisos, 0, -1);
+    public function guardar($nombrepara,$descritarea,$estado,$respo,  $id = 0) {
         $data = array(
-            'nombre_perfil' => $nombre,
-            'permisos' => $lpermisos
+            'nom_parametrizacion' => $nombrepara,
+            'descripcion_parametrizacion' => $descritarea,
+            'estado' => $estado,
+            'id_responsable' => $respo
         );
         if ($id > 0) {
-            $this->db->where('id_perfil', $id);
-            return $this->db->update('perfiles', $data);
+            $this->db->where('id_parametrizacion', $id);
+            return $this->db->update('parametrizaciones', $data);
         } else {
-            return $this->db->insert('perfiles', $data);
+            return $this->db->insert('parametrizaciones', $data);
         }
     }
 

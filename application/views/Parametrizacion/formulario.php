@@ -1,4 +1,45 @@
-<form class="form-horizontal">
+<?php 
+$nombrepara = "";
+$descripcion = "";
+$seleccionado = 0;
+$id ="";
+
+if (!isset($noid)) {
+    foreach ($parametrizaciones->result() as $parame) {
+        $nombrepara = $parame->nom_parametrizacion;
+        $descripcion = $parame->descripcion_parametrizacion;
+        $seleccionado = $parame->estado;
+        $id = $parame->id_parametrizacion;
+    }
+}
+/*SE CARGA EL FORMULARIO  Y SUS CAMPOS*/
+$arrayform = array(
+    "class" => "form-horizontal"
+);
+
+$arrayparame = array("class" => "form-control",
+    "id" => "nombrepara",
+    "name" => "nombrepara",
+    "placeholder" => "Nombre de Parametrización",
+    "value" => $nombrepara);
+$datatextarea = array(
+        'name'        => 'descritarea',
+        'id'          => 'descritarea',
+        'value'       => $descripcion,
+        'rows'        => '10',
+        'cols'        => '30',
+        'class'       => 'form-control'
+    );
+$options = array(
+        '0'         => 'NO PUBLICO',
+        '1'           => 'PUBLICADO'
+);
+$selected = array($seleccionado);
+echo form_open(base_url() . 'parametrizacion/validar', $arrayform);
+
+/**/
+?>
+
 <fieldset>
 
 <!-- Form Name -->
@@ -8,32 +49,40 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Nombre de Parametrizacion</label>  
   <div class="col-md-4">
-  <input id="textinput" name="textinput" placeholder="placeholder" class="form-control input-md" type="text">
+  <?php
+                echo form_input($arrayparame);
+                echo form_error('nombrepara', '<div class="alert alert-danger">', '</div>');
+                ?>
   </div>
 </div>
 <!-- Textarea -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="textarea">Descripcion</label>
   <div class="col-md-4">                     
-    <textarea class="form-control" id="textarea" name="textarea">default text</textarea>
+    <?php
+                echo form_textarea($datatextarea);
+                echo form_error('descritarea', '<div class="alert alert-danger">', '</div>');
+                ?>
   </div>
 </div>
+
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">Publicar </label>
   <div class="col-md-4">
-    <select id="selectbasic" name="selectbasic" class="form-control">
-      <option value="1">Option one</option>
-      <option value="2">Option two</option>
-    </select>
+   
+        <?php 
+            echo form_dropdown('publicacion', $options, $selected,'class="form-control" id="publicacion"');
+        ?>
   </div>
 </div>
 <!-- Button (Double) -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="button1id"></label>
   <div class="col-md-8">
-    <button id="button1id" name="button1id" class="btn btn-success">Good Button</button>
-    <button id="button2id" name="button2id" class="btn btn-danger">Scary Button</button>
+      <input type="hidden" name="id" id="id" value="<?= $id; ?>"> 
+    <button id="button1id" name="button1id" class="btn btn-success">GUARDAR</button>
+    <a href="<?= base_url() ?>parametrizacion" class="btn btn-dange">Volver</a>
   </div>
 </div>
 </fieldset>
