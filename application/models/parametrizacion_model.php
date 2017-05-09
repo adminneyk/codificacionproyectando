@@ -8,11 +8,11 @@ class Parametrizacion_model extends CI_Model {
         parent::__construct();
     }
 
-    public function obtenerPerfiles($perfil = 0) {
-        if ($perfil > 0) {
-            $query = $this->db->get_where('perfiles', array('id_perfil' => $perfil));
+    public function obtenerParametrizacion($idparametro = 0) {
+        if ($idparametro > 0) {
+            $query = $this->db->get_where('parametrizaciones', array('id_parametrizacion' => $idparametro));
         } else {
-            $query = $this->db->get('perfiles');
+            $query = $this->db->get('parametrizaciones');
         }
         //echo  $this->db->last_query();
         if ($query->num_rows() > 0) {

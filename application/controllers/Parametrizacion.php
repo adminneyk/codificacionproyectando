@@ -10,30 +10,25 @@ class Parametrizacion extends CI_Controller {
     }
     	public function index()
 	{
-            $this->load->view('Parametrizacion/index');
+            $datos['parametrizaciones'] = $this->parametrizacion_model->obtenerParametrizacion();
+            $this->load->view('Parametrizacion/index',$datos);
             $this->load->view('footer');
 	}
         public function formulario()
 	{
-            
-            if(isset($_GET['id']))
-            {
-                $id = $_GET['id'];
-                $datos['listaperfiles'] = $this->perfil_model->obtenerPerfiles($id);
-            } else {
-                $id = 0;
-                $datos[]="";
-            }
-            
-            $this->load->view('Usuarios/formperfiles',$datos);
+            $this->load->view('Parametrizacion/formulario');
             $this->load->view('footer');
 	}
-        public function validar()
+        public function administracion()
 	{
-            $id = $this->input->post('id');
-            $nomperfil = $this->input->post('perfil');
-            $perfiles = $this->input->post('permisos');
-            $this->perfil_model->guardar($nomperfil,$perfiles,$id);
-            redirect(base_url().'perfiles');
-        }
+            $this->load->view('Parametrizacion/administracion');
+            $this->load->view('footer');
+	}
+        
+        public function formadministracion()
+	{
+            $this->load->view('Parametrizacion/formadministracion');
+            $this->load->view('footer');
+	}
+        
 }
