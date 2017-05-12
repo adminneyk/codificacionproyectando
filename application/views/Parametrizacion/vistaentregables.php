@@ -1,3 +1,9 @@
+<ol class="breadcrumb">
+  <li><a href="<?=base_url()?>home">Home</a></li>
+  <li><a href="<?=base_url()?>parametrizacion">Mis Parametrizaciones</a></li>
+  <li><a href="<?=base_url()?>parametrizacion/formulariofases/<?=$idparametrizacion?>">Consolidado  de Actividades</a></li>
+  <li class="active">Entregables Configurados</li>
+</ol>
 <fieldset>
 	<legend>Entregables Configurados</legend>
 
@@ -34,8 +40,7 @@ if (empty($entregables)) {
             } else {
                 echo "Inactivo";
                 } ?></td>
-            <td> <a href="<?= base_url()?>parametrizacion/adminentregables/<?=$idactividad?>/<?=$idparametrizacion?>/<?=$listaentregables->id_param_entragable; ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a></td>
-            <td> <a href="<?= base_url()?>parametrizacion/adminentregables/<?=$idactividad?>/<?=$idparametrizacion?>/<?=$listaentregables->id_param_entragable?>"><span class="glyphicon glyphicon-list-alt"></span> Configurar</a></td>
+            <td> <a href="<?= base_url()?>parametrizacion/formentregables/<?=$idactividad?>/<?=$idparametrizacion?>/<?=$listaentregables->id_param_entragable; ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a></td>
         </tr>
         <?php
     }

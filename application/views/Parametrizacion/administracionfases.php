@@ -1,5 +1,10 @@
-<?php 
-foreach ($datos as $key => $listdatos) { ?>
+<ol class="breadcrumb">
+  <li><a href="<?=base_url()?>home">Home</a></li>
+  <li><a href="<?=base_url()?>parametrizacion">Mis Parametrizaciones</a></li>
+  <li class="active">Consolidado  de Actividades</li>
+</ol>
+<legend>Consolidado  de Actividades</legend>
+<?php foreach ($datos as $key => $listdatos) { ?>
 <div class="panel panel-default">
     <div class="panel-heading">Fase <?php echo $listdatos['nombrefase'];?> </div>
     <div class="panel-body">

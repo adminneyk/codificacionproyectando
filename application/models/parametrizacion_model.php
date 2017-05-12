@@ -64,6 +64,21 @@ public function obtenerActividades($idparametro = 0) {
         }
     }
 
+    public function obtenerEntregables($idactividad,$id_parametrizacion ,$id_entregable = 0) {
+        if ($id_entregable == 0) {
+            $query = $this->db->get_where('parame_entrable', array('id_actividad' => $idactividad, 
+                                                                    'id_parametrizacion' => $id_parametrizacion));
+        } else {
+            $query = $this->db->get('parame_entrable');
+        }
+        //echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
+
 
 
 }

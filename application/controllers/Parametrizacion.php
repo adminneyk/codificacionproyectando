@@ -67,10 +67,36 @@ class Parametrizacion extends CI_Controller {
             $this->load->view('footer');
 	}
         
-        public function formadministracion()
+    public function adminentregables()
 	{
-            $this->load->view('Parametrizacion/formadministracion');
+            $idactividad = $this->uri->segment(3, 0);
+            $idparametrizacion = $this->uri->segment(4, 0);
+            $datos['entregables'] = $this->parametrizacion_model->obtenerEntregables($idactividad,$idparametrizacion);
+            
+                $datos['idparametrizacion'] = $idparametrizacion;
+                $datos['idactividad'] = $idactividad;
+            $this->load->view('Parametrizacion/vistaentregables',$datos);
             $this->load->view('footer');
 	}
+    public function formentregables()
+    {
+            $idactividad = $this->uri->segment(3, 0);
+            $idparametrizacion = $this->uri->segment(4, 0);
+            $identregable = $this->uri->segment(5, 0);
+            if ($identregable){
+                $datos['entregables'] = $this->parametrizacion_model->obtenerEntregables(
+                    $idactividad,
+                    $idparametrizacion,
+                    $identregable
+                );
+                $datos['tipo'] = "A";     
+            } else {
+                $datos['tipo'] = "C";
+            }
+            $datos['idparametrizacion'] = $idparametrizacion;
+            $datos['idactividad'] = $idactividad;
+            $this->load->view('Parametrizacion/formularioentregables',$datos);
+            $this->load->view('footer');
+    }
         
 }
