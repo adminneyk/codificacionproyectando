@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-05-2017 a las 05:44:59
+-- Tiempo de generación: 13-05-2017 a las 00:01:53
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -19,6 +19,9 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyectando`
 --
+DROP TABLE `proyectando`;
+CREATE DATABASE IF NOT EXISTS `proyectando` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `proyectando`;
 
 -- --------------------------------------------------------
 
@@ -26,55 +29,37 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `actividad`
 --
 
+DROP TABLE IF EXISTS `actividad`;
 CREATE TABLE `actividad` (
   `id_actividad` int(11) NOT NULL COMMENT 'Identificador de la etapa',
   `nombre_actividad` varchar(100) COLLATE utf16_spanish_ci NOT NULL COMMENT 'Nombre de la etapa ',
   `id_fase` int(11) NOT NULL,
-  `descripcion_actividad` text COLLATE utf16_spanish_ci NOT NULL,
-  `mensaje_ayuda` varchar(100) COLLATE utf16_spanish_ci NOT NULL,
-  `version` varchar(20) COLLATE utf16_spanish_ci NOT NULL,
-  `contenido` text COLLATE utf16_spanish_ci NOT NULL
+  `descripcion_actividad` text COLLATE utf16_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `actividad`
 --
 
-INSERT INTO `actividad` (`id_actividad`, `nombre_actividad`, `id_fase`, `descripcion_actividad`, `mensaje_ayuda`, `version`, `contenido`) VALUES
-(1, 'Introduccion', 1, '', '', '', ''),
-(2, 'Justificacion', 1, '', '', '', ''),
-(3, 'Descripción del Problema ', 2, '', '', '', ''),
-(4, 'Planteamiento del Problema ', 2, '', '', '', ''),
-(5, 'Tipo de investigación ', 3, '', '', '', ''),
-(6, 'Instrumentos de recoleccion', 3, '', '', '', ''),
-(7, 'Resultados de instrumentos', 3, '', '', '', ''),
-(8, 'Muestra Poblacional', 3, '', '', '', ''),
-(9, 'Resultados de la investigación', 3, '', '', '', ''),
-(10, 'Concluciones de la investigación', 3, '', '', '', ''),
-(11, 'Objetivos', 4, '', '', '', ''),
-(12, 'Alcance', 4, '', '', '', ''),
-(13, 'Limitaciones', 4, '', '', '', ''),
-(14, 'Agradecimientos', 5, '', '', '', ''),
-(15, 'Dedicatoria', 5, '', '', '', ''),
-(16, 'Resumen', 5, '', '', '', ''),
-(17, 'Recomendaciones', 5, '', '', '', ''),
-(18, 'Prospectiva', 5, '', '', '', '');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `entregable`
---
-
-CREATE TABLE `entregable` (
-  `id_entregable` int(11) NOT NULL,
-  `id_actividad` int(11) NOT NULL,
-  `id_parametrizacion` int(11) NOT NULL,
-  `estado` int(11) NOT NULL,
-  `porcentaje` float NOT NULL,
-  `mensaje_ayuda` text COLLATE utf16_spanish_ci NOT NULL,
-  `descripcion_entregable` text COLLATE utf16_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
+INSERT INTO `actividad` (`id_actividad`, `nombre_actividad`, `id_fase`, `descripcion_actividad`) VALUES
+(1, 'Introduccion', 1, ''),
+(2, 'Justificacion', 1, ''),
+(3, 'Descripción del Problema ', 2, ''),
+(4, 'Planteamiento del Problema ', 2, ''),
+(5, 'Tipo de investigación ', 3, ''),
+(6, 'Instrumentos de recoleccion', 3, ''),
+(7, 'Resultados de instrumentos', 3, ''),
+(8, 'Muestra Poblacional', 3, ''),
+(9, 'Resultados de la investigación', 3, ''),
+(10, 'Concluciones de la investigación', 3, ''),
+(11, 'Objetivos', 4, ''),
+(12, 'Alcance', 4, ''),
+(13, 'Limitaciones', 4, ''),
+(14, 'Agradecimientos', 5, ''),
+(15, 'Dedicatoria', 5, ''),
+(16, 'Resumen', 5, ''),
+(17, 'Recomendaciones', 5, ''),
+(18, 'Prospectiva', 5, '');
 
 -- --------------------------------------------------------
 
@@ -82,21 +67,23 @@ CREATE TABLE `entregable` (
 -- Estructura de tabla para la tabla `fases`
 --
 
+DROP TABLE IF EXISTS `fases`;
 CREATE TABLE `fases` (
   `id_fase` int(11) NOT NULL COMMENT 'identificador de la fase dela idea',
-  `nombre_fase` varchar(100) COLLATE utf16_spanish_ci NOT NULL COMMENT 'nombre de la fase de la idea'
+  `nombre_fase` varchar(100) COLLATE utf16_spanish_ci NOT NULL COMMENT 'nombre de la fase de la idea',
+  `descripcion` varchar(150) COLLATE utf16_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `fases`
 --
 
-INSERT INTO `fases` (`id_fase`, `nombre_fase`) VALUES
-(1, 'Registro de Idea'),
-(2, 'Analisis de Factibilidad'),
-(3, 'Metodologia de Investigación'),
-(4, 'Determinación del Alcanze'),
-(5, 'Consolidacion');
+INSERT INTO `fases` (`id_fase`, `nombre_fase`, `descripcion`) VALUES
+(1, 'Registro de Idea', ''),
+(2, 'Analisis de Factibilidad', ''),
+(3, 'Metodologia de Investigación', ''),
+(4, 'Determinación del Alcanze', ''),
+(5, 'Consolidacion', '');
 
 -- --------------------------------------------------------
 
@@ -104,6 +91,7 @@ INSERT INTO `fases` (`id_fase`, `nombre_fase`) VALUES
 -- Estructura de tabla para la tabla `grupos`
 --
 
+DROP TABLE IF EXISTS `grupos`;
 CREATE TABLE `grupos` (
   `id_grupo` int(11) NOT NULL,
   `nombre_grupo` varchar(100) COLLATE utf16_spanish_ci NOT NULL,
@@ -116,13 +104,14 @@ CREATE TABLE `grupos` (
 -- Estructura de tabla para la tabla `ideas`
 --
 
+DROP TABLE IF EXISTS `ideas`;
 CREATE TABLE `ideas` (
   `id_idea` int(11) NOT NULL COMMENT 'Identificador de la idea',
   `nombre_idea` varchar(100) COLLATE utf16_spanish_ci NOT NULL COMMENT 'Nombre de la idea',
   `id_grupo` int(11) NOT NULL COMMENT 'Identificador del grupo perteneciente',
   `id_linea` int(11) NOT NULL COMMENT 'Identificador de la linea tematica',
   `id_fase` int(11) NOT NULL,
-  `descripcion` text COLLATE utf16_spanish_ci NOT NULL
+  `descripcion_idea` text COLLATE utf16_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
 
 -- --------------------------------------------------------
@@ -131,6 +120,7 @@ CREATE TABLE `ideas` (
 -- Estructura de tabla para la tabla `lineas`
 --
 
+DROP TABLE IF EXISTS `lineas`;
 CREATE TABLE `lineas` (
   `id_linea` int(11) NOT NULL COMMENT 'Identificacion de la linea',
   `nombre_linea` varchar(100) COLLATE utf16_spanish_ci NOT NULL COMMENT 'Nombre de la linea',
@@ -150,6 +140,7 @@ INSERT INTO `lineas` (`id_linea`, `nombre_linea`, `descripcion_linea`) VALUES
 -- Estructura de tabla para la tabla `parametrizaciones`
 --
 
+DROP TABLE IF EXISTS `parametrizaciones`;
 CREATE TABLE `parametrizaciones` (
   `id_parametrizacion` int(11) NOT NULL,
   `nom_parametrizacion` varchar(100) NOT NULL,
@@ -173,23 +164,23 @@ INSERT INTO `parametrizaciones` (`id_parametrizacion`, `nom_parametrizacion`, `d
 -- Estructura de tabla para la tabla `parame_entrable`
 --
 
+DROP TABLE IF EXISTS `parame_entrable`;
 CREATE TABLE `parame_entrable` (
   `id_param_entragable` int(11) NOT NULL,
   `id_actividad` int(11) NOT NULL,
   `id_parametrizacion` int(11) NOT NULL,
   `nombre_entregable` varchar(100) NOT NULL,
   `descripcion_entregable` varchar(200) NOT NULL,
-  `fecha_inicial` date NOT NULL,
-  `fecha_final` date NOT NULL,
-  `texto_ayuda` text NOT NULL
+  `texto_ayuda` text NOT NULL,
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `parame_entrable`
 --
 
-INSERT INTO `parame_entrable` (`id_param_entragable`, `id_actividad`, `id_parametrizacion`, `nombre_entregable`, `descripcion_entregable`, `fecha_inicial`, `fecha_final`, `texto_ayuda`) VALUES
-(1, 1, 1, 'entregable ', 'descripcion del entrgable de los datos', '2017-05-01', '2017-05-31', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos');
+INSERT INTO `parame_entrable` (`id_param_entragable`, `id_actividad`, `id_parametrizacion`, `nombre_entregable`, `descripcion_entregable`, `texto_ayuda`, `estado`) VALUES
+(1, 1, 1, 'entregable ', 'descripcion del entrgable de los datos', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos', 0);
 
 -- --------------------------------------------------------
 
@@ -197,6 +188,7 @@ INSERT INTO `parame_entrable` (`id_param_entragable`, `id_actividad`, `id_parame
 -- Estructura de tabla para la tabla `perfiles`
 --
 
+DROP TABLE IF EXISTS `perfiles`;
 CREATE TABLE `perfiles` (
   `id_perfil` int(11) NOT NULL,
   `nombre_perfil` varchar(100) COLLATE utf16_spanish_ci NOT NULL,
@@ -218,6 +210,7 @@ INSERT INTO `perfiles` (`id_perfil`, `nombre_perfil`, `permisos`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `usuario` varchar(50) COLLATE utf16_spanish_ci NOT NULL,
@@ -240,6 +233,7 @@ INSERT INTO `usuario` (`id_usuario`, `usuario`, `clave`, `id_perfil`) VALUES
 -- Estructura de tabla para la tabla `version`
 --
 
+DROP TABLE IF EXISTS `version`;
 CREATE TABLE `version` (
   `id_version` int(11) NOT NULL,
   `contenidorevisado` text COLLATE utf16_spanish_ci NOT NULL,
@@ -255,6 +249,7 @@ CREATE TABLE `version` (
 -- Estructura de tabla para la tabla `vers_entre`
 --
 
+DROP TABLE IF EXISTS `vers_entre`;
 CREATE TABLE `vers_entre` (
   `id_informacion` int(11) NOT NULL,
   `id_version` int(11) NOT NULL,
@@ -271,15 +266,6 @@ CREATE TABLE `vers_entre` (
 ALTER TABLE `actividad`
   ADD PRIMARY KEY (`id_actividad`),
   ADD KEY `fketapafase` (`id_fase`);
-
---
--- Indices de la tabla `entregable`
---
-ALTER TABLE `entregable`
-  ADD PRIMARY KEY (`id_entregable`),
-  ADD KEY `fkentregableetapa` (`id_actividad`),
-  ADD KEY `id_idea` (`id_parametrizacion`),
-  ADD KEY `id_parametrizacion` (`id_parametrizacion`);
 
 --
 -- Indices de la tabla `fases`
@@ -362,11 +348,6 @@ ALTER TABLE `vers_entre`
 ALTER TABLE `actividad`
   MODIFY `id_actividad` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la etapa', AUTO_INCREMENT=19;
 --
--- AUTO_INCREMENT de la tabla `entregable`
---
-ALTER TABLE `entregable`
-  MODIFY `id_entregable` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT de la tabla `fases`
 --
 ALTER TABLE `fases`
@@ -400,7 +381,7 @@ ALTER TABLE `parame_entrable`
 -- AUTO_INCREMENT de la tabla `perfiles`
 --
 ALTER TABLE `perfiles`
-  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
@@ -424,14 +405,7 @@ ALTER TABLE `vers_entre`
 -- Filtros para la tabla `actividad`
 --
 ALTER TABLE `actividad`
-  ADD CONSTRAINT `fketapafase` FOREIGN KEY (`id_fase`) REFERENCES `fases` (`id_fase`);
-
---
--- Filtros para la tabla `entregable`
---
-ALTER TABLE `entregable`
-  ADD CONSTRAINT `entregable_ibfk_1` FOREIGN KEY (`id_parametrizacion`) REFERENCES `ideas` (`id_idea`),
-  ADD CONSTRAINT `fkentregableetapa` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`);
+  ADD CONSTRAINT `actividad_ibfk_1` FOREIGN KEY (`id_fase`) REFERENCES `fases` (`id_fase`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `grupos`
@@ -470,8 +444,7 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `vers_entre`
 --
 ALTER TABLE `vers_entre`
-  ADD CONSTRAINT `vers_entre_ibfk_1` FOREIGN KEY (`id_version`) REFERENCES `version` (`id_version`),
-  ADD CONSTRAINT `vers_entre_ibfk_2` FOREIGN KEY (`id_entregable`) REFERENCES `entregable` (`id_entregable`);
+  ADD CONSTRAINT `vers_entre_ibfk_1` FOREIGN KEY (`id_version`) REFERENCES `version` (`id_version`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
