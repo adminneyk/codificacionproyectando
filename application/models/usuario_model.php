@@ -11,9 +11,9 @@ class Usuario_model extends CI_Model {
     public function login($documento, $clave) {
         $this->db->select('usuario.id_usuario,usuario.id_perfil,perfiles.nombre_perfil,perfiles.permisos');
         $this->db->from('usuario');
-        $this->db->join('perfiles', 'perfiles.id_perfil=usuario.id_usuario');
+        $this->db->join('perfiles', 'perfiles.id_perfil=usuario.id_perfil');
         $this->db->where('usuario.usuario', $documento);
-        //echo  $this->db->last_query();
+        $this->db->where('usuario.clave', $clave);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $data = $query->row();
