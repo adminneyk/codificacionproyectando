@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-05-2017 a las 13:45:13
+-- Tiempo de generación: 12-05-2017 a las 05:44:59
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -27,10 +27,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `actividad` (
-  `id_etapa` int(11) NOT NULL COMMENT 'Identificador de la etapa',
-  `nombre_etapa` varchar(100) COLLATE utf16_spanish_ci NOT NULL COMMENT 'Nombre de la etapa ',
+  `id_actividad` int(11) NOT NULL COMMENT 'Identificador de la etapa',
+  `nombre_actividad` varchar(100) COLLATE utf16_spanish_ci NOT NULL COMMENT 'Nombre de la etapa ',
   `id_fase` int(11) NOT NULL,
-  `descripcion_etapa` text COLLATE utf16_spanish_ci NOT NULL,
+  `descripcion_actividad` text COLLATE utf16_spanish_ci NOT NULL,
   `mensaje_ayuda` varchar(100) COLLATE utf16_spanish_ci NOT NULL,
   `version` varchar(20) COLLATE utf16_spanish_ci NOT NULL,
   `contenido` text COLLATE utf16_spanish_ci NOT NULL
@@ -40,7 +40,7 @@ CREATE TABLE `actividad` (
 -- Volcado de datos para la tabla `actividad`
 --
 
-INSERT INTO `actividad` (`id_etapa`, `nombre_etapa`, `id_fase`, `descripcion_etapa`, `mensaje_ayuda`, `version`, `contenido`) VALUES
+INSERT INTO `actividad` (`id_actividad`, `nombre_actividad`, `id_fase`, `descripcion_actividad`, `mensaje_ayuda`, `version`, `contenido`) VALUES
 (1, 'Introduccion', 1, '', '', '', ''),
 (2, 'Justificacion', 1, '', '', '', ''),
 (3, 'Descripción del Problema ', 2, '', '', '', ''),
@@ -69,7 +69,7 @@ INSERT INTO `actividad` (`id_etapa`, `nombre_etapa`, `id_fase`, `descripcion_eta
 CREATE TABLE `entregable` (
   `id_entregable` int(11) NOT NULL,
   `id_actividad` int(11) NOT NULL,
-  `id_idea` int(11) NOT NULL,
+  `id_parametrizacion` int(11) NOT NULL,
   `estado` int(11) NOT NULL,
   `porcentaje` float NOT NULL,
   `mensaje_ayuda` text COLLATE utf16_spanish_ci NOT NULL,
@@ -137,6 +137,13 @@ CREATE TABLE `lineas` (
   `descripcion_linea` text COLLATE utf16_spanish_ci NOT NULL COMMENT 'Descripcion de la linea'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `lineas`
+--
+
+INSERT INTO `lineas` (`id_linea`, `nombre_linea`, `descripcion_linea`) VALUES
+(1, 'Software', 'descripcion de la linea');
+
 -- --------------------------------------------------------
 
 --
@@ -157,7 +164,32 @@ CREATE TABLE `parametrizaciones` (
 
 INSERT INTO `parametrizaciones` (`id_parametrizacion`, `nom_parametrizacion`, `descripcion_parametrizacion`, `id_responsable`, `estado`) VALUES
 (1, 'Parametrizacion Inicial', 'Esta es una parametrizacion de un marco de proyevto inicial', 1, 1),
-(2, 'parametrizacion 001', 'Prueba de guardado', 1, 0);
+(2, 'parametrizacion 001', 'Prueba de guardado', 1, 1),
+(3, 'ptrueba de iniciacion', 'fdsfdsfdfdgfhgjhjhgfdsjuhygfdhgfrd', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `parame_entrable`
+--
+
+CREATE TABLE `parame_entrable` (
+  `id_param_entragable` int(11) NOT NULL,
+  `id_actividad` int(11) NOT NULL,
+  `id_parametrizacion` int(11) NOT NULL,
+  `nombre_entregable` varchar(100) NOT NULL,
+  `descripcion_entregable` varchar(200) NOT NULL,
+  `fecha_inicial` date NOT NULL,
+  `fecha_final` date NOT NULL,
+  `texto_ayuda` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `parame_entrable`
+--
+
+INSERT INTO `parame_entrable` (`id_param_entragable`, `id_actividad`, `id_parametrizacion`, `nombre_entregable`, `descripcion_entregable`, `fecha_inicial`, `fecha_final`, `texto_ayuda`) VALUES
+(1, 1, 1, 'entregable ', 'descripcion del entrgable de los datos', '2017-05-01', '2017-05-31', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos');
 
 -- --------------------------------------------------------
 
@@ -237,7 +269,7 @@ CREATE TABLE `vers_entre` (
 -- Indices de la tabla `actividad`
 --
 ALTER TABLE `actividad`
-  ADD PRIMARY KEY (`id_etapa`),
+  ADD PRIMARY KEY (`id_actividad`),
   ADD KEY `fketapafase` (`id_fase`);
 
 --
@@ -246,7 +278,8 @@ ALTER TABLE `actividad`
 ALTER TABLE `entregable`
   ADD PRIMARY KEY (`id_entregable`),
   ADD KEY `fkentregableetapa` (`id_actividad`),
-  ADD KEY `id_idea` (`id_idea`);
+  ADD KEY `id_idea` (`id_parametrizacion`),
+  ADD KEY `id_parametrizacion` (`id_parametrizacion`);
 
 --
 -- Indices de la tabla `fases`
@@ -280,7 +313,16 @@ ALTER TABLE `lineas`
 --
 ALTER TABLE `parametrizaciones`
   ADD PRIMARY KEY (`id_parametrizacion`),
-  ADD KEY `id_responsable` (`id_responsable`);
+  ADD KEY `id_responsable` (`id_responsable`),
+  ADD KEY `id_responsable_2` (`id_responsable`);
+
+--
+-- Indices de la tabla `parame_entrable`
+--
+ALTER TABLE `parame_entrable`
+  ADD PRIMARY KEY (`id_param_entragable`),
+  ADD KEY `id_parametrizacion` (`id_parametrizacion`),
+  ADD KEY `id_actividad` (`id_actividad`);
 
 --
 -- Indices de la tabla `perfiles`
@@ -318,7 +360,7 @@ ALTER TABLE `vers_entre`
 -- AUTO_INCREMENT de la tabla `actividad`
 --
 ALTER TABLE `actividad`
-  MODIFY `id_etapa` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la etapa', AUTO_INCREMENT=19;
+  MODIFY `id_actividad` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la etapa', AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT de la tabla `entregable`
 --
@@ -343,12 +385,17 @@ ALTER TABLE `ideas`
 -- AUTO_INCREMENT de la tabla `lineas`
 --
 ALTER TABLE `lineas`
-  MODIFY `id_linea` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion de la linea';
+  MODIFY `id_linea` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion de la linea', AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `parametrizaciones`
 --
 ALTER TABLE `parametrizaciones`
-  MODIFY `id_parametrizacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_parametrizacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `parame_entrable`
+--
+ALTER TABLE `parame_entrable`
+  MODIFY `id_param_entragable` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `perfiles`
 --
@@ -383,8 +430,8 @@ ALTER TABLE `actividad`
 -- Filtros para la tabla `entregable`
 --
 ALTER TABLE `entregable`
-  ADD CONSTRAINT `entregable_ibfk_1` FOREIGN KEY (`id_idea`) REFERENCES `ideas` (`id_idea`),
-  ADD CONSTRAINT `fkentregableetapa` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_etapa`);
+  ADD CONSTRAINT `entregable_ibfk_1` FOREIGN KEY (`id_parametrizacion`) REFERENCES `ideas` (`id_idea`),
+  ADD CONSTRAINT `fkentregableetapa` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`);
 
 --
 -- Filtros para la tabla `grupos`
@@ -405,6 +452,13 @@ ALTER TABLE `ideas`
 --
 ALTER TABLE `parametrizaciones`
   ADD CONSTRAINT `parametrizaciones_ibfk_1` FOREIGN KEY (`id_responsable`) REFERENCES `usuario` (`id_usuario`);
+
+--
+-- Filtros para la tabla `parame_entrable`
+--
+ALTER TABLE `parame_entrable`
+  ADD CONSTRAINT `parame_entrable_ibfk_1` FOREIGN KEY (`id_parametrizacion`) REFERENCES `parametrizaciones` (`id_parametrizacion`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `parame_entrable_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuario`

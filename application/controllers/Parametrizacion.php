@@ -44,9 +44,9 @@ class Parametrizacion extends CI_Controller {
                 $this->load->view("parametrizacion/formulario");  
               }
         }
-        public function administracion()
+        public function formulariofases()
 	{
-            $this->load->view('Parametrizacion/administracion');
+            $this->load->view('Parametrizacion/administracionfases');
             $this->load->view('footer');
 	}
         

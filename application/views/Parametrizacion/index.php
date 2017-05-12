@@ -26,6 +26,7 @@
                 echo "Publicada";
                 } ?></td>
             <td> <a href="<?= base_url()?>parametrizacion/formulario/<?=$parametros->id_parametrizacion; ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a></td>
+            <td> <a href="<?= base_url()?>parametrizacion/formulariofases/<?=$parametros->id_parametrizacion; ?>"><span class="glyphicon glyphicon-list-alt"></span> Configurar</a></td>
         </tr>
         <?php
     }
