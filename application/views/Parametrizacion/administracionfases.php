@@ -1,5 +1,7 @@
+<?php 
+foreach ($datos as $key => $listdatos) { ?>
 <div class="panel panel-default">
-    <div class="panel-heading">Fase 1</div>
+    <div class="panel-heading">Fase <?php echo $listdatos['nombrefase'];?> </div>
     <div class="panel-body">
         <table class="table table-striped">
             <thead>
@@ -11,9 +13,6 @@
                         Descripcion
                     </th>
                     <th>
-                        Actividad
-                    </th>
-                    <th>
                         Actividades Configuradas
                     </th>
                     <th>
@@ -22,20 +21,25 @@
                 </tr>
             </thead>
             <tr>
+            <?php foreach ($listdatos['actividades'] as $llave => $actividades) { ?>
+
+
                     <td>
-                        Actividad
+                        <?php echo $actividades['nombreactividad']; ?>
                     </td>
                     <td>
                         Descripcion
                     </td>
                     <td>
-                        Actividad
-                    </td>
-                    <td>
                       <span class="badge">42 Actividades Configuradas</span>
                     </td>
-                    <td> <a href="<?= base_url()?>parametrizacion/adminentregables/"><span class="glyphicon glyphicon-list-alt"></span> Configurar</a></td>
+                    <td> <a href="<?= base_url()?>parametrizacion/adminentregables/<?=$actividades['id_actividad']?>/<?=$id?>"><span class="glyphicon glyphicon-list-alt"></span> Configurar</a></td>
                 </tr>
+                <?php } ?>
         </table>
     </div>
 </div>
+ <?php
+}
+?>
+

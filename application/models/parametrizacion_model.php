@@ -37,6 +37,35 @@ class Parametrizacion_model extends CI_Model {
         }
     }
 
+    public function obtenerFases($idparametro = 0) {
+        if ($idparametro > 0) {
+            $query = $this->db->get_where('fases', array('id_fase' => $idparametro));
+        } else {
+            $query = $this->db->get('fases');
+        }
+        //echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
+public function obtenerActividades($idparametro = 0) {
+        if ($idparametro > 0) {
+            $query = $this->db->get_where('actividad', array('id_fase' => $idparametro));
+        } else {
+            $query = $this->db->get('actividad');
+        }
+        //echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
+
+
+
 }
 
 ?>

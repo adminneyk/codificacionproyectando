@@ -45,8 +45,25 @@ class Parametrizacion extends CI_Controller {
               }
         }
         public function formulariofases()
-	{
-            $this->load->view('Parametrizacion/administracionfases');
+	{       
+            $id = $this->uri->segment(3, 0);
+            $fases=$this->parametrizacion_model->obtenerFases();
+            $arrayfase=array();
+            foreach ($fases->result() as $listfases) {
+                $actividades=$this->parametrizacion_model->obtenerActividades($listfases->id_fase);
+                $arrayactividades=array();
+                foreach ($actividades->result() as $listactividades) {
+                    $arrayact = array('id_actividad' =>  $listactividades->id_actividad,'nombreactividad' =>  $listactividades->nombre_actividad);
+                        array_push($arrayactividades, $arrayact); 
+                }
+                  $array = array('id_fase' =>  $listfases->id_fase,
+                    'nombrefase' =>  $listfases->nombre_fase,
+                    'actividades' =>  $arrayactividades);
+                array_push($arrayfase, $array); 
+            }
+            $infor['datos']=$arrayfase;
+            $infor['id']=$id;
+            $this->load->view('Parametrizacion/administracionfases',$infor);
             $this->load->view('footer');
 	}
         
