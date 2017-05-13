@@ -21,8 +21,8 @@ if (empty($entregables)) {
 <table class="table table-condensed">
     <thead>
         <tr>
-            <th>Parametrizacion</th>
-            <th>Descripcion</th>
+            <th>Entregable</th>
+            <th>Descripcion de Entregable</th>
             <th>Estado</th>
             <th>Acciones</th>
 

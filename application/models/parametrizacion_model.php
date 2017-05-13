@@ -78,7 +78,28 @@ public function obtenerActividades($idparametro = 0) {
             return false;
         }
     }
-
+    public function guardarentregable($nomentregable,
+                        $descrientregable,
+                        $publicacion,
+                        $actividad,
+                        $parametrizacion,
+                        $textoayuda,
+                        $id) {
+        $data = array(
+            'id_actividad' => $actividad,
+            'id_parametrizacion' => $parametrizacion,
+            'nombre_entregable' => $nomentregable,
+            'descripcion_entregable' => $descrientregable,
+            'texto_ayuda ' => $textoayuda,
+            'estado ' => $publicacion
+        );
+        if ($id > 0) {
+            $this->db->where('id_param_entragable', $id);
+            return $this->db->update('parame_entrable', $data);
+        } else {
+            return $this->db->insert('parame_entrable', $data);
+        }
+    }
 
 
 }

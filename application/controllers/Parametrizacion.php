@@ -98,5 +98,34 @@ class Parametrizacion extends CI_Controller {
             $this->load->view('Parametrizacion/formularioentregables',$datos);
             $this->load->view('footer');
     }
+    
+    public function validarentregable()
+	{
+        print_r($_POST);
+        $nomentregable = $this->input->post('nomentregable');
+        $descrientregable = $this->input->post('descrientregable');
+        $publicacion = $this->input->post('publicacion');
+        $actividad = $this->input->post('actividad');   
+        $parametrizacion = $this->input->post('parametrizacion');
+        $textoayuda = $this->input->post('textoayuda');
+        $this->form_validation->set_rules('nomentregable', 'Nombre Parametrizacion', 'required|min_length[3]');
+        $this->form_validation->set_rules('descrientregable', 'Descripcion', 'required|min_length[3]');
+        $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+        if($this->form_validation->run() === true){
+                $this->parametrizacion_model->guardarentregable(
+                        $nomentregable,
+                        $descrientregable,
+                        $publicacion,
+                        $actividad,
+                        $parametrizacion,
+                        $textoayuda,
+                        $id
+                );
+                redirect(base_url().'parametrizacion/adminentregables/'.$actividad.'/'.$parametrizacion);  
+              }else{
+                $this->load->view("parametrizacion/formulario");  
+        }
+        
+        }
         
 }
