@@ -65,12 +65,12 @@ public function obtenerActividades($idparametro = 0) {
     }
     public function obtenerEntregables($idactividad,$id_parametrizacion ,$id_entregable = 0) {
         if ($id_entregable == 0) {
-            $query = $this->db->get_where('parame_entrable', array('id_actividad' => $idactividad, 
+            $query = $this->db->get_where('entregable', array('id_actividad' => $idactividad, 
                                                                     'id_parametrizacion' => $id_parametrizacion));
         } else {
-            $query = $this->db->get_where('parame_entrable', array('id_actividad' => $idactividad, 
+            $query = $this->db->get_where('entregable', array('id_actividad' => $idactividad, 
                                                                     'id_parametrizacion' => $id_parametrizacion,
-                                                                    'id_param_entragable' => $id_entregable));
+                                                                    'id_entregable' => $id_entregable));
         }
         //echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
@@ -95,16 +95,16 @@ public function obtenerActividades($idparametro = 0) {
             'estado ' => $publicacion
         );
         if ($id > 0) {
-            $this->db->where('id_param_entragable', $id);
-            return $this->db->update('parame_entrable', $data);
+            $this->db->where('id_entregable', $id);
+            return $this->db->update('entregable', $data);
         } else {
-            return $this->db->insert('parame_entrable', $data);
+            return $this->db->insert('entregable', $data);
         }
     }
         public function obtenerConteoActividades($idparametrizacion,$idactividad ) {
 
         $this->db->select('count(*) as conteo');
-        $this->db->from('parame_entrable');
+        $this->db->from('entregable');
         $this->db->where('id_actividad', $idactividad );
         $this->db->where('id_parametrizacion' ,  $idparametrizacion);
         $this->db->where('estado' ,  1);

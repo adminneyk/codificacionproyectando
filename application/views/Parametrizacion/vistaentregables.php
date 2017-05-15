@@ -39,7 +39,7 @@ if (empty($entregables)) {
             } else {
                 echo "Inactivo";
                 } ?></td>
-            <td> <a href="<?= base_url()?>parametrizacion/formentregables/<?=$idactividad?>/<?=$idparametrizacion?>/<?=$listaentregables->id_param_entragable; ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a></td>
+            <td> <a href="<?= base_url()?>parametrizacion/formentregables/<?=$idactividad?>/<?=$idparametrizacion?>/<?=$listaentregables->id_entregable; ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a></td>
         </tr>
         <?php
     }

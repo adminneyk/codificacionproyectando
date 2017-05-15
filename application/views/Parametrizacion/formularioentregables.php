@@ -13,7 +13,7 @@ foreach ($entregables->result() as $mientregable) {
         $nombreentregable = $mientregable->nombre_entregable ;
         $descripcion = $mientregable->descripcion_entregable;
         $seleccionado = $mientregable->estado;
-        $id = $mientregable->id_param_entragable;
+        $id = $mientregable->id_entregable;
         $descripciontextoayuda = $mientregable->texto_ayuda;
     }
 
