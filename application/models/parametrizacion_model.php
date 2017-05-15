@@ -63,13 +63,14 @@ public function obtenerActividades($idparametro = 0) {
             return false;
         }
     }
-
     public function obtenerEntregables($idactividad,$id_parametrizacion ,$id_entregable = 0) {
         if ($id_entregable == 0) {
             $query = $this->db->get_where('parame_entrable', array('id_actividad' => $idactividad, 
                                                                     'id_parametrizacion' => $id_parametrizacion));
         } else {
-            $query = $this->db->get('parame_entrable');
+            $query = $this->db->get_where('parame_entrable', array('id_actividad' => $idactividad, 
+                                                                    'id_parametrizacion' => $id_parametrizacion,
+                                                                    'id_param_entragable' => $id_entregable));
         }
         //echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
@@ -98,6 +99,22 @@ public function obtenerActividades($idparametro = 0) {
             return $this->db->update('parame_entrable', $data);
         } else {
             return $this->db->insert('parame_entrable', $data);
+        }
+    }
+        public function obtenerConteoActividades($idparametrizacion,$idactividad ) {
+
+        $this->db->select('count(*) as conteo');
+        $this->db->from('parame_entrable');
+        $this->db->where('id_actividad', $idactividad );
+        $this->db->where('id_parametrizacion' ,  $idparametrizacion);
+        $this->db->where('estado' ,  1);
+        $query=$this->db->get();
+
+       // echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
         }
     }
 

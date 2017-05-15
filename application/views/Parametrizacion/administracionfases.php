@@ -36,7 +36,18 @@
                         Descripcion
                     </td>
                     <td>
-                      <span class="badge">42 Actividades Configuradas</span>
+                    <?php
+                      if ($actividades['cantidadact']>0) {
+                        ?>
+                         <span class="label label-warning"><strong><?=$actividades['cantidadact']?></strong> Actividades Configuradas</span>
+                         <?php
+                      } else {
+                        ?>
+                         <span class="label label-danger"><strong><?=$actividades['cantidadact']?></strong> Actividades Configuradas</span>
+                         <?php
+
+                      }
+                 ?>
                     </td>
                     <td> <a href="<?= base_url()?>parametrizacion/adminentregables/<?=$actividades['id_actividad']?>/<?=$id?>"><span class="glyphicon glyphicon-list-alt"></span> Configurar</a></td>
                 </tr>

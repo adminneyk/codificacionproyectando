@@ -1,9 +1,29 @@
 <?php
-$nombreperfil = "";
+$nombreentregable = "";
 $descripcion = "";
 $seleccionado = 0;
 $id="";
 $descripciontextoayuda="";
+
+
+$arraypermisos = array();
+
+if($this->uri->segment(5, 0) &&  isset($entregables)){
+foreach ($entregables->result() as $mientregable) {
+        $nombreentregable = $mientregable->nombre_entregable ;
+        $descripcion = $mientregable->descripcion_entregable;
+        $seleccionado = $mientregable->estado;
+        $id = $mientregable->id_param_entragable;
+        $descripciontextoayuda = $mientregable->texto_ayuda;
+    }
+
+}
+
+/*
+entregables
+*/
+
+
 $arrayform = array(
     "class" => "form-horizontal"
 );
@@ -11,7 +31,7 @@ $arraynomentregable = array("class" => "form-control",
     "id" => "nomentregable",
     "name" => "nomentregable",
     "placeholder" => "Nombre de Entregable",
-    "value" => $nombreperfil);
+    "value" => $nombreentregable);
 $datatextarea = array(
     'name' => 'descrientregable',
     'id' => 'descrientregable',

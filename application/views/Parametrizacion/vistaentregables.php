@@ -6,9 +6,8 @@
 </ol>
 <fieldset>
 	<legend>Entregables Configurados</legend>
-
-<br>
-<br>
+<a href="<?=base_url()?>parametrizacion/formentregables/<?=$idactividad?>/<?=$idparametrizacion?>" class="btn btn-warning">Agregar Entregable</a>
+<br><br>
 <?php 
 if (empty($entregables)) {
 	?>
