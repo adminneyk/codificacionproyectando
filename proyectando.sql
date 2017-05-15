@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-05-2017 a las 00:01:53
+-- Tiempo de generación: 16-05-2017 a las 00:12:40
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyectando`
 --
-DROP TABLE `proyectando`;
+DROP DATABASE proyectando;
 CREATE DATABASE IF NOT EXISTS `proyectando` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `proyectando`;
 
@@ -60,6 +60,29 @@ INSERT INTO `actividad` (`id_actividad`, `nombre_actividad`, `id_fase`, `descrip
 (16, 'Resumen', 5, ''),
 (17, 'Recomendaciones', 5, ''),
 (18, 'Prospectiva', 5, '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `control_versiones`
+--
+
+DROP TABLE IF EXISTS `control_versiones`;
+CREATE TABLE `control_versiones` (
+  `id_version_control` int(11) NOT NULL,
+  `id_entregable` int(11) NOT NULL,
+  `id_version` int(11) NOT NULL,
+  `cod_version` varchar(50) NOT NULL,
+  `estado` int(11) NOT NULL,
+  `id_idea` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `control_versiones`
+--
+
+INSERT INTO `control_versiones` (`id_version_control`, `id_entregable`, `id_version`, `cod_version`, `estado`, `id_idea`) VALUES
+(1, 1, 1, 'CODVERSIONES', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -108,11 +131,17 @@ DROP TABLE IF EXISTS `ideas`;
 CREATE TABLE `ideas` (
   `id_idea` int(11) NOT NULL COMMENT 'Identificador de la idea',
   `nombre_idea` varchar(100) COLLATE utf16_spanish_ci NOT NULL COMMENT 'Nombre de la idea',
-  `id_grupo` int(11) NOT NULL COMMENT 'Identificador del grupo perteneciente',
   `id_linea` int(11) NOT NULL COMMENT 'Identificador de la linea tematica',
-  `id_fase` int(11) NOT NULL,
-  `descripcion_idea` text COLLATE utf16_spanish_ci NOT NULL
+  `descripcion_idea` text COLLATE utf16_spanish_ci NOT NULL,
+  `id_parametrizacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `ideas`
+--
+
+INSERT INTO `ideas` (`id_idea`, `nombre_idea`, `id_linea`, `descripcion_idea`, `id_parametrizacion`) VALUES
+(1, 'idea de prueba 001', 1, 'DESCRIPCION DE LA IDEA ', 1);
 
 -- --------------------------------------------------------
 
@@ -180,7 +209,10 @@ CREATE TABLE `parame_entrable` (
 --
 
 INSERT INTO `parame_entrable` (`id_param_entragable`, `id_actividad`, `id_parametrizacion`, `nombre_entregable`, `descripcion_entregable`, `texto_ayuda`, `estado`) VALUES
-(1, 1, 1, 'entregable ', 'descripcion del entrgable de los datos', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos', 0);
+(1, 1, 1, 'entregable ', 'descripcion del entrgable de los datos', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos', 1),
+(2, 1, 1, 'entregable ', 'descripcion del entrgable de los datos 2', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos', 0),
+(3, 1, 1, 'entregable ', 'descripcion del entrgable de los datos 3 sdfsdf', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos', 0),
+(4, 1, 1, 'entregable 002', 'dedsdasdnmaskdmas', 'mensaje de ayuda para usuario', 0);
 
 -- --------------------------------------------------------
 
@@ -240,21 +272,15 @@ CREATE TABLE `version` (
   `comentarios` text COLLATE utf16_spanish_ci NOT NULL,
   `fecha_entrega` date NOT NULL,
   `fecha_revision` date NOT NULL,
-  `estado` tinyint(1) NOT NULL
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `vers_entre`
+-- Volcado de datos para la tabla `version`
 --
 
-DROP TABLE IF EXISTS `vers_entre`;
-CREATE TABLE `vers_entre` (
-  `id_informacion` int(11) NOT NULL,
-  `id_version` int(11) NOT NULL,
-  `id_entregable` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
+INSERT INTO `version` (`id_version`, `contenidorevisado`, `comentarios`, `fecha_entrega`, `fecha_revision`, `estado`) VALUES
+(1, 'este es mi mensaje de prueba ', '', '2017-05-15', '2017-05-15', 1);
 
 --
 -- Índices para tablas volcadas
@@ -266,6 +292,16 @@ CREATE TABLE `vers_entre` (
 ALTER TABLE `actividad`
   ADD PRIMARY KEY (`id_actividad`),
   ADD KEY `fketapafase` (`id_fase`);
+
+--
+-- Indices de la tabla `control_versiones`
+--
+ALTER TABLE `control_versiones`
+  ADD PRIMARY KEY (`id_version_control`),
+  ADD KEY `id_version` (`id_version`),
+  ADD KEY `id_entregable` (`id_entregable`),
+  ADD KEY `id_idea` (`id_idea`),
+  ADD KEY `id_idea_2` (`id_idea`);
 
 --
 -- Indices de la tabla `fases`
@@ -285,8 +321,9 @@ ALTER TABLE `grupos`
 --
 ALTER TABLE `ideas`
   ADD PRIMARY KEY (`id_idea`),
-  ADD KEY `FkIdeasGrupos_idx` (`id_grupo`),
-  ADD KEY `id_fase` (`id_fase`);
+  ADD KEY `id_parametrizacion` (`id_parametrizacion`),
+  ADD KEY `id_linea` (`id_linea`),
+  ADD KEY `id_idea` (`id_idea`);
 
 --
 -- Indices de la tabla `lineas`
@@ -331,14 +368,6 @@ ALTER TABLE `version`
   ADD PRIMARY KEY (`id_version`);
 
 --
--- Indices de la tabla `vers_entre`
---
-ALTER TABLE `vers_entre`
-  ADD PRIMARY KEY (`id_informacion`),
-  ADD KEY `id_version` (`id_version`),
-  ADD KEY `id_entregable` (`id_entregable`);
-
---
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -347,6 +376,11 @@ ALTER TABLE `vers_entre`
 --
 ALTER TABLE `actividad`
   MODIFY `id_actividad` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la etapa', AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT de la tabla `control_versiones`
+--
+ALTER TABLE `control_versiones`
+  MODIFY `id_version_control` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `fases`
 --
@@ -361,7 +395,7 @@ ALTER TABLE `grupos`
 -- AUTO_INCREMENT de la tabla `ideas`
 --
 ALTER TABLE `ideas`
-  MODIFY `id_idea` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la idea';
+  MODIFY `id_idea` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la idea', AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `lineas`
 --
@@ -376,7 +410,7 @@ ALTER TABLE `parametrizaciones`
 -- AUTO_INCREMENT de la tabla `parame_entrable`
 --
 ALTER TABLE `parame_entrable`
-  MODIFY `id_param_entragable` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_param_entragable` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `perfiles`
 --
@@ -391,12 +425,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `version`
 --
 ALTER TABLE `version`
-  MODIFY `id_version` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `vers_entre`
---
-ALTER TABLE `vers_entre`
-  MODIFY `id_informacion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_version` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Restricciones para tablas volcadas
 --
@@ -405,21 +434,21 @@ ALTER TABLE `vers_entre`
 -- Filtros para la tabla `actividad`
 --
 ALTER TABLE `actividad`
-  ADD CONSTRAINT `actividad_ibfk_1` FOREIGN KEY (`id_fase`) REFERENCES `fases` (`id_fase`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `actividad_ibfk_1` FOREIGN KEY (`id_fase`) REFERENCES `fases` (`id_fase`);
 
 --
--- Filtros para la tabla `grupos`
+-- Filtros para la tabla `control_versiones`
 --
-ALTER TABLE `grupos`
-  ADD CONSTRAINT `grupos_ibfk_1` FOREIGN KEY (`id_responsable`) REFERENCES `usuario` (`id_usuario`);
+ALTER TABLE `control_versiones`
+  ADD CONSTRAINT `control_versiones_ibfk_1` FOREIGN KEY (`id_version`) REFERENCES `version` (`id_version`),
+  ADD CONSTRAINT `control_versiones_ibfk_2` FOREIGN KEY (`id_entregable`) REFERENCES `parame_entrable` (`id_param_entragable`);
 
 --
 -- Filtros para la tabla `ideas`
 --
 ALTER TABLE `ideas`
-  ADD CONSTRAINT `FKIdeasLinea` FOREIGN KEY (`id_idea`) REFERENCES `lineas` (`id_linea`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FkIdeasGrupos` FOREIGN KEY (`id_grupo`) REFERENCES `grupos` (`id_grupo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `ideas_ibfk_1` FOREIGN KEY (`id_fase`) REFERENCES `fases` (`id_fase`);
+  ADD CONSTRAINT `ideas_ibfk_1` FOREIGN KEY (`id_parametrizacion`) REFERENCES `parametrizaciones` (`id_parametrizacion`),
+  ADD CONSTRAINT `ideas_ibfk_2` FOREIGN KEY (`id_linea`) REFERENCES `lineas` (`id_linea`);
 
 --
 -- Filtros para la tabla `parametrizaciones`
@@ -431,20 +460,14 @@ ALTER TABLE `parametrizaciones`
 -- Filtros para la tabla `parame_entrable`
 --
 ALTER TABLE `parame_entrable`
-  ADD CONSTRAINT `parame_entrable_ibfk_1` FOREIGN KEY (`id_parametrizacion`) REFERENCES `parametrizaciones` (`id_parametrizacion`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `parame_entrable_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `parame_entrable_ibfk_1` FOREIGN KEY (`id_parametrizacion`) REFERENCES `parametrizaciones` (`id_parametrizacion`),
+  ADD CONSTRAINT `parame_entrable_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`);
 
 --
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `fkperfilusuario` FOREIGN KEY (`id_perfil`) REFERENCES `perfiles` (`id_perfil`);
-
---
--- Filtros para la tabla `vers_entre`
---
-ALTER TABLE `vers_entre`
-  ADD CONSTRAINT `vers_entre_ibfk_1` FOREIGN KEY (`id_version`) REFERENCES `version` (`id_version`);
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_perfil`) REFERENCES `perfiles` (`id_perfil`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
