@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
@@ -190,12 +190,12 @@ INSERT INTO `parametrizaciones` (`id_parametrizacion`, `nom_parametrizacion`, `d
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `parame_entrable`
+-- Estructura de tabla para la tabla `entregable`
 --
 
-DROP TABLE IF EXISTS `parame_entrable`;
-CREATE TABLE `parame_entrable` (
-  `id_param_entragable` int(11) NOT NULL,
+DROP TABLE IF EXISTS `entregable`;
+CREATE TABLE `entregable` (
+  `id_entregable` int(11) NOT NULL,
   `id_actividad` int(11) NOT NULL,
   `id_parametrizacion` int(11) NOT NULL,
   `nombre_entregable` varchar(100) NOT NULL,
@@ -205,10 +205,10 @@ CREATE TABLE `parame_entrable` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `parame_entrable`
+-- Volcado de datos para la tabla `entregable`
 --
 
-INSERT INTO `parame_entrable` (`id_param_entragable`, `id_actividad`, `id_parametrizacion`, `nombre_entregable`, `descripcion_entregable`, `texto_ayuda`, `estado`) VALUES
+INSERT INTO `entregable` (`id_entregable`, `id_actividad`, `id_parametrizacion`, `nombre_entregable`, `descripcion_entregable`, `texto_ayuda`, `estado`) VALUES
 (1, 1, 1, 'entregable ', 'descripcion del entrgable de los datos', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos', 1),
 (2, 1, 1, 'entregable ', 'descripcion del entrgable de los datos 2', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos', 0),
 (3, 1, 1, 'entregable ', 'descripcion del entrgable de los datos 3 sdfsdf', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos', 0),
@@ -340,10 +340,10 @@ ALTER TABLE `parametrizaciones`
   ADD KEY `id_responsable_2` (`id_responsable`);
 
 --
--- Indices de la tabla `parame_entrable`
+-- Indices de la tabla `entregable`
 --
-ALTER TABLE `parame_entrable`
-  ADD PRIMARY KEY (`id_param_entragable`),
+ALTER TABLE `entregable`
+  ADD PRIMARY KEY (`id_entregable`),
   ADD KEY `id_parametrizacion` (`id_parametrizacion`),
   ADD KEY `id_actividad` (`id_actividad`);
 
@@ -407,10 +407,10 @@ ALTER TABLE `lineas`
 ALTER TABLE `parametrizaciones`
   MODIFY `id_parametrizacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT de la tabla `parame_entrable`
+-- AUTO_INCREMENT de la tabla `entregable`
 --
-ALTER TABLE `parame_entrable`
-  MODIFY `id_param_entragable` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `entregable`
+  MODIFY `id_entregable` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `perfiles`
 --
@@ -441,7 +441,7 @@ ALTER TABLE `actividad`
 --
 ALTER TABLE `control_versiones`
   ADD CONSTRAINT `control_versiones_ibfk_1` FOREIGN KEY (`id_version`) REFERENCES `version` (`id_version`),
-  ADD CONSTRAINT `control_versiones_ibfk_2` FOREIGN KEY (`id_entregable`) REFERENCES `parame_entrable` (`id_param_entragable`);
+  ADD CONSTRAINT `control_versiones_ibfk_2` FOREIGN KEY (`id_entregable`) REFERENCES `entregable` (`id_entregable`);
 
 --
 -- Filtros para la tabla `ideas`
@@ -457,11 +457,11 @@ ALTER TABLE `parametrizaciones`
   ADD CONSTRAINT `parametrizaciones_ibfk_1` FOREIGN KEY (`id_responsable`) REFERENCES `usuario` (`id_usuario`);
 
 --
--- Filtros para la tabla `parame_entrable`
+-- Filtros para la tabla `entregable`
 --
-ALTER TABLE `parame_entrable`
-  ADD CONSTRAINT `parame_entrable_ibfk_1` FOREIGN KEY (`id_parametrizacion`) REFERENCES `parametrizaciones` (`id_parametrizacion`),
-  ADD CONSTRAINT `parame_entrable_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`);
+ALTER TABLE `entregable`
+  ADD CONSTRAINT `entregable_ibfk_1` FOREIGN KEY (`id_parametrizacion`) REFERENCES `parametrizaciones` (`id_parametrizacion`),
+  ADD CONSTRAINT `entregable_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`);
 
 --
 -- Filtros para la tabla `usuario`
