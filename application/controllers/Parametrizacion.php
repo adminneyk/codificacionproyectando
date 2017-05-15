@@ -53,7 +53,15 @@ class Parametrizacion extends CI_Controller {
                 $actividades=$this->parametrizacion_model->obtenerActividades($listfases->id_fase);
                 $arrayactividades=array();
                 foreach ($actividades->result() as $listactividades) {
-                    $arrayact = array('id_actividad' =>  $listactividades->id_actividad,'nombreactividad' =>  $listactividades->nombre_actividad);
+                    $entregablesporact=$this->parametrizacion_model->obtenerConteoActividades($id,
+                                                                     $listactividades->id_actividad);
+                    $conteo = 0;
+                    foreach ($entregablesporact->result() as $listaconteo) {
+                        $conteo = $listaconteo->conteo;
+                    }
+                    $arrayact = array('id_actividad' =>  $listactividades->id_actividad,
+                                      'nombreactividad' =>  $listactividades->nombre_actividad,
+                                      'cantidadact' => $conteo);
                         array_push($arrayactividades, $arrayact); 
                 }
                   $array = array('id_fase' =>  $listfases->id_fase,
@@ -101,13 +109,14 @@ class Parametrizacion extends CI_Controller {
     
     public function validarentregable()
 	{
-        print_r($_POST);
+
         $nomentregable = $this->input->post('nomentregable');
         $descrientregable = $this->input->post('descrientregable');
         $publicacion = $this->input->post('publicacion');
         $actividad = $this->input->post('actividad');   
         $parametrizacion = $this->input->post('parametrizacion');
         $textoayuda = $this->input->post('textoayuda');
+        $id = $this->input->post('id');
         $this->form_validation->set_rules('nomentregable', 'Nombre Parametrizacion', 'required|min_length[3]');
         $this->form_validation->set_rules('descrientregable', 'Descripcion', 'required|min_length[3]');
         $this->form_validation->set_message('required', 'El campo %s es obligatorio');
