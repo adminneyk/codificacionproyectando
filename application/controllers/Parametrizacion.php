@@ -40,9 +40,10 @@ class Parametrizacion extends CI_Controller {
             $this->form_validation->set_message('required', 'El campo %s es obligatorio');
             if($this->form_validation->run() === true){
                 $this->parametrizacion_model->guardar($nombrepara,$descritarea,$estado,$this->session->userdata('id_usuario'),$id);
-                redirect(base_url().'parametrizacion');  
+                $this->session->set_flashdata('correcto', 'Parametrización Guardada Correctamente!');
+                redirect(base_url().'parametrizacion','refresh');  
               }else{
-                $this->load->view("parametrizacion/formulario");  
+                redirect(base_url().'parametrizacion','refresh');  
               }
         }
         public function formulariofases()

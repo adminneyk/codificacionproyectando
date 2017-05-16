@@ -2,9 +2,14 @@
   <li><a href="<?=base_url()?>home">Home</a></li>
   <li class="active">Mis Parametrizaciones</li>
 </ol>
+
 <legend>Mis Parametrizaciones</legend>
 <a href="<?=base_url()?>parametrizacion/formulario" class="btn btn-warning">Agregar Parametrización</a>
 <br><br>
+<?php
+$this->load->view('Genericas/mensajes');
+?>
+<br>
 <?php 
 if($parametrizaciones==FALSE){
     ?>

@@ -34,7 +34,7 @@ class Login extends CI_Controller {
                       redirect(base_url().'login');
                   }
               }else{
-                $this->load->view("Usuarios/formulario");  
+                    $this->load->view('Usuarios/formulario');
               }
                 
 	}

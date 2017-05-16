@@ -87,6 +87,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 margin-top: 10px;
             }
         </style>
+        <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        
+
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-md-offset-4">
@@ -95,16 +98,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                              alt="">
         <?php
-                        $arrayform = array("class"=>"form-signin");  
+                        $arrayform = array("class"=>"form-signin" ,"id" => "form");  
                         $arrayusuario=array("class"=>"form-control",
                                             "id"=>"usuario",
                                             "name"=>"usuario",
-                                            "placeholder"=>"Usuario");
+                                            "placeholder"=>"Usuario",
+                                            "required" => "required",
+                                            "pattern"=>"[a-zA-Z]{5,30}",
+                                            "title"=>"Campo de Solo Letras");
                         $arrayclave=array("class"=>"form-control",
                                             "id"=>"clave",
                                             "name"=>"clave",
                                             "type"=>"password",
-                                            "placeholder"=>"Clave");
+                                            "placeholder"=>"Clave",
+                                            "required" => "required",
+                                            "pattern"=>"[A-Za-z0-9]{5,30}",
+                                            "title"=>"Campo AlfaNumerico");
                         $arrayboton=array("class"=>"btn btn-lg btn-primary btn-block");
                         
                         

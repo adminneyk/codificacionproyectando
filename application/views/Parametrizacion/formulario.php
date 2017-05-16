@@ -25,14 +25,18 @@ if (!isset($noid)) {
 }
 /*SE CARGA EL FORMULARIO  Y SUS CAMPOS*/
 $arrayform = array(
-    "class" => "form-horizontal"
+    "class" => "form-horizontal",
+    "id" => "form"
 );
 
 $arrayparame = array("class" => "form-control",
     "id" => "nombrepara",
     "name" => "nombrepara",
     "placeholder" => "Nombre de Parametrización",
-    "value" => $nombrepara);
+    "value" => $nombrepara,
+    "required" => "requited",
+    "pattern" =>"[A-Za-z0-9]+",
+    "title" =>"Campo Alfanumerico Minimo 3 Caracteres");
 $datatextarea = array(
         'name'        => 'descritarea',
         'id'          => 'descritarea',
@@ -53,15 +57,34 @@ $options = array(
 }
 $selected = array($seleccionado);
 echo form_open(base_url() . 'parametrizacion/validar', $arrayform);
-
-/**/
 ?>
 
+<script type="text/javascript">
+$(document).ready(function()
+  {
+  $("#validar").click(function () {
+    var nombrepara= $("#nombrepara").val();
+    var descritarea= $("#descritarea").val();
+    var msg="";
+    if(nombrepara=="" ){
+        msg+="-Nombre de Parametrización Requerida<br>";
+    }  
+    if(descritarea==""){
+        msg+="-Descripcion de la Parametrización Requerida";
+    }
+      if(msg){
+        $("#error").html('<strong>Tiene los Siguientes Problemas:</strong><br>'+msg);
+        $("#error").addClass('alert alert-warning');
+      } else {
+          $("#form").submit();
+      }
+    
+    });
+ }); 
+</script>
 <fieldset>
-
-<!-- Form Name -->
 <legend>Parametrización</legend>
-
+<div id="error"></div>
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Nombre de Parametrizacion</label>  
@@ -109,7 +132,7 @@ echo form_open(base_url() . 'parametrizacion/validar', $arrayform);
             
             }?>
        
-    <button id="button1id" name="button1id" class="btn btn-success">GUARDAR</button>
+    <button  name="validar" id="validar" type="button" class="btn btn-success">GUARDAR</button>
     <a href="<?= base_url() ?>parametrizacion" class="btn btn-dange">Volver</a>
   </div>
 </div>

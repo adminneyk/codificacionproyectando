@@ -25,7 +25,10 @@ $arrayperfil = array("class" => "form-control",
     "id" => "perfil",
     "name" => "perfil",
     "placeholder" => "Nombre Perfil",
-    "value" => $nombreperfil);
+    "value" => $nombreperfil,
+    "required" => "required",
+    "pattern" => "[A-Za-z0-9]{3}",
+    "title" =>"Campo Alfanumerico Minimo 3 Caracteres");
 
 function validar($valor, $arraypermisos) {
     return in_array($valor, $arraypermisos);

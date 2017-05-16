@@ -25,6 +25,7 @@ if(in_array($controlador, $this->session->userdata('permisos')) == FALSE){
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="<?=base_url()?>application/asset/bootstrap/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="<?=base_url()?>application/asset/css/estilos.css">
+        <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     </head>
     <body>
         <div class="container-fluid">
