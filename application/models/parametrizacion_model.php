@@ -53,11 +53,12 @@ class Parametrizacion_model extends CI_Model {
     }
 public function obtenerActividades($idparametro = 0) {
         if ($idparametro > 0) {
-            $query = $this->db->get_where('actividad', array('id_fase' => $idparametro));
+            $query = $this->db->get_where('actividad', array('id_fase' => $idparametro,
+                                                             'estado' => 1));
         } else {
-            $query = $this->db->get('actividad');
+            $query = $this->db->get_where('actividad', array('estado' => 1));
         }
-        //echo  $this->db->last_query();
+       // echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {
@@ -127,6 +128,7 @@ public function obtenerActividades($idparametro = 0) {
                 . 'entregable.id_parametrizacion='.$idparametrizacion.' and entregable.estado=1) '
                 . 'as conteo');
         $this->db->from('actividad');
+        $this->db->where('estado' ,  1);
         $query=$this->db->get();
 
        // echo  $this->db->last_query();

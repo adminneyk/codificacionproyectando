@@ -52,6 +52,7 @@ class Parametrizacion extends CI_Controller {
             $arrayfase=array();
             foreach ($fases->result() as $listfases) {
                 $actividades=$this->parametrizacion_model->obtenerActividades($listfases->id_fase);
+                if($actividades!=false){ 
                 $arrayactividades=array();
                 foreach ($actividades->result() as $listactividades) {
                     $entregablesporact=$this->parametrizacion_model->obtenerConteoActividades($id,
@@ -69,6 +70,7 @@ class Parametrizacion extends CI_Controller {
                     'nombrefase' =>  $listfases->nombre_fase,
                     'actividades' =>  $arrayactividades);
                 array_push($arrayfase, $array); 
+             }
             }
             $infor['datos']=$arrayfase;
             $infor['id']=$id;

@@ -41,11 +41,16 @@ $datatextarea = array(
         'cols'        => '30',
         'class'       => 'form-control'
     );
-
+if ($faltantes){
+$options = array(
+        '0'         => 'NO PUBLICO'
+);
+} else {
 $options = array(
         '0'         => 'NO PUBLICO',
         '1'           => 'PUBLICADO'
 );
+}
 $selected = array($seleccionado);
 echo form_open(base_url() . 'parametrizacion/validar', $arrayform);
 

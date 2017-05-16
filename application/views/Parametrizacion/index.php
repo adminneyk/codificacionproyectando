@@ -39,8 +39,20 @@ if($parametrizaciones==FALSE){
             } else {
                 echo "Publicada";
                 } ?></td>
-            <td> <a href="<?= base_url()?>parametrizacion/formulario/<?=$parametros->id_parametrizacion; ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a></td>
+        <?php 
+            if ($parametros->estado == 1) {
+                ?>
+                <td colspan="2"><strong style="color: red">Parametrización Publicada</strong></td>
+                <?php
+
+            } else {
+        ?>
+            <td>
+            <a href="<?= base_url()?>parametrizacion/formulario/<?=$parametros->id_parametrizacion; ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a></td>
             <td> <a href="<?= base_url()?>parametrizacion/formulariofases/<?=$parametros->id_parametrizacion; ?>"><span class="glyphicon glyphicon-list-alt"></span> Configurar</a></td>
+            <?php 
+}
+            ?>
         </tr>
         <?php
     }
