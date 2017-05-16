@@ -3,7 +3,7 @@ $nombrepara = "";
 $descripcion = "";
 $seleccionado = 0;
 $id ="";
-
+$faltantes ="";
 if (!isset($noid)) {
     foreach ($parametrizaciones->result() as $parame) {
         $nombrepara = $parame->nom_parametrizacion;
@@ -11,6 +11,17 @@ if (!isset($noid)) {
         $seleccionado = $parame->estado;
         $id = $parame->id_parametrizacion;
     }
+ 
+    foreach ($validador->result() as $listvali) {
+        $contador = $listvali->conteo;
+        $nombreactividades = $listvali->nombre_actividad;
+        if($contador==0){
+            $faltantes.="-{$nombreactividades}<br>";
+        }
+    }
+    
+} else {
+    $faltantes = "-Todas las actividades";
 }
 /*SE CARGA EL FORMULARIO  Y SUS CAMPOS*/
 $arrayform = array(
@@ -30,6 +41,7 @@ $datatextarea = array(
         'cols'        => '30',
         'class'       => 'form-control'
     );
+
 $options = array(
         '0'         => 'NO PUBLICO',
         '1'           => 'PUBLICADO'
@@ -81,6 +93,17 @@ echo form_open(base_url() . 'parametrizacion/validar', $arrayform);
   <label class="col-md-4 control-label" for="button1id"></label>
   <div class="col-md-8">
       <input type="hidden" name="id" id="id" value="<?= $id; ?>"> 
+       
+        <?php if($faltantes){?>
+       <div class="alert alert-danger" role="alert">
+            <?php
+            echo "<strong>Para cambiar de estado debe <br>agregar entregables a las siguientes actividades</strong><br> {$faltantes}";
+        ?>
+       </div>
+            <?php
+            
+            }?>
+       
     <button id="button1id" name="button1id" class="btn btn-success">GUARDAR</button>
     <a href="<?= base_url() ?>parametrizacion" class="btn btn-dange">Volver</a>
   </div>

@@ -30,8 +30,8 @@ if(in_array($controlador, $this->session->userdata('permisos')) == FALSE){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <nav class="navbar navbar-default navbar-inverse" role="navigation">
-                        <div class="navbar-header">
+                    <nav class="navbar navbar-default navbar-inverse" role="navigation" >
+                        <div class="navbar-header" id="fondo">
 
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                                 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>

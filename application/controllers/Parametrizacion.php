@@ -11,7 +11,7 @@ class Parametrizacion extends CI_Controller {
     }
     	public function index()
 	{
-            $datos['parametrizaciones'] = $this->parametrizacion_model->obtenerParametrizacion();
+            $datos['parametrizaciones'] = $this->parametrizacion_model->obtenerParametrizacion(0,$this->session->userdata('id_usuario'));
             $this->load->view('Parametrizacion/index',$datos);
             $this->load->view('footer');
 	}
@@ -20,7 +20,8 @@ class Parametrizacion extends CI_Controller {
             $id = $this->uri->segment(3, 0);
             
             if(isset($id) && $id>0){
-                $data['parametrizaciones'] = $this->parametrizacion_model->obtenerParametrizacion($id);
+                $data['parametrizaciones'] = $this->parametrizacion_model->obtenerParametrizacion($id,$this->session->userdata('id_usuario'));
+                $data['validador']=$this->parametrizacion_model->validarfaltantes($id);
             } else {
                 $data['noid']="";
             }

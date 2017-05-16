@@ -8,11 +8,12 @@ class Parametrizacion_model extends CI_Model {
         parent::__construct();
     }
 
-    public function obtenerParametrizacion($idparametro = 0) {
+    public function obtenerParametrizacion($idparametro = 0,$usuario) {
         if ($idparametro > 0) {
-            $query = $this->db->get_where('parametrizaciones', array('id_parametrizacion' => $idparametro));
+            $query = $this->db->get_where('parametrizaciones', array('id_parametrizacion' => $idparametro,
+                                                                     'id_responsable'=>$usuario));
         } else {
-            $query = $this->db->get('parametrizaciones');
+             $query = $this->db->get_where('parametrizaciones', array('id_responsable'=>$usuario));
         }
         //echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
@@ -108,6 +109,24 @@ public function obtenerActividades($idparametro = 0) {
         $this->db->where('id_actividad', $idactividad );
         $this->db->where('id_parametrizacion' ,  $idparametrizacion);
         $this->db->where('estado' ,  1);
+        $query=$this->db->get();
+
+       // echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
+    
+    public function validarfaltantes($idparametrizacion) {
+
+        $this->db->select('actividad.nombre_actividad, (select count(*) '
+                . 'from entregable '
+                . 'where entregable.id_actividad=actividad.id_actividad and '
+                . 'entregable.id_parametrizacion='.$idparametrizacion.' and entregable.estado=1) '
+                . 'as conteo');
+        $this->db->from('actividad');
         $query=$this->db->get();
 
        // echo  $this->db->last_query();

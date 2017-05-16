@@ -4,7 +4,17 @@
 </ol>
 <legend>Mis Parametrizaciones</legend>
 <a href="<?=base_url()?>parametrizacion/formulario" class="btn btn-warning">Agregar Parametrización</a>
-<br>
+<br><br>
+<?php 
+if($parametrizaciones==FALSE){
+    ?>
+    <div class="alert alert-info" role="alert">
+	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span> No se Encuentran Parametrizaciones Creadas por Usted
+    </div>
+        <?php
+} else {
+?>
 <br>
 <table class="table table-condensed">
     <thead>
@@ -36,4 +46,6 @@
     }
     ?>
 </table>
-    
+    <?php 
+}
+    ?>

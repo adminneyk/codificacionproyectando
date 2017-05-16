@@ -1,4 +1,15 @@
-#menu{
-	background:#EE7F00;
-	color: red !important;
-	}
+#fondo{
+    background:#EE7F00;
+    color: blanchedalmond;
+    font-weight: bold;
+}
+#fondo * {
+    color: blanchedalmond;
+    font-weight: bold;
+
+}
+#fondo *:hover {
+    color: black;
+    font-weight: bold;
+
+}
