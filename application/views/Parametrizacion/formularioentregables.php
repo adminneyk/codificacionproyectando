@@ -25,7 +25,8 @@ entregables
 
 
 $arrayform = array(
-    "class" => "form-horizontal"
+    "class" => "form-horizontal",
+    "id" => "form"
 );
 $arraynomentregable = array("class" => "form-control",
     "id" => "nomentregable",
@@ -55,10 +56,34 @@ $options = array(
 $selected = array($seleccionado);
 echo form_open(base_url() . 'parametrizacion/validarentregable', $arrayform);
 ?>
+<script type="text/javascript">
+$(document).ready(function()
+  {
+  $("#validar").click(function () {
+    var nomentregable= $("#nomentregable").val();
+    var descrientregable= $("#descrientregable").val();
+    var msg="";
+    if(nomentregable=="" ){
+        msg+="-Nombre del Entregable Requerido<br>";
+    }  
+    if(descrientregable==""){
+        msg+="-Descripcion del Entregable Requerida";
+    }
+      if(msg){
+        $("#error").html('<span class="glyphicon glyphicon-bell"></span><strong>Tiene los Siguientes Problemas:</strong><br>'+msg);
+        $("#error").addClass('alert alert-warning');
+      } else {
+          $("#form").submit();
+      }
+    
+    });
+ }); 
+</script>
 <fieldset>
 
     <!-- Form Name -->
     <legend>Formulario de Entregable</legend>
+    <div id="error"></div>
     <!-- Text input-->
     <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Entregable</label>  
@@ -106,7 +131,7 @@ echo form_open(base_url() . 'parametrizacion/validarentregable', $arrayform);
     <div class="form-group">
         <label class="col-md-4 control-label" for="button1id"></label>
         <div class="col-md-8">
-            <button id="button1id" name="button1id" class="btn btn-success" type="submit">Guardar</button>
+            <button name="validar" id="validar" type="button" class="btn btn-success">Guardar</button>
             <a href="<?= base_url() ?>parametrizacion/adminentregables/<?= $idactividad ?>/<?= $idparametrizacion ?>" class="btn btn-danger">Volver</a>
         </div>
     </div>

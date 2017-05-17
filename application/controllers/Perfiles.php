@@ -16,14 +16,12 @@ class Perfiles extends CI_Controller {
 	}
         public function formulario()
 	{
-            
-            if(isset($_GET['id']))
-            {
-                $id = $_GET['id'];
-                $datos['listaperfiles'] = $this->perfil_model->obtenerPerfiles($id);
+            $idactividad = $this->uri->segment(3, 0);
+            if(isset($idactividad))
+            {   $datos['id']=$idactividad;
+                $datos['listaperfiles'] = $this->perfil_model->obtenerPerfiles($idactividad);
             } else {
-                $id = 0;
-                $datos[]="";
+
             }
             
             $this->load->view('Usuarios/formperfiles',$datos);
@@ -35,6 +33,7 @@ class Perfiles extends CI_Controller {
             $nomperfil = $this->input->post('perfil');
             $perfiles = $this->input->post('permisos');
             $this->perfil_model->guardar($nomperfil,$perfiles,$id);
+            $this->session->set_flashdata('correcto', 'Perfil Guardado Correctamente!'); 
             redirect(base_url().'perfiles');
         }
 }

@@ -8,6 +8,9 @@
 	<legend>Entregables Configurados</legend>
 <a href="<?=base_url()?>parametrizacion/formentregables/<?=$idactividad?>/<?=$idparametrizacion?>" class="btn btn-warning">Agregar Entregable</a>
 <br><br>
+<?php
+$this->load->view('Genericas/mensajes');
+?><br>
 <?php 
 if (empty($entregables)) {
 	?>

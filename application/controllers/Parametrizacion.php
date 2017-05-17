@@ -134,9 +134,11 @@ class Parametrizacion extends CI_Controller {
                         $textoayuda,
                         $id
                 );
-                redirect(base_url().'parametrizacion/adminentregables/'.$actividad.'/'.$parametrizacion);  
+                
+                $this->session->set_flashdata('correcto', 'Entregable Guardado Correctamente!'); 
+                redirect(base_url().'parametrizacion/adminentregables/'.$actividad.'/'.$parametrizacion); 
               }else{
-                $this->load->view("parametrizacion/formulario");  
+                redirect(base_url().'parametrizacion/adminentregables/'.$actividad.'/'.$parametrizacion);
         }
         
         }

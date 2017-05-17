@@ -24,8 +24,10 @@ class Reportes extends CI_Controller {
           //  $this->load->view('footer'); 
     }
     public function consultar(){
-           echo "hola";
-           $this->load->view('Reportes/vistaparametrizaciones');
+           
+           $responsable = $this->input->post('responsable');
+           $data['responsable']=$responsable;
+           $this->load->view('Reportes/vistaparametrizaciones',$data);
     }
 
 }

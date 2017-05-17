@@ -4,8 +4,7 @@ $nombreperfil = "";
 $permisos = "";
 $id = "";
 $arraypermisos = array();
-if (isset($_GET['id']) && isset($listaperfiles)) {
-    $id = $_GET['id'];
+if (isset($id) && isset($listaperfiles)) {
     foreach ($listaperfiles->result() as $perfil) {
         $idpefil = $perfil->id_perfil;
         $nombreperfil = $perfil->nombre_perfil;
@@ -19,7 +18,8 @@ if (isset($_GET['id']) && isset($listaperfiles)) {
     }
 }
 $arrayform = array(
-    "class" => "form-horizontal"
+    "class" => "form-horizontal",
+    "id" => "form"
 );
 $arrayperfil = array("class" => "form-control",
     "id" => "perfil",
@@ -73,12 +73,33 @@ $datarevision = array(
 
 echo form_open(base_url() . 'perfiles/validar', $arrayform);
 ?>
-
+<script type="text/javascript">
+$(document).ready(function()
+  {
+  $("#validar").click(function () {
+    var perfil= $("#perfil").val();
+    var msg="";
+    if(perfil=="" ){
+        msg+="-Nombre de Perfil Requerido<br>";
+    } 
+    if(!$("input[type='checkbox']").is(':checked') === true){
+         msg+="-Debe seleccionar al menos 1 permiso<br>";
+    }
+      if(msg){
+        $("#error").html('<span class="glyphicon glyphicon-bell"></span><strong>Tiene los Siguientes Problemas:</strong><br>'+msg);
+        $("#error").addClass('alert alert-warning');
+      } else {
+          $("#form").submit();
+      }
+    
+    });
+ }); 
+</script>
 <form class="perfiles">
     <fieldset>
         <!-- Form Name -->
         <legend>Perfil</legend>
-
+        <div id="error"></div>
         <!-- Text input-->
         <div class="form-group">
             <label class="col-md-4 control-label" for="textinput">Nombre de Perfil</label>  
@@ -170,8 +191,8 @@ echo form_open(base_url() . 'perfiles/validar', $arrayform);
         <div class="form-group">
             <label class="col-md-4 control-label" for="button1id">&nbsp;</label>
             <div class="col-md-8">
-                <button id="button1id" name="button1id" class="btn btn-success" type="submit">GUARDAR</button>
-                <a href="<?= base_url() ?>perfiles" class="btn btn-dange">Volver</a>
+                <button name="validar" id="validar" type="button" class="btn btn-success">GUARDAR</button>
+                <a href="<?= base_url() ?>perfiles" class="btn btn-danger">Volver</a>
             </div>
         </div>
     </fieldset>

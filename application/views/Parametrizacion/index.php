@@ -47,7 +47,7 @@ if($parametrizaciones==FALSE){
         <?php 
             if ($parametros->estado == 1) {
                 ?>
-                <td colspan="2"><strong style="color: red">Parametrización Publicada</strong></td>
+                <td colspan="2"><strong>Parametrización Publicada</strong></td>
                 <?php
 
             } else {

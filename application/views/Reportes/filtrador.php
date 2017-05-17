@@ -10,22 +10,37 @@
 <script type="text/javascript">
 $(document).ready(function()
 	{
-	$("#boton02").click(function () {
-		var nombreresponsable= $("#nombre2").val();
+	$("#buscar").click(function () {
+		var nombreresponsable= $("#usuario").val();
 		$.ajax({
  			type: 'POST',
 			 url: '<?=base_url()?>reportes/consultar', 
- 			data: 'dato='+nombreresponsable,
+ 			data: 'responsable='+nombreresponsable,
  			success: function(resp) { 
  			$('#divmostrar').html(resp);
  }
  });
-
-		
-	//saco el valor accediendo a un input de tipo text y name = nombre2 y lo asigno a uno con name = nombre3 
 	});		
 });
 </script>
-<input type="text" name="nombre2" id="nombre2" class="nombre2" value=""> 
-<input type="button" name="boton02" id="boton02" value="Asginar al input 2 el valor del primero">
+
+<form class="form-horizontal">
+<fieldset>
+<legend>Filtro</legend>
+<div class="form-group">
+  <label class="col-md-4 control-label" for="usuario">Nombre de Usuario</label>  
+  <div class="col-md-4">
+  <input name="usuario" class="form-control input-md" id="usuario" type="text" placeholder="Nombre de Usuario">
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+    <button name="buscar" class="btn btn-warning" id="buscar" type="button">Buscar</button>
+  </div>
+</div>
+</fieldset>
+</form>
 <div id="divmostrar"></div>

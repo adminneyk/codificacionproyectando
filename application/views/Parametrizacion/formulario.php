@@ -73,7 +73,7 @@ $(document).ready(function()
         msg+="-Descripcion de la Parametrización Requerida";
     }
       if(msg){
-        $("#error").html('<strong>Tiene los Siguientes Problemas:</strong><br>'+msg);
+        $("#error").html('<span class="glyphicon glyphicon-bell"></span><strong>Tiene los Siguientes Problemas:</strong><br>'+msg);
         $("#error").addClass('alert alert-warning');
       } else {
           $("#form").submit();
@@ -123,9 +123,9 @@ $(document).ready(function()
       <input type="hidden" name="id" id="id" value="<?= $id; ?>"> 
        
         <?php if($faltantes){?>
-       <div class="alert alert-danger" role="alert">
+       <div class="alert alert-info" role="alert">
             <?php
-            echo "<strong>Para cambiar de estado debe <br>agregar entregables a las siguientes actividades</strong><br> {$faltantes}";
+            echo "<span class='glyphicon glyphicon-bell'></span>  <strong>Para cambiar de estado debe <br>agregar entregables a las siguientes actividades</strong><br> {$faltantes}";
         ?>
        </div>
             <?php
@@ -133,7 +133,7 @@ $(document).ready(function()
             }?>
        
     <button  name="validar" id="validar" type="button" class="btn btn-success">GUARDAR</button>
-    <a href="<?= base_url() ?>parametrizacion" class="btn btn-dange">Volver</a>
+    <a href="<?= base_url() ?>parametrizacion" class="btn btn-danger">Volver</a>
   </div>
 </div>
 </fieldset>
