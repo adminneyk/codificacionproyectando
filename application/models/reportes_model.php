@@ -9,6 +9,7 @@ class Reportes_model extends CI_Model {
     }
 
     public function obtenerParametrizaciones($nombreusuario = "") {
+           $this->db->order_by("1", "asc");
         if ($nombreusuario == "") {
             $query = $this->db->get('vista_parametrizacion');
         } else {
