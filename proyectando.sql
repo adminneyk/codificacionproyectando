@@ -1,9 +1,9 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-05-2017 a las 00:12:40
+-- Tiempo de generación: 18-05-2017 a las 06:17:07
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 
 --
 -- Base de datos: `proyectando`
---
 DROP DATABASE proyectando;
-CREATE DATABASE IF NOT EXISTS `proyectando` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `proyectando`;
+CREATE DATABASE proyectando;
+USE proyectando;
+--
 
 -- --------------------------------------------------------
 
@@ -29,7 +29,6 @@ USE `proyectando`;
 -- Estructura de tabla para la tabla `actividad`
 --
 
-DROP TABLE IF EXISTS `actividad`;
 CREATE TABLE `actividad` (
   `id_actividad` int(11) NOT NULL COMMENT 'Identificador de la etapa',
   `nombre_actividad` varchar(100) COLLATE utf16_spanish_ci NOT NULL COMMENT 'Nombre de la etapa ',
@@ -67,7 +66,6 @@ INSERT INTO `actividad` (`id_actividad`, `nombre_actividad`, `id_fase`, `descrip
 -- Estructura de tabla para la tabla `control_versiones`
 --
 
-DROP TABLE IF EXISTS `control_versiones`;
 CREATE TABLE `control_versiones` (
   `id_version_control` int(11) NOT NULL,
   `id_entregable` int(11) NOT NULL,
@@ -87,10 +85,43 @@ INSERT INTO `control_versiones` (`id_version_control`, `id_entregable`, `id_vers
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `entregable`
+--
+
+CREATE TABLE `entregable` (
+  `id_entregable` int(11) NOT NULL,
+  `id_actividad` int(11) NOT NULL,
+  `id_parametrizacion` int(11) NOT NULL,
+  `nombre_entregable` varchar(100) NOT NULL,
+  `descripcion_entregable` varchar(200) NOT NULL,
+  `texto_ayuda` text NOT NULL,
+  `estado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `entregable`
+--
+
+INSERT INTO `entregable` (`id_entregable`, `id_actividad`, `id_parametrizacion`, `nombre_entregable`, `descripcion_entregable`, `texto_ayuda`, `estado`) VALUES
+(1, 1, 1, 'entregable ', 'descripcion del entrgable de los datos', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos', 1),
+(2, 1, 1, 'entregable ', 'descripcion del entrgable de los datos 2', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos', 1),
+(3, 1, 1, 'entregable ', 'descripcion del entrgable de los datos 3 sdfsdf', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos', 0),
+(4, 1, 1, 'entregable 002', 'dedsdasdnmaskdmas', 'mensaje de ayuda para usuario', 0),
+(5, 2, 1, 'entregable 001', 'sdfhkdsfsdkf', 'texto de ayuda', 1),
+(6, 1, 1, 'entregable nuevo', 'este es para prueba', 'no se le olvide poner el where en el delete from ', 1),
+(7, 1, 4, 'entregable 001', 'este es el entregable de la informacion', 'este es el mensaje de ayuda', 1),
+(8, 1, 5, 'foto-perfil', 'agregar una foto de perfil del grupo de trabajo', 'esta fototo debe ser en formato jpg', 1),
+(9, 3, 4, 'hola', 'nsdfkdskfj', 'ksdnfkdsnkfn', 1),
+(10, 4, 4, 'entregable', 'znndsnads', 'nsbdjdsbfjb', 0),
+(11, 2, 4, 'ejwqejwqe', 'jejshfjdsh', 'jsdfjdsfjdfjdn', 1),
+(12, 1, 6, 'entregable prueba', 'descripcion', 'msg ayuda', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `fases`
 --
 
-DROP TABLE IF EXISTS `fases`;
 CREATE TABLE `fases` (
   `id_fase` int(11) NOT NULL COMMENT 'identificador de la fase dela idea',
   `nombre_fase` varchar(100) COLLATE utf16_spanish_ci NOT NULL COMMENT 'nombre de la fase de la idea',
@@ -114,7 +145,6 @@ INSERT INTO `fases` (`id_fase`, `nombre_fase`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `grupos`
 --
 
-DROP TABLE IF EXISTS `grupos`;
 CREATE TABLE `grupos` (
   `id_grupo` int(11) NOT NULL,
   `nombre_grupo` varchar(100) COLLATE utf16_spanish_ci NOT NULL,
@@ -127,7 +157,6 @@ CREATE TABLE `grupos` (
 -- Estructura de tabla para la tabla `ideas`
 --
 
-DROP TABLE IF EXISTS `ideas`;
 CREATE TABLE `ideas` (
   `id_idea` int(11) NOT NULL COMMENT 'Identificador de la idea',
   `nombre_idea` varchar(100) COLLATE utf16_spanish_ci NOT NULL COMMENT 'Nombre de la idea',
@@ -149,7 +178,6 @@ INSERT INTO `ideas` (`id_idea`, `nombre_idea`, `id_linea`, `descripcion_idea`, `
 -- Estructura de tabla para la tabla `lineas`
 --
 
-DROP TABLE IF EXISTS `lineas`;
 CREATE TABLE `lineas` (
   `id_linea` int(11) NOT NULL COMMENT 'Identificacion de la linea',
   `nombre_linea` varchar(100) COLLATE utf16_spanish_ci NOT NULL COMMENT 'Nombre de la linea',
@@ -169,7 +197,6 @@ INSERT INTO `lineas` (`id_linea`, `nombre_linea`, `descripcion_linea`) VALUES
 -- Estructura de tabla para la tabla `parametrizaciones`
 --
 
-DROP TABLE IF EXISTS `parametrizaciones`;
 CREATE TABLE `parametrizaciones` (
   `id_parametrizacion` int(11) NOT NULL,
   `nom_parametrizacion` varchar(100) NOT NULL,
@@ -185,34 +212,10 @@ CREATE TABLE `parametrizaciones` (
 INSERT INTO `parametrizaciones` (`id_parametrizacion`, `nom_parametrizacion`, `descripcion_parametrizacion`, `id_responsable`, `estado`) VALUES
 (1, 'Parametrizacion Inicial', 'Esta es una parametrizacion de un marco de proyevto inicial', 1, 1),
 (2, 'parametrizacion 001', 'Prueba de guardado', 1, 1),
-(3, 'ptrueba de iniciacion', 'fdsfdsfdfdgfhgjhjhgfdsjuhygfdhgfrd', 1, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `entregable`
---
-
-DROP TABLE IF EXISTS `entregable`;
-CREATE TABLE `entregable` (
-  `id_entregable` int(11) NOT NULL,
-  `id_actividad` int(11) NOT NULL,
-  `id_parametrizacion` int(11) NOT NULL,
-  `nombre_entregable` varchar(100) NOT NULL,
-  `descripcion_entregable` varchar(200) NOT NULL,
-  `texto_ayuda` text NOT NULL,
-  `estado` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `entregable`
---
-
-INSERT INTO `entregable` (`id_entregable`, `id_actividad`, `id_parametrizacion`, `nombre_entregable`, `descripcion_entregable`, `texto_ayuda`, `estado`) VALUES
-(1, 1, 1, 'entregable ', 'descripcion del entrgable de los datos', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos', 1),
-(2, 1, 1, 'entregable ', 'descripcion del entrgable de los datos 2', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos', 0),
-(3, 1, 1, 'entregable ', 'descripcion del entrgable de los datos 3 sdfsdf', 'para esta gestion usted nesecita porder verificar toda la informacion de la base de datos', 0),
-(4, 1, 1, 'entregable 002', 'dedsdasdnmaskdmas', 'mensaje de ayuda para usuario', 0);
+(3, 'ptrueba de iniciacion', 'fdsfdsfdfdgfhgjhjhgfdsjuhygfdhgfrd', 1, 1),
+(4, 'Parametrizacion de carlos 1', 'esta es la prueba de trazabilidad del sistema', 4, 0),
+(5, 'fotografia', 'Parametrizacion tecnologos fotografia', 4, 0),
+(6, 'prueba', 'descrob', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -220,7 +223,6 @@ INSERT INTO `entregable` (`id_entregable`, `id_actividad`, `id_parametrizacion`,
 -- Estructura de tabla para la tabla `perfiles`
 --
 
-DROP TABLE IF EXISTS `perfiles`;
 CREATE TABLE `perfiles` (
   `id_perfil` int(11) NOT NULL,
   `nombre_perfil` varchar(100) COLLATE utf16_spanish_ci NOT NULL,
@@ -234,7 +236,7 @@ CREATE TABLE `perfiles` (
 INSERT INTO `perfiles` (`id_perfil`, `nombre_perfil`, `permisos`) VALUES
 (1, 'Administrador', 'perfiles,usuarios,ideas,reportes,parametrizacion,revision'),
 (2, 'Estudiante', 'ideas'),
-(3, 'Profesor', 'reportes,parametrizacion');
+(3, 'Profesor', 'reportes,parametrizacion,revision');
 
 -- --------------------------------------------------------
 
@@ -242,7 +244,6 @@ INSERT INTO `perfiles` (`id_perfil`, `nombre_perfil`, `permisos`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `usuario` varchar(50) COLLATE utf16_spanish_ci NOT NULL,
@@ -265,7 +266,6 @@ INSERT INTO `usuario` (`id_usuario`, `usuario`, `clave`, `id_perfil`) VALUES
 -- Estructura de tabla para la tabla `version`
 --
 
-DROP TABLE IF EXISTS `version`;
 CREATE TABLE `version` (
   `id_version` int(11) NOT NULL,
   `contenidorevisado` text COLLATE utf16_spanish_ci NOT NULL,
@@ -281,6 +281,30 @@ CREATE TABLE `version` (
 
 INSERT INTO `version` (`id_version`, `contenidorevisado`, `comentarios`, `fecha_entrega`, `fecha_revision`, `estado`) VALUES
 (1, 'este es mi mensaje de prueba ', '', '2017-05-15', '2017-05-15', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `vista_parametrizacion`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `vista_parametrizacion` (
+`PARAMETRIZACION` varchar(100)
+,`FASE` varchar(100)
+,`ACTIVIDAD` varchar(100)
+,`ENTREGABLE` varchar(100)
+,`USUARIO` varchar(50)
+,`ESTADO` varchar(10)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vista_parametrizacion`
+--
+DROP TABLE IF EXISTS `vista_parametrizacion`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_parametrizacion`  AS  select `parametrizaciones`.`nom_parametrizacion` AS `PARAMETRIZACION`,`fases`.`nombre_fase` AS `FASE`,`actividad`.`nombre_actividad` AS `ACTIVIDAD`,`entregable`.`nombre_entregable` AS `ENTREGABLE`,`usuario`.`usuario` AS `USUARIO`,(case `entregable`.`estado` when 1 then 'Activo' when 0 then 'Inactivo' else 'Sin Estado' end) AS `ESTADO` from ((((`parametrizaciones` join `entregable` on((`parametrizaciones`.`id_parametrizacion` = `entregable`.`id_parametrizacion`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) join `usuario` on((`usuario`.`id_usuario` = `parametrizaciones`.`id_responsable`))) ;
 
 --
 -- Índices para tablas volcadas
@@ -302,6 +326,14 @@ ALTER TABLE `control_versiones`
   ADD KEY `id_entregable` (`id_entregable`),
   ADD KEY `id_idea` (`id_idea`),
   ADD KEY `id_idea_2` (`id_idea`);
+
+--
+-- Indices de la tabla `entregable`
+--
+ALTER TABLE `entregable`
+  ADD PRIMARY KEY (`id_entregable`),
+  ADD KEY `id_parametrizacion` (`id_parametrizacion`),
+  ADD KEY `id_actividad` (`id_actividad`);
 
 --
 -- Indices de la tabla `fases`
@@ -340,14 +372,6 @@ ALTER TABLE `parametrizaciones`
   ADD KEY `id_responsable_2` (`id_responsable`);
 
 --
--- Indices de la tabla `entregable`
---
-ALTER TABLE `entregable`
-  ADD PRIMARY KEY (`id_entregable`),
-  ADD KEY `id_parametrizacion` (`id_parametrizacion`),
-  ADD KEY `id_actividad` (`id_actividad`);
-
---
 -- Indices de la tabla `perfiles`
 --
 ALTER TABLE `perfiles`
@@ -382,6 +406,11 @@ ALTER TABLE `actividad`
 ALTER TABLE `control_versiones`
   MODIFY `id_version_control` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT de la tabla `entregable`
+--
+ALTER TABLE `entregable`
+  MODIFY `id_entregable` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
 -- AUTO_INCREMENT de la tabla `fases`
 --
 ALTER TABLE `fases`
@@ -405,12 +434,7 @@ ALTER TABLE `lineas`
 -- AUTO_INCREMENT de la tabla `parametrizaciones`
 --
 ALTER TABLE `parametrizaciones`
-  MODIFY `id_parametrizacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `entregable`
---
-ALTER TABLE `entregable`
-  MODIFY `id_entregable` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_parametrizacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `perfiles`
 --
@@ -444,6 +468,13 @@ ALTER TABLE `control_versiones`
   ADD CONSTRAINT `control_versiones_ibfk_2` FOREIGN KEY (`id_entregable`) REFERENCES `entregable` (`id_entregable`);
 
 --
+-- Filtros para la tabla `entregable`
+--
+ALTER TABLE `entregable`
+  ADD CONSTRAINT `entregable_ibfk_1` FOREIGN KEY (`id_parametrizacion`) REFERENCES `parametrizaciones` (`id_parametrizacion`),
+  ADD CONSTRAINT `entregable_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`);
+
+--
 -- Filtros para la tabla `ideas`
 --
 ALTER TABLE `ideas`
@@ -455,13 +486,6 @@ ALTER TABLE `ideas`
 --
 ALTER TABLE `parametrizaciones`
   ADD CONSTRAINT `parametrizaciones_ibfk_1` FOREIGN KEY (`id_responsable`) REFERENCES `usuario` (`id_usuario`);
-
---
--- Filtros para la tabla `entregable`
---
-ALTER TABLE `entregable`
-  ADD CONSTRAINT `entregable_ibfk_1` FOREIGN KEY (`id_parametrizacion`) REFERENCES `parametrizaciones` (`id_parametrizacion`),
-  ADD CONSTRAINT `entregable_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`);
 
 --
 -- Filtros para la tabla `usuario`

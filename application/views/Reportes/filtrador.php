@@ -10,6 +10,7 @@
 <script type="text/javascript">
 $(document).ready(function()
 	{
+            $('#divmostrar').html('');
 	$("#buscar").click(function () {
 		var nombreresponsable= $("#usuario").val();
 		$.ajax({

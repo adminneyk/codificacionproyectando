@@ -8,14 +8,13 @@ class Reportes_model extends CI_Model {
         parent::__construct();
     }
 
-    public function obtenerParametrizacion($idparametro = 0,$usuario) {
-        if ($idparametro > 0) {
-            $query = $this->db->get_where('parametrizaciones', array('id_parametrizacion' => $idparametro,
-                                                                     'id_responsable'=>$usuario));
+    public function obtenerParametrizaciones($nombreusuario = "") {
+        if ($nombreusuario == "") {
+            $query = $this->db->get('vista_parametrizacion');
         } else {
-             $query = $this->db->get_where('parametrizaciones', array('id_responsable'=>$usuario));
+             $query = $this->db->get_where('vista_parametrizacion', array('usuario'=>$nombreusuario));
         }
-        //echo  $this->db->last_query();
+       // echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {
