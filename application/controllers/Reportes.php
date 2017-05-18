@@ -26,6 +26,8 @@ class Reportes extends CI_Controller {
         //  $this->load->view('Reportes/filtrador');
         //  $this->load->view('footer'); 
     }
+    
+
 
     public function consultar() {
 
@@ -34,6 +36,37 @@ class Reportes extends CI_Controller {
         $data['consulta']=$this->reportes_model->obtenerParametrizaciones($responsable);
         $data['responsable'] = $responsable;
         $this->load->view('Reportes/vistaparametrizaciones', $data);
+    }
+
+    public function progresoReal() {
+        $data['nombreinforme'] = "Progreso de Ideas";
+        $data['parametrizaciones']=$this->reportes_model->obtenerParametros();
+        $this->load->view('cabecera');
+        $this->load->view('menus');
+        $this->load->view('Reportes/filtroideas', $data);
+        //  $this->load->view('Reportes/filtrador');
+        //  $this->load->view('footer'); 
+    }
+    public function consultarIdeas() {
+
+        $parametrizacion = $this->input->post('parametrizacion');
+        
+        $param= $this->reportes_model->obtenerIdeas($parametrizacion);
+        $ideaslist="";
+        foreach ($param->result() as $listaideas) {
+            $id = $listaideas->id_idea ;
+            $nombre = $listaideas->nombre_idea;
+            $ideaslist.='<option value"'.$id.'">'.$nombre.'</option>';
+         }
+
+        echo $ideaslist;
+    }
+        public function consultarEstadoProyecto() {
+
+        $idea = $this->input->post('idea');
+        
+        $data['consulta']=$this->reportes_model->obtenerConsolidado($idea);
+        $this->load->view('Reportes/vistaavances', $data);
     }
 
 }

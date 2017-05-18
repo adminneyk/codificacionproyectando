@@ -1,8 +1,19 @@
-<?php 
+<hr><?php 
 if(!empty($consulta)){
     
     ?>
-<table  class="table table-striped">
+<script type="text/javascript">
+    $("#exportar").click(function(){
+  $("#table2excel").table2excel({
+    // exclude CSS class
+    exclude: ".noExl",
+    name: "Worksheet Name",
+    filename: "SomeFile" //do not include extension
+  }); 
+});
+</script>
+    <button id="exportar" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> Exportar a Excel</button><br><br>
+<table  class="table table-striped" id="table2excel">
     <thead>
         <tr>
             <th>Nombre de Parametrización</th>
