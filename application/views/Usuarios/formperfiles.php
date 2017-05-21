@@ -4,7 +4,8 @@ $nombreperfil = "";
 $permisos = "";
 $id = "";
 $arraypermisos = array();
-if (isset($id) && isset($listaperfiles)) {
+if (isset($getperfil) && isset($listaperfiles)) {
+    $id = $getperfil;
     foreach ($listaperfiles->result() as $perfil) {
         $idpefil = $perfil->id_perfil;
         $nombreperfil = $perfil->nombre_perfil;
@@ -69,6 +70,12 @@ $datarevision = array(
     'id' => 'permisos[]',
     'value' => 'revision',
     'checked' => validar('revision', $arraypermisos)
+);
+$databanco = array(
+    'name' => 'permisos[]',
+    'id' => 'permisos[]',
+    'value' => 'banco',
+    'checked' => validar('banco', $arraypermisos)
 );
 
 echo form_open(base_url() . 'perfiles/validar', $arrayform);
@@ -181,6 +188,19 @@ $(document).ready(function()
                     <label for="checkboxes-0">
                         <?php
                         echo form_checkbox($datarevision);
+                        ?>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="checkboxes">BANCO DE IDEAS</label>
+            <div class="col-md-4">
+                <div class="checkbox">
+                    <label for="checkboxes-0">
+                        <?php
+                        echo form_checkbox($databanco);
                         ?>
                     </label>
                 </div>

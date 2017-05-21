@@ -10,10 +10,10 @@ class Parametrizacion_model extends CI_Model {
 
     public function obtenerParametrizacion($idparametro = 0,$usuario) {
         if ($idparametro > 0) {
-            $query = $this->db->get_where('parametrizaciones', array('id_parametrizacion' => $idparametro,
+            $query = $this->db->get_where('parametrizacion', array('id_parametrizacion' => $idparametro,
                                                                      'id_responsable'=>$usuario));
         } else {
-             $query = $this->db->get_where('parametrizaciones', array('id_responsable'=>$usuario));
+             $query = $this->db->get_where('parametrizacion', array('id_responsable'=>$usuario));
         }
         //echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
@@ -32,9 +32,9 @@ class Parametrizacion_model extends CI_Model {
         );
         if ($id > 0) {
             $this->db->where('id_parametrizacion', $id);
-            return $this->db->update('parametrizaciones', $data);
+            return $this->db->update('parametrizacion', $data);
         } else {
-            return $this->db->insert('parametrizaciones', $data);
+            return $this->db->insert('parametrizacion', $data);
         }
     }
 

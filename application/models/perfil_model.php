@@ -10,9 +10,9 @@ class Perfil_model extends CI_Model {
 
     public function obtenerPerfiles($perfil = 0) {
         if ($perfil > 0) {
-            $query = $this->db->get_where('perfiles', array('id_perfil' => $perfil));
+            $query = $this->db->get_where('perfiles', array('id_perfil' => $perfil,'visible' => 0));
         } else {
-            $query = $this->db->get('perfiles');
+            $query = $this->db->get_where('perfiles', array('visible' => 0));
         }
         //echo  $this->db->last_query();
         if ($query->num_rows() > 0) {

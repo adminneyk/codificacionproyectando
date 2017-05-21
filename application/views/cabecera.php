@@ -20,7 +20,7 @@ if(in_array($controlador, $this->session->userdata('permisos')) == FALSE){
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Welcome to CodeIgniter</title>
+        <title>Proyectando</title>
         <script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="<?=base_url()?>application/asset/bootstrap/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">

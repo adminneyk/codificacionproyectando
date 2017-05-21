@@ -9,7 +9,7 @@ class Usuario_model extends CI_Model {
     }
 
     public function login($documento, $clave) {
-        $this->db->select('usuario.id_usuario,usuario.id_perfil,perfiles.nombre_perfil,perfiles.permisos');
+        $this->db->select('usuario.nombre_usuario,usuario.id_usuario,usuario.id_perfil,perfiles.nombre_perfil,perfiles.permisos');
         $this->db->from('usuario');
         $this->db->join('perfiles', 'perfiles.id_perfil=usuario.id_perfil');
         $this->db->where('usuario.usuario', $documento);
@@ -21,6 +21,7 @@ class Usuario_model extends CI_Model {
             $idpefil = $data->id_perfil;
             $nombreperil = $data->nombre_perfil;
             $permisos = $data->permisos;
+            $nombreusuario = $data->nombre_usuario;
             $mispermisos=array();
             $permisossesion = explode(",", $permisos);
             for ($y = 0; $y < count($permisossesion); $y++) {
@@ -30,6 +31,7 @@ class Usuario_model extends CI_Model {
             $usuario_data = array("id_usuario" => $id,
                 "nombre_perfil" => $nombreperil,
                 "perfil" => $idpefil,
+                "nombre_usuario" => $nombreusuario,
                 "permisos" => $mispermisos);
             $this->session->set_userdata($usuario_data);
             return 1;

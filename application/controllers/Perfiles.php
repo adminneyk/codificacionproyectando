@@ -18,7 +18,7 @@ class Perfiles extends CI_Controller {
 	{
             $idactividad = $this->uri->segment(3, 0);
             if(isset($idactividad))
-            {   $datos['id']=$idactividad;
+            {   $datos['getperfil']=$idactividad;
                 $datos['listaperfiles'] = $this->perfil_model->obtenerPerfiles($idactividad);
             } else {
 
