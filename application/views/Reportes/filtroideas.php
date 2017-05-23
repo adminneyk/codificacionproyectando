@@ -19,7 +19,11 @@
                 url: '<?= base_url() ?>reportes/consultarIdeas',
                 data: 'parametrizacion=' + parametrizaciones,
                 success: function (resp) {
+                    if(resp){
                     $('#idea').html(resp).fadeIn();
+                } else {
+                     $('#idea').html('<option value="">Seleccione Idea</option>');
+                }
                 }
             });
         });

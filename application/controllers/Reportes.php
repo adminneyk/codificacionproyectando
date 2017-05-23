@@ -52,10 +52,12 @@ class Reportes extends CI_Controller {
 
         $param = $this->reportes_model->obtenerIdeas($parametrizacion);
         $ideaslist = "";
-        foreach ($param->result() as $listaideas) {
-            $id = $listaideas->id_idea;
-            $nombre = $listaideas->nombre_idea;
-            $ideaslist .= '<option value"' . $id . '">' . $nombre . '</option>';
+        if ($param) {
+            foreach ($param->result() as $listaideas) {
+                $id = $listaideas->id_idea;
+                $nombre = $listaideas->nombre_idea;
+                $ideaslist .= '<option value"' . $id . '">' . $nombre . '</option>';
+            }
         }
 
         echo $ideaslist;
@@ -72,20 +74,10 @@ class Reportes extends CI_Controller {
             if ($actividades != false) {
                 $arrayactividades = array();
                 foreach ($actividades->result() as $listactividades) {
-                   $entregables = $this->reportes_model->obtenerEntregables(
-                           $listactividades->id_actividad,
-                           $parametrizaciones
-                    );
-                   if($entregables != false) {
-                    foreach ($entregables->result() as $listaentregable) {
-                        echo "---".$listaentregable->nombre_entregable;
-                        
-                    }
-                   }
-                   echo "--".$listactividades->nombre_actividad;
+                    
                 }
             }
-            echo "-" . $listfases->nombre_fase."<br>";
+            echo "-" . $listfases->nombre_fase . "<hr><br>";
         }
 
 
