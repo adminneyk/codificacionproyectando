@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-05-2017 a las 07:38:40
+-- Tiempo de generación: 23-05-2017 a las 23:34:55
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -42,8 +42,8 @@ CREATE TABLE `actividad` (
 
 INSERT INTO `actividad` (`id_actividad`, `id_fase`, `nombre_actividad`, `descripcion_actividad`, `estado`, `orden`) VALUES
 (1, 1, 'Introduccion', '', 1, 1),
-(2, 1, 'Justificacion', '', 0, 1),
-(3, 2, 'Descripción del Problema ', '', 0, 1),
+(2, 1, 'Justificacion', '', 1, 2),
+(3, 2, 'Descripción del Problema ', '', 1, 3),
 (4, 2, 'Planteamiento del Problema ', '', 0, 1),
 (5, 3, 'Tipo de investigación ', '', 0, 1),
 (6, 3, 'Instrumentos de recoleccion', '', 0, 1),
@@ -105,7 +105,7 @@ CREATE TABLE `entregable` (
 
 INSERT INTO `entregable` (`id_entregable`, `id_parametrizacion`, `id_actividad`, `nombre_entregable`, `descripcion_entregable`, `texto_ayuda`, `estado`) VALUES
 (1, 1, 1, 'objetivos generales', 'Descripcion del entregable', 'Texto de ayuda', 1),
-(2, 2, 1, 'entregable de prueba', 'descripcion del entregable', 'texto de ayuda', 1);
+(2, 1, 1, 'entregable de prueba', 'descripcion del entregable', 'texto de ayuda', 1);
 
 -- --------------------------------------------------------
 
@@ -268,6 +268,23 @@ INSERT INTO `perfiles` (`id_perfil`, `nombre_perfil`, `permisos`, `visible`) VAL
 -- --------------------------------------------------------
 
 --
+-- Estructura Stand-in para la vista `resumengeneral`
+-- (Véase abajo para la vista actual)
+--
+DROP VIEW IF EXISTS `resumengeneral`;
+CREATE TABLE `resumengeneral` (
+`nombre_entregable` varchar(100)
+,`id_idea` int(11)
+,`id_parametrizacion` int(11)
+,`id_actividad` int(11)
+,`id_grupo` int(11)
+,`conteoentregable` bigint(21)
+,`conteoentregablesaprobados` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuario`
 --
 
@@ -313,7 +330,20 @@ CREATE TABLE `versiones` (
 --
 
 INSERT INTO `versiones` (`id_version`, `id_idea`, `id_entregable`, `entregable`, `revision`, `comentarios`, `estado`) VALUES
-(1, 1, 1, 'Entregado  por el usuario para la gestion de usuarios', 'Entregado  por el usuario para la gestion de usuarios revisado', 'ese ajuste debe quedar configurado ', 1);
+(1, 1, 1, 'sdfsdf', 'sdfsdf', 'sdfsdfsd', 1),
+(2, 1, 1, 'sfsdfsdfsd 2 ', 'sdfsdfsdf 2 ', 'sdfsdfsdf 2 ', 1),
+(3, 1, 1, 'sdfsdf', 'sdfsdfsd', 'sdfsdfsdfsdfsdf', 1),
+(4, 1, 2, 'sdfsdfsdfsdf', 'sdfsdfsdf', 'sdfsdfsdfsdfsdf', 1),
+(5, 1, 2, 'sdfsdfsdfsdfsdfsdf', 'sdfsdfsd', 'sdfsdfsdfsdfsdfsd', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `resumengeneral`
+--
+DROP TABLE IF EXISTS `resumengeneral`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `resumengeneral`  AS  select `entregable`.`nombre_entregable` AS `nombre_entregable`,`ideas`.`id_idea` AS `id_idea`,`para`.`id_parametrizacion` AS `id_parametrizacion`,`actividad`.`id_actividad` AS `id_actividad`,`grupo`.`id_grupo` AS `id_grupo`,(select count(0) from `versiones` where ((`versiones`.`id_entregable` = `entregable`.`id_entregable`) and (`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `conteoentregable`,(select count(0) from `versiones` where ((`versiones`.`id_entregable` = `entregable`.`id_entregable`) and (`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`) and (`versiones`.`id_idea` = `ideas`.`id_idea`) and (`versiones`.`estado` = 3))) AS `conteoentregablesaprobados` from ((((`actividad` join `entregable` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `parametrizacion` `para` on((`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`))) join `grupo` on((`grupo`.`id_parametrizacion` = `para`.`id_parametrizacion`))) join `ideas` on((`ideas`.`id_grupo` = `grupo`.`id_grupo`))) ;
 
 --
 -- Índices para tablas volcadas
@@ -405,12 +435,8 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `versiones`
   ADD PRIMARY KEY (`id_version`),
-  ADD UNIQUE KEY `id_idea` (`id_idea`),
-  ADD UNIQUE KEY `id_idea_3` (`id_idea`),
-  ADD UNIQUE KEY `id_idea_4` (`id_idea`),
-  ADD UNIQUE KEY `id_idea_5` (`id_idea`),
-  ADD KEY `id_entregable` (`id_entregable`),
-  ADD KEY `id_idea_2` (`id_idea`);
+  ADD KEY `id_idea` (`id_idea`),
+  ADD KEY `id_entregable` (`id_entregable`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -460,7 +486,7 @@ ALTER TABLE `parametrizacion`
 -- AUTO_INCREMENT de la tabla `perfiles`
 --
 ALTER TABLE `perfiles`
-  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de perfil', AUTO_INCREMENT=5;
+  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de perfil', AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
@@ -470,7 +496,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `versiones`
 --
 ALTER TABLE `versiones`
-  MODIFY `id_version` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion de la Versiono', AUTO_INCREMENT=2;
+  MODIFY `id_version` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion de la Versiono', AUTO_INCREMENT=6;
 --
 -- Restricciones para tablas volcadas
 --

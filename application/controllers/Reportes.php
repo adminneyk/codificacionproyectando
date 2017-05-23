@@ -56,7 +56,7 @@ class Reportes extends CI_Controller {
             foreach ($param->result() as $listaideas) {
                 $id = $listaideas->id_idea;
                 $nombre = $listaideas->nombre_idea;
-                $ideaslist .= '<option value"' . $id . '">' . $nombre . '</option>';
+                $ideaslist .= '<option value="' . $id . '">' . $nombre . '</option>';
             }
         }
 
@@ -66,24 +66,82 @@ class Reportes extends CI_Controller {
     public function consultarEstadoProyecto() {
 
         $idea = $this->input->post('idea');
-        $parametrizaciones = $this->input->post('parametrizaciones');
+        $idparametrizaciones = $this->input->post('parametrizaciones');
         $fases = $this->reportes_model->obtenerFases();
-        $arrayfase = array();
+        $arrayfase=array();
+            foreach ($fases->result() as $listfases) {
+                $actividades=$this->reportes_model->obtenerActividades($listfases->id_fase);
+                if($actividades!=false){ 
+                $arrayactividades=array();
+                foreach ($actividades->result() as $listactividades) {
+                    $entregablesporact=$this->reportes_model->obtenerDatosEntregable($listactividades->id_actividad,
+                    $idea,
+                      $idparametrizaciones);
+                    if($entregablesporact!=false) {
+                        $arrayentregable=array();
+                        foreach ($entregablesporact->result() as $listaentregable) {
+                            $arrayent = array('nombre_entregable' =>  $listaentregable->nombre_entregable,
+                                      'conteoentregable' =>  $listaentregable->conteoentregable);
+                        array_push($arrayentregable, $arrayent); 
+                        }
+
+                    }
+                    $arrayact = array('id_actividad' =>  $listactividades->id_actividad,
+                                      'nombreactividad' =>  $listactividades->nombre_actividad,
+                                      'entregables'=>$arrayentregable);
+                        array_push($arrayactividades, $arrayact); 
+                }
+                  $array = array('id_fase' =>  $listfases->id_fase,
+                    'nombrefase' =>  $listfases->nombre_fase,
+                    'actividades' =>  $arrayactividades);
+                array_push($arrayfase, $array); 
+             } else {
+                 $array = array('id_fase' =>  $listfases->id_fase,
+                    'nombrefase' =>  $listfases->nombre_fase,
+                    'actividades' =>  array());
+                array_push($arrayfase, $array);
+             }
+            }
+var_dump($arrayfase);
+
+
+        /*
+        $fases = $this->reportes_model->obtenerFases();
+        $fasedata=array();
         foreach ($fases->result() as $listfases) {
             $actividades = $this->reportes_model->obtenerActividades($listfases->id_fase);
+             $actividaddata=array();
             if ($actividades != false) {
-                $arrayactividades = array();
+
                 foreach ($actividades->result() as $listactividades) {
-                    
+
+                     $entregable = $this->reportes_model->obtenerDatosEntregable($listactividades->id_actividad,
+                    $idea,
+                      $idparametrizaciones);
+                     $entregabledata=array();
+                       if ($entregable != false) {
+                        
+                             foreach ($entregable->result() as $listarentregable) {
+                                array_push($entregabledata,'Entregable 001' );
+                             }
+                           
+                        } else {
+                                array_push($entregabledata,'No' );
+                        }
                 }
+                 array_push($actividaddata, $entregabledata);
+            } else {
+               
+                array_push($actividaddata, 0);
             }
-            echo "-" . $listfases->nombre_fase . "<hr><br>";
+            $actividad=
+             array_push($fasedata,""$actividaddata);
         }
-
-
+       var_export($fasedata);
         $data['data'] = $arrayfase;
-
-        $this->load->view('Reportes/vistaavances', $data);
+*/
+        $data['datos'] = $arrayfase;
+        $this->load->view('Reportes/vistaavances',$data);
     }
 
 }

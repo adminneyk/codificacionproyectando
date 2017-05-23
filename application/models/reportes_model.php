@@ -51,7 +51,7 @@ class Reportes_model extends CI_Model {
     public function obtenerFases() {
            $this->db->order_by("orden", "asc");
            $query = $this->db->get('fases'); 
-        //echo  $this->db->last_query();
+        echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {
@@ -105,6 +105,21 @@ class Reportes_model extends CI_Model {
         } else {
             return false;
         }
+    }
+
+    public function obtenerDatosEntregable($actividad,$idea,$parame){
+       
+            $query = $this->db->get_where('resumengeneral ', array('id_actividad' => $actividad, 
+                                                                    'id_idea' => $idea,
+                                                                    'id_parametrizacion' => $parame));
+       
+       //echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        } 
+
     }
     
     
