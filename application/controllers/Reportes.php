@@ -81,15 +81,22 @@ class Reportes extends CI_Controller {
                         $arrayentregable=array();
                         foreach ($entregablesporact->result() as $listaentregable) {
                             $arrayent = array('nombre_entregable' =>  $listaentregable->nombre_entregable,
-                                      'conteoentregable' =>  $listaentregable->conteoentregable);
+                                      'conteoentregable' =>  $listaentregable->conteoentregable,
+                                      'conteoentregableaprobados' =>  $listaentregable->conteoentregablesaprobados);
                         array_push($arrayentregable, $arrayent); 
                         }
-
-                    }
-                    $arrayact = array('id_actividad' =>  $listactividades->id_actividad,
+$arrayact = array('id_actividad' =>  $listactividades->id_actividad,
                                       'nombreactividad' =>  $listactividades->nombre_actividad,
                                       'entregables'=>$arrayentregable);
                         array_push($arrayactividades, $arrayact); 
+                    } else{
+$arrayact = array('id_actividad' =>  $listactividades->id_actividad,
+                                      'nombreactividad' =>  $listactividades->nombre_actividad,
+                                      'entregables'=>array());
+                        array_push($arrayactividades, $arrayact); 
+
+                    }
+                    
                 }
                   $array = array('id_fase' =>  $listfases->id_fase,
                     'nombrefase' =>  $listfases->nombre_fase,
@@ -102,8 +109,6 @@ class Reportes extends CI_Controller {
                 array_push($arrayfase, $array);
              }
             }
-var_dump($arrayfase);
-
 
         /*
         $fases = $this->reportes_model->obtenerFases();

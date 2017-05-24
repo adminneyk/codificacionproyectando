@@ -33,7 +33,7 @@
             var parametrizaciones = $('#parametrizaciones').val();
             
             $.post("<?= base_url() ?>reportes/consultarEstadoProyecto", {idea: idea, parametrizaciones: parametrizaciones}, function (mensaje) {
-                $("#divmostrar").html(mensaje);
+                $("#divmostrar").html("<h2>Informe de Progreso de Ideas</h2><br>"+mensaje);
             });
         });
     });

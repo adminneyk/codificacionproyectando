@@ -51,7 +51,7 @@ class Reportes_model extends CI_Model {
     public function obtenerFases() {
            $this->db->order_by("orden", "asc");
            $query = $this->db->get('fases'); 
-        echo  $this->db->last_query();
+      //  echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {
