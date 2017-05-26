@@ -60,6 +60,6 @@ Fase <?php echo $listdatos['nombrefase'];?>
 </tr>
 <?php } ?>
 </table>
-
+<?=$total?>
 
 

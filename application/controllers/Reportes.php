@@ -68,8 +68,11 @@ class Reportes extends CI_Controller {
         $idea = $this->input->post('idea');
         $idparametrizaciones = $this->input->post('parametrizaciones');
         $fases = $this->reportes_model->obtenerFases();
+        $cantfases=0;
+        $totalavance=0;
         $arrayfase=array();
             foreach ($fases->result() as $listfases) {
+                $cantfases++;
                 $avancefase=0;
                 $contactividades=0;
                 $actividades=$this->reportes_model->obtenerActividades($listfases->id_fase);
@@ -94,7 +97,12 @@ class Reportes extends CI_Controller {
                                       'conteoentregableaprobados' =>  $listaentregable->conteoentregablesaprobados);
                         array_push($arrayentregable, $arrayent); 
                         }
-                        $avanceactividad=($conteoaprobadas/$conteoentregable)*100;
+
+                        if($conteoentregable == 0) {
+                            $avanceactividad=0;
+                        } else {
+                               $avanceactividad=($conteoaprobadas/$conteoentregable)*100;
+                         }
                         $avancefase= $avancefase + $avanceactividad;
 $arrayact = array('id_actividad' =>  $listactividades->id_actividad,
                                       'nombreactividad' =>  $listactividades->nombre_actividad,
@@ -102,7 +110,11 @@ $arrayact = array('id_actividad' =>  $listactividades->id_actividad,
                                       'avancereal'=>$avanceactividad);
                         array_push($arrayactividades, $arrayact); 
                     } else{
-                        $avanceactividad=($conteoaprobadas/$conteoentregable)*100;
+                        if($conteoentregable == 0) {
+                            $avanceactividad=0;
+                        } else {
+                               $avanceactividad=($conteoaprobadas/$conteoentregable)*100;
+                         }
                          $avancefase = $avancefase + $avanceactividad;
 $arrayact = array('id_actividad' =>  $listactividades->id_actividad,
                                       'nombreactividad' =>  $listactividades->nombre_actividad,
@@ -113,18 +125,27 @@ $arrayact = array('id_actividad' =>  $listactividades->id_actividad,
                     }
                     
                 }
-                $avancefases=$avancefase/$contactividades;
+                 if($contactividades == 0 ){
+$avancefases=0;
+                } else {
+                   $avancefases=$avancefase/$contactividades; 
+                }
                   $array = array('id_fase' =>  $listfases->id_fase,
                     'nombrefase' =>  $listfases->nombre_fase,
                     'actividades' =>  $arrayactividades,
                     'avancefase'=>$avancefases);
                 array_push($arrayfase, $array); 
              } else {
-                $avancefases=$avancefase/$contactividades;
+                if($contactividades == 0 ){
+$avancefases=0;
+                } else {
+                   $avancefases=$avancefase/$contactividades; 
+                }
+                $totalavance=$totalavance+$avancefases;
                  $array = array('id_fase' =>  $listfases->id_fase,
                     'nombrefase' =>  $listfases->nombre_fase,
                     'actividades' =>  array(),
-                    'avancefase'=>($avancefases/$contactividades)*100);
+                    'avancefase'=>$avancefases);
                 array_push($arrayfase, $array);
              }
             }
@@ -165,6 +186,7 @@ $arrayact = array('id_actividad' =>  $listactividades->id_actividad,
         $data['data'] = $arrayfase;
 */
         $data['datos'] = $arrayfase;
+        $data['total'] = $totalavance.$cantfases;
         $this->load->view('Reportes/vistaavances',$data);
     }
 
