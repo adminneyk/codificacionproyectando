@@ -70,42 +70,61 @@ class Reportes extends CI_Controller {
         $fases = $this->reportes_model->obtenerFases();
         $arrayfase=array();
             foreach ($fases->result() as $listfases) {
+                $avancefase=0;
+                $contactividades=0;
                 $actividades=$this->reportes_model->obtenerActividades($listfases->id_fase);
                 if($actividades!=false){ 
                 $arrayactividades=array();
                 foreach ($actividades->result() as $listactividades) {
+                    $contactividades++;
                     $entregablesporact=$this->reportes_model->obtenerDatosEntregable($listactividades->id_actividad,
                     $idea,
                       $idparametrizaciones);
+                        $conteoentregable=0;
+                        $conteoaprobadas=0;
                     if($entregablesporact!=false) {
                         $arrayentregable=array();
                         foreach ($entregablesporact->result() as $listaentregable) {
+                            $conteoentregable++;
+                            if($listaentregable->conteoentregablesaprobados==1){
+                              $conteoaprobadas ++;  
+                            }
                             $arrayent = array('nombre_entregable' =>  $listaentregable->nombre_entregable,
                                       'conteoentregable' =>  $listaentregable->conteoentregable,
                                       'conteoentregableaprobados' =>  $listaentregable->conteoentregablesaprobados);
                         array_push($arrayentregable, $arrayent); 
                         }
+                        $avanceactividad=($conteoaprobadas/$conteoentregable)*100;
+                        $avancefase= $avancefase + $avanceactividad;
 $arrayact = array('id_actividad' =>  $listactividades->id_actividad,
                                       'nombreactividad' =>  $listactividades->nombre_actividad,
-                                      'entregables'=>$arrayentregable);
+                                      'entregables'=>$arrayentregable,
+                                      'avancereal'=>$avanceactividad);
                         array_push($arrayactividades, $arrayact); 
                     } else{
+                        $avanceactividad=($conteoaprobadas/$conteoentregable)*100;
+                         $avancefase = $avancefase + $avanceactividad;
 $arrayact = array('id_actividad' =>  $listactividades->id_actividad,
                                       'nombreactividad' =>  $listactividades->nombre_actividad,
-                                      'entregables'=>array());
+                                      'entregables'=>array(),
+                                      'avancereal'=>$avanceactividad);
                         array_push($arrayactividades, $arrayact); 
 
                     }
                     
                 }
+                $avancefases=$avancefase/$contactividades;
                   $array = array('id_fase' =>  $listfases->id_fase,
                     'nombrefase' =>  $listfases->nombre_fase,
-                    'actividades' =>  $arrayactividades);
+                    'actividades' =>  $arrayactividades,
+                    'avancefase'=>$avancefases);
                 array_push($arrayfase, $array); 
              } else {
+                $avancefases=$avancefase/$contactividades;
                  $array = array('id_fase' =>  $listfases->id_fase,
                     'nombrefase' =>  $listfases->nombre_fase,
-                    'actividades' =>  array());
+                    'actividades' =>  array(),
+                    'avancefase'=>($avancefases/$contactividades)*100);
                 array_push($arrayfase, $array);
              }
             }
