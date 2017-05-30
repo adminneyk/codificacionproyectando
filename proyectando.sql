@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-05-2017 a las 19:40:33
+-- Tiempo de generación: 30-05-2017 a las 23:55:13
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -340,11 +340,36 @@ INSERT INTO `versiones` (`id_version`, `id_idea`, `id_entregable`, `entregable`,
 -- --------------------------------------------------------
 
 --
+-- Estructura Stand-in para la vista `vista_parametrizacion`
+-- (Véase abajo para la vista actual)
+--
+DROP VIEW IF EXISTS `vista_parametrizacion`;
+CREATE TABLE `vista_parametrizacion` (
+`PARAMETRIZACION` varchar(100)
+,`FASE` varchar(100)
+,`ACTIVIDAD` varchar(100)
+,`ENTREGABLE` varchar(100)
+,`USUARIO` varchar(100)
+,`ESTADO` varchar(10)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura para la vista `resumengeneral`
 --
 DROP TABLE IF EXISTS `resumengeneral`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `resumengeneral`  AS  select `entregable`.`nombre_entregable` AS `nombre_entregable`,`ideas`.`id_idea` AS `id_idea`,`para`.`id_parametrizacion` AS `id_parametrizacion`,`actividad`.`id_actividad` AS `id_actividad`,`grupo`.`id_grupo` AS `id_grupo`,(select count(0) from `versiones` where ((`versiones`.`id_entregable` = `entregable`.`id_entregable`) and (`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `conteoentregable`,(select count(0) from `versiones` where ((`versiones`.`id_entregable` = `entregable`.`id_entregable`) and (`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`) and (`versiones`.`id_idea` = `ideas`.`id_idea`) and (`versiones`.`estado` = 3))) AS `conteoentregablesaprobados` from ((((`actividad` join `entregable` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `parametrizacion` `para` on((`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`))) join `grupo` on((`grupo`.`id_parametrizacion` = `para`.`id_parametrizacion`))) join `ideas` on((`ideas`.`id_grupo` = `grupo`.`id_grupo`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vista_parametrizacion`
+--
+DROP TABLE IF EXISTS `vista_parametrizacion`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_parametrizacion`  AS  select `parametrizacion`.`nom_parametrizacion` AS `PARAMETRIZACION`,`fases`.`nombre_fase` AS `FASE`,`actividad`.`nombre_actividad` AS `ACTIVIDAD`,`entregable`.`nombre_entregable` AS `ENTREGABLE`,`usuario`.`usuario` AS `USUARIO`,(case `entregable`.`estado` when 1 then 'Activo' when 0 then 'Inactivo' else 'Sin Estado' end) AS `ESTADO` from ((((`parametrizacion` join `entregable` on((`entregable`.`id_parametrizacion` = `parametrizacion`.`id_parametrizacion`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) join `usuario` on((`parametrizacion`.`id_responsable` = `usuario`.`id_usuario`))) ;
 
 --
 -- Índices para tablas volcadas
