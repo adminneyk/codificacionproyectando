@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-05-2017 a las 23:34:55
+-- Tiempo de generación: 30-05-2017 a las 19:40:33
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyectando20`
 --
+CREATE DATABASE IF NOT EXISTS `proyectando20` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `proyectando20`;
 
 -- --------------------------------------------------------
 
@@ -105,7 +107,8 @@ CREATE TABLE `entregable` (
 
 INSERT INTO `entregable` (`id_entregable`, `id_parametrizacion`, `id_actividad`, `nombre_entregable`, `descripcion_entregable`, `texto_ayuda`, `estado`) VALUES
 (1, 1, 1, 'objetivos generales', 'Descripcion del entregable', 'Texto de ayuda', 1),
-(2, 1, 1, 'entregable de prueba', 'descripcion del entregable', 'texto de ayuda', 1);
+(2, 1, 1, 'entregable de prueba', 'descripcion del entregable', 'texto de ayuda', 1),
+(3, 1, 2, 'entregable', 'descripción ', 'asdasdasdasd', 1);
 
 -- --------------------------------------------------------
 
@@ -303,10 +306,10 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `usuario`, `clave`, `id_perfil`) VALUES
 (1, 'Administrador Del Sistema', 'admin', 'admin', 1),
-(2, 'Carlos Donoso', 'cdonoso', '123456', 2),
-(3, 'Yudy Viviana Bran Sanchez', 'ybransa', '123456', 3),
-(4, 'Yeimy Parada Migue', 'yparadami', '123456', 3),
-(5, 'Omar Bonilla Franco', 'obonillafr', '123456', 3);
+(2, 'Carlos Donoso', 'cdonoso', 'p1234', 2),
+(3, 'Yudy Viviana Bran Sanchez', 'ybransa', 'p1234', 3),
+(4, 'Yeimy Parada Migue', 'yparadami', 'p1234', 3),
+(5, 'Omar Bonilla Franco', 'obonillafr', 'p1234', 3);
 
 -- --------------------------------------------------------
 
@@ -330,11 +333,9 @@ CREATE TABLE `versiones` (
 --
 
 INSERT INTO `versiones` (`id_version`, `id_idea`, `id_entregable`, `entregable`, `revision`, `comentarios`, `estado`) VALUES
-(1, 1, 1, 'sdfsdf', 'sdfsdf', 'sdfsdfsd', 1),
-(2, 1, 1, 'sfsdfsdfsd 2 ', 'sdfsdfsdf 2 ', 'sdfsdfsdf 2 ', 1),
-(3, 1, 1, 'sdfsdf', 'sdfsdfsd', 'sdfsdfsdfsdfsdf', 1),
-(4, 1, 2, 'sdfsdfsdfsdf', 'sdfsdfsdf', 'sdfsdfsdfsdfsdf', 1),
-(5, 1, 2, 'sdfsdfsdfsdfsdfsdf', 'sdfsdfsd', 'sdfsdfsdfsdfsdfsd', 2);
+(5, 1, 2, 'sdfsdfsdfsdfsdfsdf', 'sdfsdfsd', 'sdfsdfsdfsdfsdfsd', 3),
+(6, 1, 3, 'entregable', 'sdfsdfsd', 'sdfsdfsdfsd', 2),
+(7, 1, 1, 'ghjghjghjghj', 'ghjghjghjghjgh', 'jghjghjghjghjghjghjghj', 3);
 
 -- --------------------------------------------------------
 
@@ -456,7 +457,7 @@ ALTER TABLE `cursos`
 -- AUTO_INCREMENT de la tabla `entregable`
 --
 ALTER TABLE `entregable`
-  MODIFY `id_entregable` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion del Entregable', AUTO_INCREMENT=3;
+  MODIFY `id_entregable` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion del Entregable', AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `equipos`
 --
@@ -496,7 +497,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `versiones`
 --
 ALTER TABLE `versiones`
-  MODIFY `id_version` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion de la Versiono', AUTO_INCREMENT=6;
+  MODIFY `id_version` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion de la Versiono', AUTO_INCREMENT=8;
 --
 -- Restricciones para tablas volcadas
 --

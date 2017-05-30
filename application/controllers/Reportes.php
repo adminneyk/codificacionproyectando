@@ -149,42 +149,6 @@ $avancefases=0;
                 array_push($arrayfase, $array);
              }
             }
-
-        /*
-        $fases = $this->reportes_model->obtenerFases();
-        $fasedata=array();
-        foreach ($fases->result() as $listfases) {
-            $actividades = $this->reportes_model->obtenerActividades($listfases->id_fase);
-             $actividaddata=array();
-            if ($actividades != false) {
-
-                foreach ($actividades->result() as $listactividades) {
-
-                     $entregable = $this->reportes_model->obtenerDatosEntregable($listactividades->id_actividad,
-                    $idea,
-                      $idparametrizaciones);
-                     $entregabledata=array();
-                       if ($entregable != false) {
-                        
-                             foreach ($entregable->result() as $listarentregable) {
-                                array_push($entregabledata,'Entregable 001' );
-                             }
-                           
-                        } else {
-                                array_push($entregabledata,'No' );
-                        }
-                }
-                 array_push($actividaddata, $entregabledata);
-            } else {
-               
-                array_push($actividaddata, 0);
-            }
-            $actividad=
-             array_push($fasedata,""$actividaddata);
-        }
-       var_export($fasedata);
-        $data['data'] = $arrayfase;
-*/
         $data['datos'] = $arrayfase;
         $data['total'] = $totalavance.$cantfases;
         $this->load->view('Reportes/vistaavances',$data);
