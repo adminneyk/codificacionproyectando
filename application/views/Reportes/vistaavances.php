@@ -1,3 +1,14 @@
+Avance General de la Idea<br>
+<div class="progress progress-striped active">
+  <div class="progress-bar" role="progressbar"
+       aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"
+       style="width: <?=$total?>%">
+    <span class="sr-only"><?=$total?>% completado</span>
+   <?=$total?>%
+  </div>
+
+</div>
+
 <table class="table table-bordered">
 <thead>
     <tr>
@@ -60,6 +71,6 @@ Fase <?php echo $listdatos['nombrefase'];?>
 </tr>
 <?php } ?>
 </table>
-<?=$total?>
+
 
 

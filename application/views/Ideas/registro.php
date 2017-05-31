@@ -38,13 +38,13 @@ echo form_open(base_url() . 'ideas/validar', $arrayform);
             if (descripidea == "") {
                 msg += "-Descripcion de la Idea Requerido<br>";
             }
-            var valida=0;
-                $("#integrantes option:selected").each(function() {			
+           /* var valida=0;
+                $("#integrantes[] option:selected").each(function() {			
                 valida++;		
             });
             if(valida != 3){
                msg += "-Idea con 3 integrantes Requeridos<br>"; 
-            }
+            }*/
             if (msg) {
                 $("#error").html('<span class="glyphicon glyphicon-bell"></span><strong>Tiene los Siguientes Problemas:</strong><br>' + msg);
                 $("#error").addClass('alert alert-warning');
@@ -85,7 +85,7 @@ echo form_open(base_url() . 'ideas/validar', $arrayform);
         <div class="form-group">
             <label class="col-md-4 control-label" for="selectmultiple">Integrantes del Grupo</label>
             <div class="col-md-4">
-                <select id="integrantes" name="integrantes" class="form-control" multiple="multiple">
+                <select multiple id="integrantes[]" name="integrantes[]" class="form-control">
                    <?php
                    foreach ($listaestudiantes->result() as $lista) {
                          ?>

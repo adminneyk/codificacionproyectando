@@ -148,9 +148,10 @@ $avancefases=0;
                     'avancefase'=>$avancefases);
                 array_push($arrayfase, $array);
              }
+             $totalavance=$totalavance+$avancefases;
             }
         $data['datos'] = $arrayfase;
-        $data['total'] = $totalavance.$cantfases;
+        $data['total'] = $totalavance/$cantfases;
         $this->load->view('Reportes/vistaavances',$data);
     }
 

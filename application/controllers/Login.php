@@ -31,10 +31,13 @@ class Login extends CI_Controller {
                   if($res ==1){
                       redirect(base_url().'home');
                   }else{
+                      $this->session->set_flashdata('error', 'Usuario o Clave Incorrecta');
                       redirect(base_url().'login');
+                      
                   }
               }else{
                     $this->load->view('Usuarios/formulario');
+
               }
                 
 	}
