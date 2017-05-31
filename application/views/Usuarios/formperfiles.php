@@ -4,7 +4,7 @@ $nombreperfil = "";
 $permisos = "";
 $id = "";
 $arraypermisos = array();
-if (isset($getperfil) && isset($listaperfiles)) {
+if (isset($getperfil) && $listaperfiles!=FALSE) {
     $id = $getperfil;
     foreach ($listaperfiles->result() as $perfil) {
         $idpefil = $perfil->id_perfil;

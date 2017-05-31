@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
   <li><a href="<?=base_url()?>home">Home</a></li>
-  <li class="active">Menu de Ideas</li>
+  <li class="active">Opciones de Ideas</li>
 </ol>
 <fieldset>
 <ul class="list-group">
