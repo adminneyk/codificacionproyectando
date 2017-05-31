@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-05-2017 a las 23:55:13
+-- Tiempo de generación: 31-05-2017 a las 06:17:00
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyectando20`
 --
+DROP TABLE proyectando20;
 CREATE DATABASE IF NOT EXISTS `proyectando20` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `proyectando20`;
 
@@ -108,7 +109,8 @@ CREATE TABLE `entregable` (
 INSERT INTO `entregable` (`id_entregable`, `id_parametrizacion`, `id_actividad`, `nombre_entregable`, `descripcion_entregable`, `texto_ayuda`, `estado`) VALUES
 (1, 1, 1, 'objetivos generales', 'Descripcion del entregable', 'Texto de ayuda', 1),
 (2, 1, 1, 'entregable de prueba', 'descripcion del entregable', 'texto de ayuda', 1),
-(3, 1, 2, 'entregable', 'descripción ', 'asdasdasdasd', 1);
+(3, 1, 2, 'entregable', 'descripción ', 'asdasdasdasd', 1),
+(4, 2, 1, 'kfgkdg', 'zmxnkncxzc', 'zjxchjzxhcizxhchxzic', 1);
 
 -- --------------------------------------------------------
 
@@ -264,9 +266,10 @@ CREATE TABLE `perfiles` (
 --
 
 INSERT INTO `perfiles` (`id_perfil`, `nombre_perfil`, `permisos`, `visible`) VALUES
-(1, 'Administrador', 'perfiles,usuarios,ideas,reportes,parametrizacion,revision', 1),
+(1, 'Administrador', 'perfiles,usuarios,ideas,reportes,parametrizacion,revision,banco', 1),
 (2, 'Profesor', 'reportes,parametrizacion,revision,banco', 1),
-(3, 'Estudiante', 'ideas', 1);
+(3, 'Estudiante', 'ideas', 1),
+(4, 'Perfil de Prueba', 'perfiles,banco', 0);
 
 -- --------------------------------------------------------
 
@@ -310,6 +313,19 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `usuario`, `clave`, `id_p
 (3, 'Yudy Viviana Bran Sanchez', 'ybransa', 'p1234', 3),
 (4, 'Yeimy Parada Migue', 'yparadami', 'p1234', 3),
 (5, 'Omar Bonilla Franco', 'obonillafr', 'p1234', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `usuariosporgrupo`
+-- (Véase abajo para la vista actual)
+--
+DROP VIEW IF EXISTS `usuariosporgrupo`;
+CREATE TABLE `usuariosporgrupo` (
+`id_usuario` int(11)
+,`nombre_usuario` varchar(100)
+,`id_grupo` int(11)
+);
 
 -- --------------------------------------------------------
 
@@ -361,6 +377,15 @@ CREATE TABLE `vista_parametrizacion` (
 DROP TABLE IF EXISTS `resumengeneral`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `resumengeneral`  AS  select `entregable`.`nombre_entregable` AS `nombre_entregable`,`ideas`.`id_idea` AS `id_idea`,`para`.`id_parametrizacion` AS `id_parametrizacion`,`actividad`.`id_actividad` AS `id_actividad`,`grupo`.`id_grupo` AS `id_grupo`,(select count(0) from `versiones` where ((`versiones`.`id_entregable` = `entregable`.`id_entregable`) and (`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `conteoentregable`,(select count(0) from `versiones` where ((`versiones`.`id_entregable` = `entregable`.`id_entregable`) and (`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`) and (`versiones`.`id_idea` = `ideas`.`id_idea`) and (`versiones`.`estado` = 3))) AS `conteoentregablesaprobados` from ((((`actividad` join `entregable` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `parametrizacion` `para` on((`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`))) join `grupo` on((`grupo`.`id_parametrizacion` = `para`.`id_parametrizacion`))) join `ideas` on((`ideas`.`id_grupo` = `grupo`.`id_grupo`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `usuariosporgrupo`
+--
+DROP TABLE IF EXISTS `usuariosporgrupo`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `usuariosporgrupo`  AS  select `usuario`.`id_usuario` AS `id_usuario`,`usuario`.`nombre_usuario` AS `nombre_usuario`,`cursos`.`id_grupo` AS `id_grupo` from (`cursos` join `usuario` on((`cursos`.`id_usuario` = `usuario`.`id_usuario`))) ;
 
 -- --------------------------------------------------------
 
@@ -482,7 +507,7 @@ ALTER TABLE `cursos`
 -- AUTO_INCREMENT de la tabla `entregable`
 --
 ALTER TABLE `entregable`
-  MODIFY `id_entregable` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion del Entregable', AUTO_INCREMENT=4;
+  MODIFY `id_entregable` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion del Entregable', AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `equipos`
 --
@@ -512,7 +537,7 @@ ALTER TABLE `parametrizacion`
 -- AUTO_INCREMENT de la tabla `perfiles`
 --
 ALTER TABLE `perfiles`
-  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de perfil', AUTO_INCREMENT=4;
+  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de perfil', AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
