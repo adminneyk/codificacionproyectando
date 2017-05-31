@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2017 a las 17:44:27
+-- Tiempo de generación: 31-05-2017 a las 22:56:30
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -185,7 +185,8 @@ CREATE TABLE `grupo` (
 --
 
 INSERT INTO `grupo` (`id_grupo`, `nombre_grupo`, `id_responsable`, `id_parametrizacion`) VALUES
-(1, '800', 2, 1);
+(1, '800', 2, 1),
+(2, '801', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -550,7 +551,7 @@ ALTER TABLE `equipos`
 -- AUTO_INCREMENT de la tabla `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificable del Grupo', AUTO_INCREMENT=2;
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificable del Grupo', AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `ideas`
 --
