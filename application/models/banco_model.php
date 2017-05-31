@@ -29,7 +29,7 @@ class Banco_model extends CI_Model {
         } else {
              $query = $this->db->get_where('ideas', array('id_grupo'=>$idgrupo));
         }
-        echo  $this->db->last_query();
+       // echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {
