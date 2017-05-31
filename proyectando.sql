@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2017 a las 06:17:00
+-- Tiempo de generación: 31-05-2017 a las 17:44:27
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyectando20`
 --
-DROP TABLE proyectando20;
+DROP DATABASE proyectando20;
 CREATE DATABASE IF NOT EXISTS `proyectando20` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `proyectando20`;
 
@@ -133,7 +133,13 @@ CREATE TABLE `equipos` (
 INSERT INTO `equipos` (`id_equipo`, `id_idea`, `id_usuario`, `estado`) VALUES
 (1, 1, 5, 1),
 (2, 1, 4, 1),
-(3, 1, 3, 1);
+(3, 1, 3, 1),
+(4, 7, 3, 1),
+(5, 7, 4, 1),
+(6, 7, 5, 1),
+(7, 8, 3, 1),
+(8, 8, 4, 1),
+(9, 8, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -202,7 +208,24 @@ CREATE TABLE `ideas` (
 --
 
 INSERT INTO `ideas` (`id_idea`, `id_grupo`, `id_linea`, `nombre_idea`, `descripcion_idea`, `estado`) VALUES
-(1, 1, 1, 'Nombre de la Idea', 'Esta es la idea la cual se desea manejar', 1);
+(1, 1, 1, 'Nombre de la Idea', 'Esta es la idea la cual se desea manejar', 1),
+(2, 1, 1, 'idea de proyecto', 'descripción de idea', 1),
+(7, 1, 1, 'Proyecto de perros Calientes', 'Descripción de Idea', 1),
+(8, 1, 1, 'Idea 002', 'asdasdasd', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `ideasgrupo`
+-- (Véase abajo para la vista actual)
+--
+DROP VIEW IF EXISTS `ideasgrupo`;
+CREATE TABLE `ideasgrupo` (
+`id_idea` int(11)
+,`nombre_idea` varchar(100)
+,`id_grupo` int(11)
+,`id_parametrizacion` int(11)
+);
 
 -- --------------------------------------------------------
 
@@ -245,7 +268,8 @@ CREATE TABLE `parametrizacion` (
 
 INSERT INTO `parametrizacion` (`id_parametrizacion`, `nom_parametrizacion`, `descripcion_parametrizacion`, `id_responsable`, `estado`) VALUES
 (1, 'Parametrizacion de Ingenieria de software', 'Descripcion de la parametrizacion de ingenieria de software', 2, 1),
-(2, 'ingenieria civil', 'prueba yudy', 2, 0);
+(2, 'ingenieria civil', 'prueba yudy', 2, 0),
+(3, 'Parametrizacion de ADSI', 'esta es la parametrizacion de entregable de adsi', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -368,6 +392,15 @@ CREATE TABLE `vista_parametrizacion` (
 ,`USUARIO` varchar(100)
 ,`ESTADO` varchar(10)
 );
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `ideasgrupo`
+--
+DROP TABLE IF EXISTS `ideasgrupo`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ideasgrupo`  AS  select `ideas`.`id_idea` AS `id_idea`,`ideas`.`nombre_idea` AS `nombre_idea`,`ideas`.`id_grupo` AS `id_grupo`,`grupo`.`id_parametrizacion` AS `id_parametrizacion` from (`ideas` join `grupo` on((`ideas`.`id_grupo` = `grupo`.`id_grupo`))) ;
 
 -- --------------------------------------------------------
 
@@ -512,7 +545,7 @@ ALTER TABLE `entregable`
 -- AUTO_INCREMENT de la tabla `equipos`
 --
 ALTER TABLE `equipos`
-  MODIFY `id_equipo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del Registro', AUTO_INCREMENT=4;
+  MODIFY `id_equipo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del Registro', AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `grupo`
 --
@@ -522,7 +555,7 @@ ALTER TABLE `grupo`
 -- AUTO_INCREMENT de la tabla `ideas`
 --
 ALTER TABLE `ideas`
-  MODIFY `id_idea` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la  Idea', AUTO_INCREMENT=2;
+  MODIFY `id_idea` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la  Idea', AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `linea`
 --
@@ -532,7 +565,7 @@ ALTER TABLE `linea`
 -- AUTO_INCREMENT de la tabla `parametrizacion`
 --
 ALTER TABLE `parametrizacion`
-  MODIFY `id_parametrizacion` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la Parametrizacion ', AUTO_INCREMENT=3;
+  MODIFY `id_parametrizacion` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la Parametrizacion ', AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `perfiles`
 --
