@@ -7,12 +7,15 @@ class Home extends CI_Controller {
         $this->load->helper('url');
         $this->load->view('cabecera');
         $this->load->view('menus');
+        $this->load->model('notificaciones_model');
         
     }
 	public function index()
 	{
                 $this->load->helper('url');
-		$this->load->view('Genericas/home');
+                $usuario =$this->session->userdata('id_usuario');
+                $datos['listanotificaciones'] = $this->notificaciones_model->obtenerNotificaciones($usuario);
+		        $this->load->view('Genericas/home',$datos);
                 $this->load->view('footer');
 	}
 }

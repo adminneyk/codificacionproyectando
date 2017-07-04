@@ -70,6 +70,15 @@ class Banco_model extends CI_Model {
         return $this->db->update('ideas', $data);
     }
 
+    public function mostrarIntegrantes($ididea) {
+
+        $this->db->select('*');
+        $this->db->from('equipos');
+        $this->db->join('ideas','equipos.id_idea=ideas.id_idea');
+        $this->db->where('ideas.id_idea',$ididea);
+        return $query = $this->db->get();
+    }
+
 }
 
 ?>

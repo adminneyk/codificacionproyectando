@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Banco extends CI_Controller {
+class Notificaciones extends CI_Controller {
 
     function __construct() {
         parent::__construct();
@@ -10,7 +10,6 @@ class Banco extends CI_Controller {
         $this->load->view('cabecera');
         $this->load->view('menus');
         $this->load->model('banco_model');
-        $this->load->model('notificaciones_model');
     }
 
     public function index() {
@@ -49,21 +48,7 @@ class Banco extends CI_Controller {
         $idea = $this->uri->segment(4, 0);
         $estado = $this->uri->segment(5, 0);
         $this->banco_model->aprobarIdea($idea,$estado);
-        $integrantes = $this->banco_model->mostrarIntegrantes($idea);
-        foreach ($integrantes->result() as $integrante) {
-           $usuario = $integrante->id_usuario;
-           $nombreidea = $integrante->nombre_idea;
-           if($estado==3){
-            $mensaje="Su Idea ".$nombreidea." Es viable para continuar!";
-           }
-           if($estado==2){
-            $mensaje="Su Idea ".$nombreidea." No es viable para continuar!";
-           }
-
-           $this->notificaciones_model->notificar($idea,$mensaje);
-
-         }
-      
+        $datos['listagrupos'] = $this->banco_model->obtenerGrupos($this->session->userdata('id_usuario'));
         $this->session->set_flashdata('correcto', 'Idea Clasificada Correctamente!');
         redirect(base_url().'banco/bancoIdeas/'.$grupo,'refresh'); 
     }
