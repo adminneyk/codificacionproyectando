@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2017 a las 22:56:30
+-- Tiempo de generación: 04-07-2017 a las 23:14:14
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -19,7 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyectando20`
 --
-DROP DATABASE proyectando20;
 CREATE DATABASE IF NOT EXISTS `proyectando20` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `proyectando20`;
 
@@ -30,14 +29,16 @@ USE `proyectando20`;
 --
 
 DROP TABLE IF EXISTS `actividad`;
-CREATE TABLE `actividad` (
-  `id_actividad` int(11) NOT NULL COMMENT 'Identificador de la Actividad',
+CREATE TABLE IF NOT EXISTS `actividad` (
+  `id_actividad` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la Actividad',
   `id_fase` int(11) NOT NULL COMMENT 'Relacion con las Fase',
   `nombre_actividad` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre de la Actividad',
   `descripcion_actividad` varchar(200) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Descripcion de la Actividad',
   `estado` int(11) NOT NULL COMMENT 'Estado de la Actividad',
-  `orden` int(11) NOT NULL DEFAULT '1' COMMENT 'Orden de Muestra'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `orden` int(11) NOT NULL DEFAULT '1' COMMENT 'Orden de Muestra',
+  PRIMARY KEY (`id_actividad`),
+  KEY `id_fase` (`id_fase`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `actividad`
@@ -70,11 +71,16 @@ INSERT INTO `actividad` (`id_actividad`, `id_fase`, `nombre_actividad`, `descrip
 --
 
 DROP TABLE IF EXISTS `cursos`;
-CREATE TABLE `cursos` (
-  `id_cursos` int(11) NOT NULL COMMENT 'Identificacion de Curso',
+CREATE TABLE IF NOT EXISTS `cursos` (
+  `id_cursos` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion de Curso',
   `id_grupo` int(11) NOT NULL COMMENT 'Relacion con el Grupo',
-  `id_usuario` int(11) NOT NULL COMMENT 'Relacion con el Usuario'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `id_usuario` int(11) NOT NULL COMMENT 'Relacion con el Usuario',
+  PRIMARY KEY (`id_cursos`),
+  KEY `id_grupo` (`id_grupo`),
+  KEY `id_usuario` (`id_usuario`),
+  KEY `id_grupo_2` (`id_grupo`),
+  KEY `id_usuario_2` (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `cursos`
@@ -92,15 +98,18 @@ INSERT INTO `cursos` (`id_cursos`, `id_grupo`, `id_usuario`) VALUES
 --
 
 DROP TABLE IF EXISTS `entregable`;
-CREATE TABLE `entregable` (
-  `id_entregable` int(11) NOT NULL COMMENT 'Identificacion del Entregable',
+CREATE TABLE IF NOT EXISTS `entregable` (
+  `id_entregable` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion del Entregable',
   `id_parametrizacion` int(11) NOT NULL COMMENT 'Relacion con Parametrizacion',
   `id_actividad` int(11) NOT NULL COMMENT 'Relacion del Entregable con la Actividad',
   `nombre_entregable` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre del Entregable',
   `descripcion_entregable` varchar(200) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Descripcion del Entregable',
   `texto_ayuda` varchar(200) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Mensaje de Ayuda Para Estudiantes',
-  `estado` int(11) NOT NULL COMMENT 'Estado de publicacion del Entregable'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `estado` int(11) NOT NULL COMMENT 'Estado de publicacion del Entregable',
+  PRIMARY KEY (`id_entregable`),
+  KEY `id_actividad` (`id_actividad`),
+  KEY `id_parametrizacion` (`id_parametrizacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `entregable`
@@ -119,12 +128,15 @@ INSERT INTO `entregable` (`id_entregable`, `id_parametrizacion`, `id_actividad`,
 --
 
 DROP TABLE IF EXISTS `equipos`;
-CREATE TABLE `equipos` (
-  `id_equipo` int(11) NOT NULL COMMENT 'Identificador del Registro',
+CREATE TABLE IF NOT EXISTS `equipos` (
+  `id_equipo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del Registro',
   `id_idea` int(11) NOT NULL COMMENT 'Identificador de la Idea',
   `id_usuario` int(11) NOT NULL COMMENT 'Identificador del Usuario',
-  `estado` int(11) NOT NULL COMMENT 'Estado del Usuario'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `estado` int(11) NOT NULL COMMENT 'Estado del Usuario',
+  PRIMARY KEY (`id_equipo`),
+  KEY `id_usuario` (`id_usuario`),
+  KEY `id_idea` (`id_idea`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `equipos`
@@ -148,11 +160,12 @@ INSERT INTO `equipos` (`id_equipo`, `id_idea`, `id_usuario`, `estado`) VALUES
 --
 
 DROP TABLE IF EXISTS `fases`;
-CREATE TABLE `fases` (
+CREATE TABLE IF NOT EXISTS `fases` (
   `id_fase` int(11) NOT NULL COMMENT 'identificador de la fase dela idea',
   `nombre_fase` varchar(100) COLLATE utf16_spanish_ci NOT NULL COMMENT 'nombre de la fase de la idea',
   `descripcion` varchar(150) COLLATE utf16_spanish_ci NOT NULL,
-  `orden` int(11) NOT NULL DEFAULT '1' COMMENT 'Orden de Mostrar'
+  `orden` int(11) NOT NULL DEFAULT '1' COMMENT 'Orden de Mostrar',
+  PRIMARY KEY (`id_fase`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
 
 --
@@ -173,12 +186,15 @@ INSERT INTO `fases` (`id_fase`, `nombre_fase`, `descripcion`, `orden`) VALUES
 --
 
 DROP TABLE IF EXISTS `grupo`;
-CREATE TABLE `grupo` (
-  `id_grupo` int(11) NOT NULL COMMENT 'Identificable del Grupo',
+CREATE TABLE IF NOT EXISTS `grupo` (
+  `id_grupo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificable del Grupo',
   `nombre_grupo` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre del Grupo',
   `id_responsable` int(11) NOT NULL COMMENT 'Relacion con Usuario Responsable',
-  `id_parametrizacion` int(11) NOT NULL COMMENT 'Identificador de la Parametrizacion'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `id_parametrizacion` int(11) NOT NULL COMMENT 'Identificador de la Parametrizacion',
+  PRIMARY KEY (`id_grupo`),
+  KEY `id_responsable` (`id_responsable`),
+  KEY `id_parametrizacion` (`id_parametrizacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `grupo`
@@ -195,24 +211,27 @@ INSERT INTO `grupo` (`id_grupo`, `nombre_grupo`, `id_responsable`, `id_parametri
 --
 
 DROP TABLE IF EXISTS `ideas`;
-CREATE TABLE `ideas` (
-  `id_idea` int(11) NOT NULL COMMENT 'Identificador de la  Idea',
+CREATE TABLE IF NOT EXISTS `ideas` (
+  `id_idea` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la  Idea',
   `id_grupo` int(11) NOT NULL COMMENT 'Identificador del Grupo',
   `id_linea` int(11) NOT NULL COMMENT 'Identificador de la Linea',
   `nombre_idea` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre de la Idea',
   `descripcion_idea` varchar(200) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Descripcion de la Idea',
-  `estado` int(11) NOT NULL DEFAULT '1' COMMENT 'Estado de la Idea'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `estado` int(11) NOT NULL DEFAULT '1' COMMENT 'Estado de la Idea',
+  PRIMARY KEY (`id_idea`),
+  KEY `id_linea` (`id_linea`),
+  KEY `id_grupo` (`id_grupo`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `ideas`
 --
 
 INSERT INTO `ideas` (`id_idea`, `id_grupo`, `id_linea`, `nombre_idea`, `descripcion_idea`, `estado`) VALUES
-(1, 1, 1, 'Nombre de la Idea', 'Esta es la idea la cual se desea manejar', 1),
-(2, 1, 1, 'idea de proyecto', 'descripción de idea', 1),
-(7, 1, 1, 'Proyecto de perros Calientes', 'Descripción de Idea', 1),
-(8, 1, 1, 'Idea 002', 'asdasdasd', 1);
+(1, 1, 1, 'Nombre de la Idea', 'Esta es la idea la cual se desea manejar', 3),
+(2, 1, 1, 'idea de proyecto', 'descripción de idea', 3),
+(7, 1, 1, 'Proyecto de perros Calientes', 'Descripción de Idea1', 3),
+(8, 1, 1, 'Idea 002', 'asdasdasd1', 3);
 
 -- --------------------------------------------------------
 
@@ -221,7 +240,7 @@ INSERT INTO `ideas` (`id_idea`, `id_grupo`, `id_linea`, `nombre_idea`, `descripc
 -- (Véase abajo para la vista actual)
 --
 DROP VIEW IF EXISTS `ideasgrupo`;
-CREATE TABLE `ideasgrupo` (
+CREATE TABLE IF NOT EXISTS `ideasgrupo` (
 `id_idea` int(11)
 ,`nombre_idea` varchar(100)
 ,`id_grupo` int(11)
@@ -235,11 +254,12 @@ CREATE TABLE `ideasgrupo` (
 --
 
 DROP TABLE IF EXISTS `linea`;
-CREATE TABLE `linea` (
-  `id_linea` int(11) NOT NULL COMMENT 'Identificador de la Linea Tematica',
+CREATE TABLE IF NOT EXISTS `linea` (
+  `id_linea` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la Linea Tematica',
   `nombre_linea` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre de la Linea Tematic',
-  `descripcion_linea` varchar(200) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Descripcion de la Linea Tematica'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `descripcion_linea` varchar(200) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Descripcion de la Linea Tematica',
+  PRIMARY KEY (`id_linea`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `linea`
@@ -251,17 +271,43 @@ INSERT INTO `linea` (`id_linea`, `nombre_linea`, `descripcion_linea`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `notificaciones`
+--
+
+DROP TABLE IF EXISTS `notificaciones`;
+CREATE TABLE IF NOT EXISTS `notificaciones` (
+  `id_notificacion` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del Mensaje',
+  `id_usuario` int(11) NOT NULL COMMENT 'Persona destinataria',
+  `mensaje` text NOT NULL COMMENT 'Mensaje Contreto',
+  `estado` int(11) NOT NULL COMMENT 'Estado de la Notificacion',
+  PRIMARY KEY (`id_notificacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `notificaciones`
+--
+
+INSERT INTO `notificaciones` (`id_notificacion`, `id_usuario`, `mensaje`, `estado`) VALUES
+(19, 3, 'Su Idea Idea 002 Es viable para continuar!', 1),
+(20, 5, 'Su Idea Idea 002 Es viable para continuar!', 1),
+(21, 2, 'Su Idea Idea 002 Es viable para continuar!', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `parametrizacion`
 --
 
 DROP TABLE IF EXISTS `parametrizacion`;
-CREATE TABLE `parametrizacion` (
-  `id_parametrizacion` int(11) NOT NULL COMMENT 'Identificador de la Parametrizacion ',
+CREATE TABLE IF NOT EXISTS `parametrizacion` (
+  `id_parametrizacion` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la Parametrizacion ',
   `nom_parametrizacion` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'nombre de la Parametrizacion',
   `descripcion_parametrizacion` varchar(200) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Descripcion de la Parametrizacion',
   `id_responsable` int(11) NOT NULL COMMENT 'Responsable de la Parametrizacion',
-  `estado` int(11) NOT NULL COMMENT 'Estado de la Parametrizacion'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `estado` int(11) NOT NULL COMMENT 'Estado de la Parametrizacion',
+  PRIMARY KEY (`id_parametrizacion`),
+  KEY `id_responsable` (`id_responsable`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `parametrizacion`
@@ -279,12 +325,13 @@ INSERT INTO `parametrizacion` (`id_parametrizacion`, `nom_parametrizacion`, `des
 --
 
 DROP TABLE IF EXISTS `perfiles`;
-CREATE TABLE `perfiles` (
-  `id_perfil` int(11) NOT NULL COMMENT 'Identificador de perfil',
+CREATE TABLE IF NOT EXISTS `perfiles` (
+  `id_perfil` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de perfil',
   `nombre_perfil` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre de Perfil',
   `permisos` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Permisos Suministrados por Perfil',
-  `visible` int(11) NOT NULL COMMENT 'Oculta los Perfiles'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `visible` int(11) NOT NULL COMMENT 'Oculta los Perfiles',
+  PRIMARY KEY (`id_perfil`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `perfiles`
@@ -303,7 +350,7 @@ INSERT INTO `perfiles` (`id_perfil`, `nombre_perfil`, `permisos`, `visible`) VAL
 -- (Véase abajo para la vista actual)
 --
 DROP VIEW IF EXISTS `resumengeneral`;
-CREATE TABLE `resumengeneral` (
+CREATE TABLE IF NOT EXISTS `resumengeneral` (
 `nombre_entregable` varchar(100)
 ,`id_idea` int(11)
 ,`id_parametrizacion` int(11)
@@ -320,13 +367,15 @@ CREATE TABLE `resumengeneral` (
 --
 
 DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE `usuario` (
-  `id_usuario` int(11) NOT NULL COMMENT 'Autoincremental de usuarios',
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Autoincremental de usuarios',
   `nombre_usuario` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre Completo',
   `usuario` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre de Usuario',
   `clave` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Clave de Acceso de Usuario',
-  `id_perfil` int(11) NOT NULL COMMENT 'Relacion con Perfil '
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `id_perfil` int(11) NOT NULL COMMENT 'Relacion con Perfil ',
+  PRIMARY KEY (`id_usuario`),
+  KEY `id_perfil` (`id_perfil`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -346,7 +395,7 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `usuario`, `clave`, `id_p
 -- (Véase abajo para la vista actual)
 --
 DROP VIEW IF EXISTS `usuariosporgrupo`;
-CREATE TABLE `usuariosporgrupo` (
+CREATE TABLE IF NOT EXISTS `usuariosporgrupo` (
 `id_usuario` int(11)
 ,`nombre_usuario` varchar(100)
 ,`id_grupo` int(11)
@@ -359,15 +408,18 @@ CREATE TABLE `usuariosporgrupo` (
 --
 
 DROP TABLE IF EXISTS `versiones`;
-CREATE TABLE `versiones` (
-  `id_version` int(11) NOT NULL COMMENT 'Identificacion de la Versiono',
+CREATE TABLE IF NOT EXISTS `versiones` (
+  `id_version` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion de la Versiono',
   `id_idea` int(11) NOT NULL COMMENT 'Relacion con la Idea ',
   `id_entregable` int(11) NOT NULL COMMENT 'Relacion con el Entregable',
   `entregable` text COLLATE utf8_spanish_ci NOT NULL COMMENT 'Entregable Redactado',
   `revision` text COLLATE utf8_spanish_ci NOT NULL COMMENT 'Revision del Entregable',
   `comentarios` text COLLATE utf8_spanish_ci NOT NULL COMMENT 'Comentario del Responsable',
-  `estado` int(11) NOT NULL COMMENT 'Estado de las Version del Entregable'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `estado` int(11) NOT NULL COMMENT 'Estado de las Version del Entregable',
+  PRIMARY KEY (`id_version`),
+  KEY `id_idea` (`id_idea`),
+  KEY `id_entregable` (`id_entregable`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `versiones`
@@ -385,7 +437,7 @@ INSERT INTO `versiones` (`id_version`, `id_idea`, `id_entregable`, `entregable`,
 -- (Véase abajo para la vista actual)
 --
 DROP VIEW IF EXISTS `vista_parametrizacion`;
-CREATE TABLE `vista_parametrizacion` (
+CREATE TABLE IF NOT EXISTS `vista_parametrizacion` (
 `PARAMETRIZACION` varchar(100)
 ,`FASE` varchar(100)
 ,`ACTIVIDAD` varchar(100)
@@ -430,158 +482,6 @@ DROP TABLE IF EXISTS `vista_parametrizacion`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_parametrizacion`  AS  select `parametrizacion`.`nom_parametrizacion` AS `PARAMETRIZACION`,`fases`.`nombre_fase` AS `FASE`,`actividad`.`nombre_actividad` AS `ACTIVIDAD`,`entregable`.`nombre_entregable` AS `ENTREGABLE`,`usuario`.`usuario` AS `USUARIO`,(case `entregable`.`estado` when 1 then 'Activo' when 0 then 'Inactivo' else 'Sin Estado' end) AS `ESTADO` from ((((`parametrizacion` join `entregable` on((`entregable`.`id_parametrizacion` = `parametrizacion`.`id_parametrizacion`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) join `usuario` on((`parametrizacion`.`id_responsable` = `usuario`.`id_usuario`))) ;
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `actividad`
---
-ALTER TABLE `actividad`
-  ADD PRIMARY KEY (`id_actividad`),
-  ADD KEY `id_fase` (`id_fase`);
-
---
--- Indices de la tabla `cursos`
---
-ALTER TABLE `cursos`
-  ADD PRIMARY KEY (`id_cursos`),
-  ADD KEY `id_grupo` (`id_grupo`),
-  ADD KEY `id_usuario` (`id_usuario`),
-  ADD KEY `id_grupo_2` (`id_grupo`),
-  ADD KEY `id_usuario_2` (`id_usuario`);
-
---
--- Indices de la tabla `entregable`
---
-ALTER TABLE `entregable`
-  ADD PRIMARY KEY (`id_entregable`),
-  ADD KEY `id_actividad` (`id_actividad`),
-  ADD KEY `id_parametrizacion` (`id_parametrizacion`);
-
---
--- Indices de la tabla `equipos`
---
-ALTER TABLE `equipos`
-  ADD PRIMARY KEY (`id_equipo`),
-  ADD KEY `id_usuario` (`id_usuario`),
-  ADD KEY `id_idea` (`id_idea`);
-
---
--- Indices de la tabla `fases`
---
-ALTER TABLE `fases`
-  ADD PRIMARY KEY (`id_fase`);
-
---
--- Indices de la tabla `grupo`
---
-ALTER TABLE `grupo`
-  ADD PRIMARY KEY (`id_grupo`),
-  ADD KEY `id_responsable` (`id_responsable`),
-  ADD KEY `id_parametrizacion` (`id_parametrizacion`);
-
---
--- Indices de la tabla `ideas`
---
-ALTER TABLE `ideas`
-  ADD PRIMARY KEY (`id_idea`),
-  ADD KEY `id_linea` (`id_linea`),
-  ADD KEY `id_grupo` (`id_grupo`);
-
---
--- Indices de la tabla `linea`
---
-ALTER TABLE `linea`
-  ADD PRIMARY KEY (`id_linea`);
-
---
--- Indices de la tabla `parametrizacion`
---
-ALTER TABLE `parametrizacion`
-  ADD PRIMARY KEY (`id_parametrizacion`),
-  ADD KEY `id_responsable` (`id_responsable`);
-
---
--- Indices de la tabla `perfiles`
---
-ALTER TABLE `perfiles`
-  ADD PRIMARY KEY (`id_perfil`);
-
---
--- Indices de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id_usuario`),
-  ADD KEY `id_perfil` (`id_perfil`);
-
---
--- Indices de la tabla `versiones`
---
-ALTER TABLE `versiones`
-  ADD PRIMARY KEY (`id_version`),
-  ADD KEY `id_idea` (`id_idea`),
-  ADD KEY `id_entregable` (`id_entregable`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `actividad`
---
-ALTER TABLE `actividad`
-  MODIFY `id_actividad` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la Actividad', AUTO_INCREMENT=19;
---
--- AUTO_INCREMENT de la tabla `cursos`
---
-ALTER TABLE `cursos`
-  MODIFY `id_cursos` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion de Curso', AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `entregable`
---
-ALTER TABLE `entregable`
-  MODIFY `id_entregable` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion del Entregable', AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de la tabla `equipos`
---
-ALTER TABLE `equipos`
-  MODIFY `id_equipo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del Registro', AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT de la tabla `grupo`
---
-ALTER TABLE `grupo`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificable del Grupo', AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT de la tabla `ideas`
---
-ALTER TABLE `ideas`
-  MODIFY `id_idea` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la  Idea', AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT de la tabla `linea`
---
-ALTER TABLE `linea`
-  MODIFY `id_linea` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la Linea Tematica', AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT de la tabla `parametrizacion`
---
-ALTER TABLE `parametrizacion`
-  MODIFY `id_parametrizacion` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la Parametrizacion ', AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `perfiles`
---
-ALTER TABLE `perfiles`
-  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de perfil', AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Autoincremental de usuarios', AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT de la tabla `versiones`
---
-ALTER TABLE `versiones`
-  MODIFY `id_version` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion de la Versiono', AUTO_INCREMENT=8;
 --
 -- Restricciones para tablas volcadas
 --
