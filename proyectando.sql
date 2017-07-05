@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-07-2017 a las 23:14:14
+-- Tiempo de generación: 06-07-2017 a las 00:15:23
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `cursos` (
   KEY `id_usuario` (`id_usuario`),
   KEY `id_grupo_2` (`id_grupo`),
   KEY `id_usuario_2` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `cursos`
@@ -89,7 +89,8 @@ CREATE TABLE IF NOT EXISTS `cursos` (
 INSERT INTO `cursos` (`id_cursos`, `id_grupo`, `id_usuario`) VALUES
 (1, 1, 3),
 (2, 1, 4),
-(3, 1, 5);
+(3, 1, 5),
+(4, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -109,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `entregable` (
   PRIMARY KEY (`id_entregable`),
   KEY `id_actividad` (`id_actividad`),
   KEY `id_parametrizacion` (`id_parametrizacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `entregable`
@@ -119,7 +120,10 @@ INSERT INTO `entregable` (`id_entregable`, `id_parametrizacion`, `id_actividad`,
 (1, 1, 1, 'objetivos generales', 'Descripcion del entregable', 'Texto de ayuda', 1),
 (2, 1, 1, 'entregable de prueba', 'descripcion del entregable', 'texto de ayuda', 1),
 (3, 1, 2, 'entregable', 'descripción ', 'asdasdasdasd', 1),
-(4, 2, 1, 'kfgkdg', 'zmxnkncxzc', 'zjxchjzxhcizxhchxzic', 1);
+(4, 2, 1, 'kfgkdg', 'zmxnkncxzc', 'zjxchjzxhcizxhchxzic', 1),
+(5, 4, 1, 'Entregable de prueba 001', 'descripcon', 'ayuda de texto', 1),
+(6, 4, 2, 'entregable de 002', 'DESCRIOPCIN ', 'sdasdasdasd', 1),
+(7, 4, 3, 'actividad de entregable 003', 'erwrwer', 'wrwerewr', 1);
 
 -- --------------------------------------------------------
 
@@ -136,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `equipos` (
   PRIMARY KEY (`id_equipo`),
   KEY `id_usuario` (`id_usuario`),
   KEY `id_idea` (`id_idea`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `equipos`
@@ -151,7 +155,8 @@ INSERT INTO `equipos` (`id_equipo`, `id_idea`, `id_usuario`, `estado`) VALUES
 (6, 7, 5, 1),
 (7, 8, 3, 1),
 (8, 8, 4, 1),
-(9, 8, 5, 1);
+(9, 8, 5, 1),
+(10, 9, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -202,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `grupo` (
 
 INSERT INTO `grupo` (`id_grupo`, `nombre_grupo`, `id_responsable`, `id_parametrizacion`) VALUES
 (1, '800', 2, 1),
-(2, '801', 2, 1);
+(2, '801', 2, 4);
 
 -- --------------------------------------------------------
 
@@ -221,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `ideas` (
   PRIMARY KEY (`id_idea`),
   KEY `id_linea` (`id_linea`),
   KEY `id_grupo` (`id_grupo`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `ideas`
@@ -231,7 +236,8 @@ INSERT INTO `ideas` (`id_idea`, `id_grupo`, `id_linea`, `nombre_idea`, `descripc
 (1, 1, 1, 'Nombre de la Idea', 'Esta es la idea la cual se desea manejar', 3),
 (2, 1, 1, 'idea de proyecto', 'descripción de idea', 3),
 (7, 1, 1, 'Proyecto de perros Calientes', 'Descripción de Idea1', 3),
-(8, 1, 1, 'Idea 002', 'asdasdasd1', 3);
+(8, 1, 1, 'Idea 002', 'asdasdasd1', 3),
+(9, 2, 1, 'Idea de prueba Nueva', 'Descripción de la idea de trazabilidad', 1);
 
 -- --------------------------------------------------------
 
@@ -307,7 +313,7 @@ CREATE TABLE IF NOT EXISTS `parametrizacion` (
   `estado` int(11) NOT NULL COMMENT 'Estado de la Parametrizacion',
   PRIMARY KEY (`id_parametrizacion`),
   KEY `id_responsable` (`id_responsable`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `parametrizacion`
@@ -316,7 +322,8 @@ CREATE TABLE IF NOT EXISTS `parametrizacion` (
 INSERT INTO `parametrizacion` (`id_parametrizacion`, `nom_parametrizacion`, `descripcion_parametrizacion`, `id_responsable`, `estado`) VALUES
 (1, 'Parametrizacion de Ingenieria de software', 'Descripcion de la parametrizacion de ingenieria de software', 2, 1),
 (2, 'ingenieria civil', 'prueba yudy', 2, 0),
-(3, 'Parametrizacion de ADSI', 'esta es la parametrizacion de entregable de adsi', 2, 0);
+(3, 'Parametrizacion de ADSI', 'esta es la parametrizacion de entregable de adsi', 2, 0),
+(4, 'Parametrizacion de Prueba', 'Descripción de gestion', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -375,7 +382,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `id_perfil` int(11) NOT NULL COMMENT 'Relacion con Perfil ',
   PRIMARY KEY (`id_usuario`),
   KEY `id_perfil` (`id_perfil`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -386,7 +393,8 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `usuario`, `clave`, `id_p
 (2, 'Carlos Donoso', 'cdonoso', 'p1234', 2),
 (3, 'Yudy Viviana Bran Sanchez', 'ybransa', 'p1234', 3),
 (4, 'Yeimy Parada Migue', 'yparadami', 'p1234', 3),
-(5, 'Omar Bonilla Franco', 'obonillafr', 'p1234', 3);
+(5, 'Omar Bonilla Franco', 'obonillafr', 'p1234', 3),
+(6, 'pruebas', 'prueba', 'p1234', 3);
 
 -- --------------------------------------------------------
 
