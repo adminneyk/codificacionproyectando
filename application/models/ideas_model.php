@@ -49,6 +49,26 @@ foreach ($integrantes as $id) {
 }
          
     }
+    public function mostrarIntegrantes($ididea) {
+
+        $this->db->select('*');
+        $this->db->from('equipos');
+        $this->db->join('ideas','equipos.id_idea=ideas.id_idea');
+        $this->db->where('equipos.id_usuario',$ididea);
+        return $query = $this->db->get();
+    }
+
+    public function obtenerParametrizacion($idIdea) {
+
+        $this->db->select('grupo.id_parametrizacion','parametrizacion');
+        $this->db->from('grupo');
+        $this->db->join('ideas','grupo.id_grupo=ideas.id_grupo');
+        $this->db->where('ideas.id_idea',$idIdea);
+        //echo  $this->db->last_query();
+        return $this->db->get()->row()->id_parametrizacion;
+         
+    }
+
 
 }
 
