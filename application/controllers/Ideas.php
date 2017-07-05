@@ -9,6 +9,7 @@ class Ideas extends CI_Controller {
         $this->load->view('menus');
         $this->load->model('ideas_model');
         $this->load->model('parametrizacion_model');
+        $this->load->model('reportes_model');
         
     }
 	public function index()
@@ -45,36 +46,92 @@ class Ideas extends CI_Controller {
         {    
             $codIdea = $this->uri->segment(3, 0);
             $parame=$this->ideas_model->obtenerParametrizacion($codIdea);
-            //echo $parame;
-
-            $fases=$this->parametrizacion_model->obtenerFases();
-            $arrayfase=array();
+            $fases = $this->reportes_model->obtenerFases();
+        $cantfases=0;
+        $totalavance=0;
+        $arrayfase=array();
             foreach ($fases->result() as $listfases) {
-                $actividades=$this->parametrizacion_model->obtenerActividades($listfases->id_fase);
+                $cantfases++;
+                $avancefase=0;
+                $contactividades=0;
+                $actividades=$this->reportes_model->obtenerActividades($listfases->id_fase);
                 if($actividades!=false){ 
                 $arrayactividades=array();
                 foreach ($actividades->result() as $listactividades) {
-                    $entregablesporact=$this->parametrizacion_model->obtenerConteoActividades($parame,
-                                                                     $listactividades->id_actividad);
-                    $conteo = 0;
-                    foreach ($entregablesporact->result() as $listaconteo) {
-                        $conteo = $listaconteo->conteo;
-                    }
-                    $arrayact = array('id_actividad' =>  $listactividades->id_actividad,
+                    $contactividades++;
+                    $entregablesporact=$this->reportes_model->obtenerDatosEntregable($listactividades->id_actividad,
+                    $codIdea,
+                      $parame);
+                        $conteoentregable=0;
+                        $conteoaprobadas=0;
+                    if($entregablesporact!=false) {
+                        $arrayentregable=array();
+                        foreach ($entregablesporact->result() as $listaentregable) {
+                            $conteoentregable++;
+                            if($listaentregable->conteoentregablesaprobados==1){
+                              $conteoaprobadas ++;  
+                            }
+                            $arrayent = array('nombre_entregable' =>  $listaentregable->nombre_entregable,
+                                      'conteoentregable' =>  $listaentregable->conteoentregable,
+                                      'conteoentregableaprobados' =>  $listaentregable->conteoentregablesaprobados);
+                        array_push($arrayentregable, $arrayent); 
+                        }
+
+                        if($conteoentregable == 0) {
+                            $avanceactividad=0;
+                        } else {
+                               $avanceactividad=($conteoaprobadas/$conteoentregable)*100;
+                         }
+                        $avancefase= $avancefase + $avanceactividad;
+$arrayact = array('id_actividad' =>  $listactividades->id_actividad,
                                       'nombreactividad' =>  $listactividades->nombre_actividad,
-                                      'cantidadact' => $conteo);
+                                      'entregables'=>$arrayentregable,
+                                      'avancereal'=>$avanceactividad);
                         array_push($arrayactividades, $arrayact); 
+                    } else{
+                        if($conteoentregable == 0) {
+                            $avanceactividad=0;
+                        } else {
+                               $avanceactividad=($conteoaprobadas/$conteoentregable)*100;
+                         }
+                         $avancefase = $avancefase + $avanceactividad;
+$arrayact = array('id_actividad' =>  $listactividades->id_actividad,
+                                      'nombreactividad' =>  $listactividades->nombre_actividad,
+                                      'entregables'=>array(),
+                                      'avancereal'=>$avanceactividad);
+                        array_push($arrayactividades, $arrayact); 
+
+                    }
+                    
+                }
+                 if($contactividades == 0 ){
+$avancefases=0;
+                } else {
+                   $avancefases=$avancefase/$contactividades; 
                 }
                   $array = array('id_fase' =>  $listfases->id_fase,
                     'nombrefase' =>  $listfases->nombre_fase,
-                    'actividades' =>  $arrayactividades);
+                    'actividades' =>  $arrayactividades,
+                    'avancefase'=>$avancefases);
                 array_push($arrayfase, $array); 
+             } else {
+                if($contactividades == 0 ){
+$avancefases=0;
+                } else {
+                   $avancefases=$avancefase/$contactividades; 
+                }
+                $totalavance=$totalavance+$avancefases;
+                 $array = array('id_fase' =>  $listfases->id_fase,
+                    'nombrefase' =>  $listfases->nombre_fase,
+                    'actividades' =>  array(),
+                    'avancefase'=>$avancefases);
+                array_push($arrayfase, $array);
              }
+             $totalavance=$totalavance+$avancefases;
             }
-            $infor['datos']=$arrayfase;
-            $infor['id']=$parame;
-            $this->load->view('Ideas/administracionfases',$infor);
-            $this->load->view('footer');
+        $data['datos'] = $arrayfase;
+        $data['total'] = $totalavance/$cantfases;
+        $this->load->view('Ideas/administracionfases',$data);
   }
         
         
