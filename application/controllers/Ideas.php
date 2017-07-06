@@ -71,7 +71,7 @@ class Ideas extends CI_Controller {
                             if($listaentregable->conteoentregablesaprobados==1){
                               $conteoaprobadas ++;  
                             }
-                            $arrayent = array('nombre_entregable' =>  $listaentregable->nombre_entregable,
+                            $arrayent = array('id_entregable' =>  $listaentregable->id_entregable,'nombre_entregable' =>  $listaentregable->nombre_entregable,
                                       'conteoentregable' =>  $listaentregable->conteoentregable,
                                       'conteoentregableaprobados' =>  $listaentregable->conteoentregablesaprobados);
                         array_push($arrayentregable, $arrayent); 
@@ -133,6 +133,47 @@ $avancefases=0;
         $data['total'] = $totalavance/$cantfases;
         $this->load->view('Ideas/administracionfases',$data);
   }
+  public function historiales(){
+     $idea = $this->uri->segment(3, 0);
+     $entregable = $this->uri->segment(4, 0);
+
+     $datos['versiones'] = $this->ideas_model->obtenerVersiones($idea,$entregable);
+     $this->load->view('Ideas/historiales',$datos);
+
+  }
+
+    public function gestionVersion(){
+     $idea = $this->uri->segment(3, 0);
+     $entregable = $this->uri->segment(4, 0);
+     $version = $this->uri->segment(5, 0);
+     $datos['versiones'] = $this->ideas_model->obtenerVersiones($idea,$entregable,$version);
+     $datos['ayuda'] = $this->ideas_model->obtenerAyuda($entregable);
+     $this->load->view('Ideas/formVersion',$datos);
+
+  }
+
+  public function guardarVersion(){
+
+          $texto = $this->input->post('ckeditor');
+          $id = $this->input->post('id');
+          if($id==""){
+            $id=0;
+          }
+          $idea = $this->input->post('idea');
+          $entregable = $this->input->post('entregable');
+           $this->ideas_model->guardarVersion($id,$idea,$entregable,$texto);
+               $this->session->set_flashdata('correcto', 'Version Guardada Correctamente!');
+                redirect(base_url().'ideas/historiales/'.$idea.'/'.$entregable,'refresh');
+    
+  }
+
+  
+
+
+
+
+
+
         
         
 }

@@ -70,6 +70,53 @@ foreach ($integrantes as $id) {
     }
 
 
+       public function obtenerVersiones($ididea,$entregable,$idversion=0) {
+       
+
+        if($idversion==0){
+          $datos=array('id_idea'=>$ididea,'id_entregable'=>$entregable);
+             $query = $this->db->get_where('versiones', $datos);  
+         } else {
+            $datos=array('id_idea'=>$ididea,'id_entregable'=>$entregable,'id_version'=>$idversion);
+             $query = $this->db->get_where('versiones', $datos);
+         }
+    
+
+        //echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
+    public function obtenerAyuda($identregable) {
+
+        $this->db->select('texto_ayuda');
+        $this->db->from('entregable');
+        $this->db->where('id_entregable',$identregable);
+        //echo  $this->db->last_query();
+        return $this->db->get()->row()->texto_ayuda;
+         
+    }
+     public function guardarVersion($id,$idea,$entregable,$texto) {
+
+        $fecha=date('Y-m-d H:i:s');
+        $data = array(
+            'id_idea' => $idea,
+            'id_entregable' =>$entregable,
+            'fecharegistro' => $fecha,
+            'entregable' => $texto,
+            'estado' => 1
+        );
+        
+        if($id==0){
+                $this->db->insert('versiones', $data);
+        } else {
+              $this->db->where('id_version', $id);
+              $this->db->update('versiones', $data);
+        }
+     }
+
 }
 
 ?>

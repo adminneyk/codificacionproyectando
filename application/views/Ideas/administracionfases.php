@@ -65,7 +65,7 @@ echo " <br>(FASE BLOQUEDA)";
                         echo '<span class="glyphicon glyphicon-thumbs-up"></span> Entregable Completado';   
                         } else {
                           $codIdea = $this->uri->segment(3, 0);
-                         echo '<a href="'.base_url().'ideas/historiales/'.$codIdea.$listentregables['id_entregable'].'"><span class="glyphicon glyphicon-folder-open"></span> Gestionar Entregagle</a>';    
+                         echo '<a href="'.base_url().'ideas/historiales/'.$codIdea.'/'.$listentregables['id_entregable'].'"><span class="glyphicon glyphicon-folder-open"></span> Gestionar Entregagle</a>';    
                         }
                         } else {
  echo '<span class="glyphicon glyphicon-stop"></span> Entregable Bloqueado';  
