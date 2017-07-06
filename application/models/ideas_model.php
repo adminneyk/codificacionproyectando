@@ -117,6 +117,20 @@ foreach ($integrantes as $id) {
         }
      }
 
+public function solicitarRevision($idea,$entregable,$version) {
+
+        $fecha=date('Y-m-d H:i:s');
+        $data = array(
+            'id_idea' => $idea,
+            'id_entregable' =>$entregable,
+            'fecharegistro' => $fecha,
+            'estado' => 2
+        );
+              $this->db->where('id_version', $version);
+              $this->db->update('versiones', $data);
+     }
+
+
 }
 
 ?>

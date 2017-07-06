@@ -167,6 +167,19 @@ $avancefases=0;
     
   }
 
+  public function solicitarRevision(){
+          $idea = $this->uri->segment(3, 0);
+          $entregable = $this->uri->segment(4, 0);
+          $version = $this->uri->segment(5, 0);
+          
+           $this->ideas_model->solicitarRevision($idea,$entregable,$version);
+           $this->session->set_flashdata('correcto', 'Version Enviada Correctamente!');
+           redirect(base_url().'ideas/historiales/'.$idea.'/'.$entregable,'refresh');
+    
+  }
+
+  
+
   
 
 

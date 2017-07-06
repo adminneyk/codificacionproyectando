@@ -6,7 +6,10 @@
   <li class="active">Gestion de Versiones</li>
 </ol>
 <legend>Marco de Desarrollo de Idea</legend>
-
+<br><br>
+<?php
+$this->load->view('Genericas/mensajes');
+?><br>
 
 <?php 
 
@@ -26,6 +29,7 @@ if (empty($versiones)) {
         <tr>
             <th>Fecha de Registro</th>
             <th>Estado Actual</th>
+            <th colspan="2">Acciones</th>
 
         </tr>
     </thead>
@@ -62,7 +66,33 @@ if (empty($versiones)) {
              
 
              ?></td>
-            <td> <a href="<?= base_url()?>ideas/gestionVersion/<?=$this->uri->segment(3, 0)?>/<?=$this->uri->segment(4, 0)?>/<?=$versiones->id_version?>"><span class="glyphicon glyphicon-edit"></span> Editar Version</a></td>
+            <td> 
+            <?php
+              if($versiones->estado==2)
+              {
+                $mensaje='<span class="glyphicon glyphicon-zoom-in"></span> Ver Version';
+                
+              } else {
+                $mensaje='<span class="glyphicon glyphicon-edit"></span> Editar Version';
+              }
+            ?>
+
+            <a href="<?= base_url()?>ideas/gestionVersion/<?=$this->uri->segment(3, 0)?>/<?=$this->uri->segment(4, 0)?>/<?=$versiones->id_version?>"><?=$mensaje?></a>
+
+
+
+            </td>
+            <?php 
+            if($versiones->estado==1){
+              ?>
+               <td> <a href="<?= base_url()?>ideas/solicitarRevision/<?=$this->uri->segment(3, 0)?>/<?=$this->uri->segment(4, 0)?>/<?=$versiones->id_version?>"><span class="glyphicon glyphicon-edit"></span> Enviar a Revision</a></td>
+              <?php
+            }
+            ?>
+
+
+
+
         </tr>
      <?php
     }
