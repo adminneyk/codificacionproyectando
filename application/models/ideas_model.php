@@ -129,6 +129,25 @@ public function solicitarRevision($idea,$entregable,$version) {
               $this->db->where('id_version', $version);
               $this->db->update('versiones', $data);
      }
+     
+     public function generarNuevaVersion($id,$idea,$entregable,$texto) {
+
+        $fecha=date('Y-m-d H:i:s');
+        $data = array(
+            'fecharegistro' => $fecha,
+            'estado' => 5
+        );
+              $this->db->where('id_version', $id);
+              $this->db->update('versiones', $data);
+        $data = array(
+            'id_idea' => $idea,
+            'id_entregable' =>$entregable,
+            'fecharegistro' => $fecha,
+            'entregable' => $texto,
+            'estado' => 1
+        );
+                $this->db->insert('versiones', $data);     
+     }
 
 
 }

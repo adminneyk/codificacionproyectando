@@ -156,12 +156,17 @@ $avancefases=0;
 
           $texto = $this->input->post('ckeditor');
           $id = $this->input->post('id');
+          $vers = $this->input->post('vers');
           if($id==""){
             $id=0;
           }
           $idea = $this->input->post('idea');
           $entregable = $this->input->post('entregable');
-           $this->ideas_model->guardarVersion($id,$idea,$entregable,$texto);
+          if($vers!=1){
+              $this->ideas_model->guardarVersion($id,$idea,$entregable,$texto);
+          }else {
+              $this->ideas_model->generarNuevaVersion($id,$idea,$entregable,$texto);
+          }
                $this->session->set_flashdata('correcto', 'Version Guardada Correctamente!');
                 redirect(base_url().'ideas/historiales/'.$idea.'/'.$entregable,'refresh');
     

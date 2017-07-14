@@ -2,6 +2,8 @@
 
 $id = "";
 $texto = "";
+$versiona= 0;
+$mensaje = "";
 $guarda = true;
 if (!empty($versiones)) {
     foreach ($versiones->result() as $version) {
@@ -10,6 +12,11 @@ if (!empty($versiones)) {
         if($version->estado==2){
            $guarda=false; 
         }
+        if($version->comentarios!=""){
+            $mensaje=$version->comentarios;
+            $versiona=1;
+        }
+        
     }
 }
 ?>
@@ -17,10 +24,18 @@ if (!empty($versiones)) {
 <fieldset>
 <legend>Forrmulario de Gestiones</legend>
 <div class="form-group">
-  <label class="control-label col-sm-2" for="textarea">Textarea</label>
+  <label class="control-label col-sm-2" for="textarea">Estructura del Entregable</label>
   <div class="col-sm-10">
     <textarea name="ckeditor" class="ckeditor form-control" id="ckeditor" rows="1"><?=$texto?></textarea>
-    <p class="help-block"><?=$ayuda?></p>
+    <p class="help-block"><span class="glyphicon glyphicon-bullhorn"></span> <?=$ayuda?></p>
+    <?php 
+    if($mensaje!=""){
+        ?>
+    <p class="help-block" style="font-weight: bold;"><span class="glyphicon glyphicon-exclamation-sign"></span> <?=$mensaje?></p>
+            <?php
+    }
+    ?>
+    
   </div>
 </div>
 
@@ -36,6 +51,7 @@ if (!empty($versiones)) {
         </div>
 <input type="hidden" name="id" id="id" value="<?=$id?>">
 <input type="hidden" name="idea" id="idea" value="<?=$this->uri->segment(3, 0)?>">
+<input type="hidden" name="vers" id="vers" value="<?=$versiona?>">
 <input type="hidden" name="entregable" id="entregable" value="<?=$this->uri->segment(4, 0)?>">
 </fieldset>
 </form>
