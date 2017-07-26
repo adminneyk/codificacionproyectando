@@ -4,7 +4,19 @@
   <li><a href="<?=base_url()?>ideas/desarrollarIdea">Desarrollar Ideas</a></li>
   <li class="active">Marco de Idea</li>
 </ol>
-<legend>Marco de Desarrollo de Idea</legend>
+<?php 
+
+if($total>0){
+
+    ?>
+    <h4><a href="<?=base_url()?>generacion/generarArchivo" target="_black"><span class="glyphicon glyphicon-download"></span> Exportar Borrador</a></h4>
+    <?php
+}
+?>
+
+<legend>Marco de Desarrollo de Idea<br><strong><?php 
+echo $total;
+?>% De Avance</strong></legend>
 <table class="table table-bordered">
 <thead>
     <tr>
