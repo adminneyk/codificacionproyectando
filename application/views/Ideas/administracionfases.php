@@ -9,7 +9,7 @@
 if($total>0){
 
     ?>
-    <h4><a href="<?=base_url()?>generacion/generarArchivo" target="_black"><span class="glyphicon glyphicon-download"></span> Exportar Borrador</a></h4>
+    <h4><a href="<?=base_url()?>generacion/generarArchivo/<?=$this->uri->segment(3, 0)?>" target="_black"><span class="glyphicon glyphicon-download"></span> Exportar Borrador</a></h4>
     <?php
 }
 ?>
