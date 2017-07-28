@@ -27,7 +27,7 @@ class Generacion extends CI_Controller {
                 $arrayactividades=array();
                 foreach ($actividades->result() as $listactividades) {
                     $contactividades++;
-                    $entregablesporact=$this->reportes_model->obtenerDatosEntregable($listactividades->id_actividad,
+                    $entregablesporact=$this->reportes_model->obtenerDatosEntregableVersion($listactividades->id_actividad,
                     $codIdea,
                       $parame);
                         $conteoentregable=0;
@@ -41,7 +41,7 @@ class Generacion extends CI_Controller {
                             }
                             $arrayent = array('id_entregable' =>  $listaentregable->id_entregable,'nombre_entregable' =>  $listaentregable->nombre_entregable,
                                       'conteoentregable' =>  $listaentregable->conteoentregable,
-                                      'conteoentregableaprobados' =>  $listaentregable->conteoentregablesaprobados);
+                                      'entregable' =>  $listaentregable->entregable);
                         array_push($arrayentregable, $arrayent); 
                         }
 

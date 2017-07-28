@@ -121,6 +121,22 @@ class Reportes_model extends CI_Model {
         } 
 
     }
+    public function obtenerDatosEntregableVersion($actividad,$idea,$parame){
+       
+            $query = $this->db->get_where('mostraversiones ', array('id_actividad' => $actividad, 
+                                                                    'id_idea' => $idea,
+                                                                    'id_parametrizacion' => $parame));
+       
+      // echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        } 
+
+    }
+
+     
     
     
     
