@@ -55,6 +55,7 @@ foreach ($integrantes as $id) {
         $this->db->from('equipos');
         $this->db->join('ideas','equipos.id_idea=ideas.id_idea');
         $this->db->where('equipos.id_usuario',$ididea);
+        $this->db->where('ideas.estado',3);
         return $query = $this->db->get();
     }
 
