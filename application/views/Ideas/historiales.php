@@ -36,7 +36,7 @@ if (empty($versiones)) {
 <?php
     foreach ($versiones->result() as $versiones) {
     	if($validacrear){
-    		if($versiones->estado==1 || $versiones->estado==2 || $versiones->estado==3 ){
+    		if($versiones->estado==1 || $versiones->estado==2 || $versiones->estado==3 || $versiones->estado==4){
     			$validacrear=false;
     		}
     	}
@@ -61,7 +61,7 @@ if (empty($versiones)) {
             }
 
             if($versiones->estado==5){
-            	echo "No Aprobado";
+            	echo "Historico";
             }
              
 

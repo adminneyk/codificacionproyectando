@@ -9,7 +9,7 @@ if (!empty($versiones)) {
     foreach ($versiones->result() as $version) {
         $id = $version->id_version;
         $texto = $version->entregable;
-        if($version->estado==2){
+        if($version->estado==2 || $version->estado==5){
            $guarda=false; 
         }
         if($version->comentarios!=""){
@@ -22,7 +22,7 @@ if (!empty($versiones)) {
 ?>
 <form class="form-horizontal" action="<?= base_url()?>ideas/guardarVersion" method="POST">
 <fieldset>
-<legend>Forrmulario de Gestiones</legend>
+<legend>Formulario de Gestiones</legend>
 <div class="form-group">
   <label class="control-label col-sm-2" for="textarea">Estructura del Entregable</label>
   <div class="col-sm-10">

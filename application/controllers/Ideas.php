@@ -146,7 +146,9 @@ $avancefases=0;
      $idea = $this->uri->segment(3, 0);
      $entregable = $this->uri->segment(4, 0);
      $version = $this->uri->segment(5, 0);
-     $datos['versiones'] = $this->ideas_model->obtenerVersiones($idea,$entregable,$version);
+     if($version){
+       $datos['versiones'] = $this->ideas_model->obtenerVersiones($idea,$entregable,$version);
+     }
      $datos['ayuda'] = $this->ideas_model->obtenerAyuda($entregable);
      $this->load->view('Ideas/formVersion',$datos);
 

@@ -83,7 +83,7 @@ foreach ($integrantes as $id) {
          }
     
 
-        //echo  $this->db->last_query();
+        echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {
