@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-07-2017 a las 00:27:25
+-- Tiempo de generación: 04-08-2017 a las 04:42:46
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -19,7 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyectando20`
 --
-DROP DATABASE proyectando20;
 CREATE DATABASE IF NOT EXISTS `proyectando20` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `proyectando20`;
 
@@ -331,6 +330,20 @@ INSERT INTO `parametrizacion` (`id_parametrizacion`, `nom_parametrizacion`, `des
 -- --------------------------------------------------------
 
 --
+-- Estructura Stand-in para la vista `pendientesactuales`
+-- (Véase abajo para la vista actual)
+--
+DROP VIEW IF EXISTS `pendientesactuales`;
+CREATE TABLE IF NOT EXISTS `pendientesactuales` (
+`conteo` bigint(21)
+,`nombre_grupo` varchar(100)
+,`id_responsable` int(11)
+,`id_grupo` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `perfiles`
 --
 
@@ -525,6 +538,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `mostraversiones`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mostraversiones`  AS  select `resumengeneral`.`id_entregable` AS `id_entregable`,`resumengeneral`.`nombre_entregable` AS `nombre_entregable`,`resumengeneral`.`id_idea` AS `id_idea`,`resumengeneral`.`id_parametrizacion` AS `id_parametrizacion`,`resumengeneral`.`id_actividad` AS `id_actividad`,`resumengeneral`.`id_grupo` AS `id_grupo`,`resumengeneral`.`conteoentregable` AS `conteoentregable`,`resumengeneral`.`conteoentregablesaprobados` AS `conteoentregablesaprobados`,`versiones`.`entregable` AS `entregable` from (`resumengeneral` join `versiones` on((`versiones`.`id_idea` = `resumengeneral`.`id_idea`))) where ((`resumengeneral`.`id_entregable` = `versiones`.`id_entregable`) and (`versiones`.`estado` = 3)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `pendientesactuales`
+--
+DROP TABLE IF EXISTS `pendientesactuales`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pendientesactuales`  AS  select count(0) AS `conteo`,`grupo`.`nombre_grupo` AS `nombre_grupo`,`grupo`.`id_responsable` AS `id_responsable`,`grupo`.`id_grupo` AS `id_grupo` from (`ideas` join `grupo` on((`grupo`.`id_grupo` = `ideas`.`id_grupo`))) where (`ideas`.`estado` = 1) group by `grupo`.`id_grupo` ;
 
 -- --------------------------------------------------------
 

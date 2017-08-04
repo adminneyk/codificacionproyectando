@@ -49,10 +49,9 @@ class Reportes_model extends CI_Model {
         }
     }
     public function obtenerFases() {
-           $this->db->order_by("orden", "asc");
-           $query = $this->db->get('fases'); 
-      //  echo  $this->db->last_query();
-        if ($query->num_rows() > 0) {
+      
+$query = $this->db->order_by('orden', 'ASC')->get_where('fases', array('estado'=>1));      
+if ($query->num_rows() > 0) {
             return $query;
         } else {
             return false;

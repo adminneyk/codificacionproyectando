@@ -17,6 +17,7 @@ class Home extends CI_Controller {
                 $datos['listanotificaciones'] = $this->notificaciones_model->obtenerNotificaciones($usuario);
                 $datos['listarevision'] = $this->notificaciones_model->obtenerRecordatorioRevision($usuario,1);
                 $datos['devueltos'] = $this->notificaciones_model->obtenerRecordatorioRevision($usuario);
+                $datos['pendientesrevision'] = $this->notificaciones_model->obtenerPendientesBanco($usuario);
 		        $this->load->view('Genericas/home',$datos);
                 $this->load->view('footer');
 	}

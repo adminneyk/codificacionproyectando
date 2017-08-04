@@ -71,5 +71,32 @@ La herramienta diseñada para volver las ideas en una verdadera iniciativa de pr
    </div>
 <?php
 }
+if(!empty($pendientesrevision)){
+ 	?>
+ 	<div class="panel panel-primary"> 
+<div class="panel-heading"> 
+<h3 class="panel-title">Notificaciones</h3>
+ </div>
+  <div class="panel-body">
+<div class="list-group">
+ 	<?php
+
+    foreach ($pendientesrevision->result() as $pendiente) {
+        ?>
+    <a href="<?=base_url()?>banco/bancoIdeas/<?=$pendiente->id_grupo;?>" class="list-group-item">Tiene Pendiente Verificar Ideas del Grupo <?=$pendiente->nombre_grupo;?><strong></strong> </a>
+        <?php  
+}
+?>
+</div>
+ </div> 
+   </div>
+<?php
+}
+
+
+
+
+
+
     ?>
   
