@@ -64,6 +64,16 @@
         }
         ?>      
             
+        <?php
+        if (in_array('paramcurso', $this->session->userdata('permisos')) == true) {
+            ?>
+            <li id="fondo">
+                <a href="<?= base_url() ?>parametrizacion/parametrizarCursos">Gestion de Curso</a>
+            </li>
+            <?php
+        }
+        ?>      
+            
             
 
 <!--

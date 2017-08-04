@@ -78,6 +78,13 @@ $databanco = array(
     'checked' => validar('banco', $arraypermisos)
 );
 
+$datacursos = array(
+    'name' => 'permisos[]',
+    'id' => 'permisos[]',
+    'value' => 'paramcurso',
+    'checked' => validar('paramcurso', $arraypermisos)
+);
+
 echo form_open(base_url() . 'perfiles/validar', $arrayform);
 ?>
 <script type="text/javascript">
@@ -201,6 +208,18 @@ $(document).ready(function()
                     <label for="checkboxes-0">
                         <?php
                         echo form_checkbox($databanco);
+                        ?>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="checkboxes">Mis Cursos</label>
+            <div class="col-md-4">
+                <div class="checkbox">
+                    <label for="checkboxes-0">
+                        <?php
+                        echo form_checkbox($datacursos);
                         ?>
                     </label>
                 </div>
