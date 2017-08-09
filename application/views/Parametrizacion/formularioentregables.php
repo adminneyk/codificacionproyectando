@@ -132,7 +132,7 @@ $(document).ready(function()
         <label class="col-md-4 control-label" for="button1id"></label>
         <div class="col-md-8">
             <button name="validar" id="validar" type="button" class="btn btn-success">Guardar</button>
-            <a href="<?= base_url() ?>parametrizacion/adminentregables/<?= $idactividad ?>/<?= $idparametrizacion ?>" class="btn btn-danger">Volver</a>
+            <button onclick="validarVolver('<?= base_url() ?>parametrizacion/adminentregables/<?= $idactividad ?>/<?= $idparametrizacion ?>','')" class="btn btn-danger" type="button">Volver</button>
         </div>
     </div>
 

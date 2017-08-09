@@ -64,6 +64,7 @@ class Parametrizacion extends CI_Controller {
                     }
                     $arrayact = array('id_actividad' =>  $listactividades->id_actividad,
                                       'nombreactividad' =>  $listactividades->nombre_actividad,
+                                      'descactividad' =>  $listactividades->descripcion_actividad,
                                       'cantidadact' => $conteo);
                         array_push($arrayactividades, $arrayact); 
                 }
@@ -90,7 +91,30 @@ class Parametrizacion extends CI_Controller {
             $this->load->view('Parametrizacion/vistaentregables',$datos);
             $this->load->view('footer');
 	}
-    public function formentregables()
+        
+        
+    public function parametrizarCursos()
+	{
+            $idactividad = $this->uri->segment(3, 0);
+            $idparametrizacion = $this->uri->segment(4, 0);
+            $datos['cursos'] = $this->parametrizacion_model->obtenerCursos($this->session->userdata('id_usuario'));
+            
+                $datos['idparametrizacion'] = $idparametrizacion;
+                $datos['idactividad'] = $idactividad;
+            $this->load->view('Parametrizacion/vistacursos',$datos);
+            $this->load->view('footer');
+	}
+        
+        public function formasignacionCursos()
+    {
+            $grupo = $this->uri->segment(3, 0);
+            $datos['grupo'] = $grupo;
+            $datos['parame'] = $this->parametrizacion_model->obtenerParametrizacion(0,$this->session->userdata('id_usuario'));
+            $this->load->view('Parametrizacion/formulariocursos',$datos);
+            $this->load->view('footer');
+    }
+        
+        public function formentregables()
     {
             $idactividad = $this->uri->segment(3, 0);
             $idparametrizacion = $this->uri->segment(4, 0);
@@ -140,6 +164,21 @@ class Parametrizacion extends CI_Controller {
               }else{
                 redirect(base_url().'parametrizacion/adminentregables/'.$actividad.'/'.$parametrizacion);
         }
+        
+        }
+        
+        function asigParamBase (){
+            print_r($_POST);
+        $publicacion = $this->input->post('publicacion');
+        $idgrupo = $this->input->post('idgrupo');
+                $this->parametrizacion_model->guardaParambase(
+                        $publicacion,
+                        $idgrupo
+                );
+                
+                $this->session->set_flashdata('correcto', 'Parametrización Asignada Correctamente!'); 
+        redirect(base_url().'parametrizacion/parametrizarCursos');
+        
         
         }
         

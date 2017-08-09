@@ -33,7 +33,7 @@
                         <?php echo $actividades['nombreactividad']; ?>
                     </td>
                     <td>
-                        Descripcion
+                        <?php echo $actividades['descactividad']; ?>
                     </td>
                     <td>
                     <?php

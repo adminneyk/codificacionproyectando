@@ -58,7 +58,7 @@ public function obtenerActividades($idparametro = 0) {
         } else {
             $query = $this->db->get_where('actividad', array('estado' => 1));
         }
-       // echo  $this->db->last_query();
+        //secho  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {
@@ -138,6 +138,34 @@ public function obtenerActividades($idparametro = 0) {
             return false;
         }
     }
+    
+    public function obtenerCursos($uduario = 0) {
+        
+            $query = $this->db->get_where('grupo', array('id_responsable'=>$uduario,'id_parametrizacion'=>0));
+        
+       // echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
+    
+    public function guardaParambase(
+                        $publicacion,
+                        $idgrupo
+                ){
+        $data = array(
+            'id_parametrizacion' => $publicacion
+        );
+        
+            $this->db->where('id_grupo', $idgrupo);
+            
+            return $this->db->update('grupo', $data);
+             
+        
+    }
+    
 
 
 }

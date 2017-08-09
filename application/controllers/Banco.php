@@ -60,7 +60,7 @@ class Banco extends CI_Controller {
             $mensaje="Su Idea ".$nombreidea." No es viable para continuar!";
            }
 
-           $this->notificaciones_model->notificar($idea,$mensaje);
+          // $this->notificaciones_model->notificar($idea,$mensaje);
 
          }
       

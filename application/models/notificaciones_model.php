@@ -45,7 +45,7 @@ class Notificaciones_model extends CI_Model {
             // $query = $this->db->get_where('recordatorios', array('responsable'=>$idUsuario,'estado'=>2));
         }
         $query = $this->db->get();
-        echo $this->db->last_query();
+//        echo $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {
@@ -60,7 +60,7 @@ class Notificaciones_model extends CI_Model {
             // $query = $this->db->get_where('recordatorios', array('responsable'=>$idUsuario,'estado'=>2));
         
         $query = $this->db->get();
-        echo $this->db->last_query();
+  //      echo $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {
