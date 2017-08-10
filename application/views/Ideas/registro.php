@@ -34,17 +34,17 @@ echo form_open(base_url() . 'ideas/validar', $arrayform);
             if (nombreidea == "") {
                 msg += "-Nombre de Idea Requerido<br>";
             }
-            
+
             if (descripidea == "") {
                 msg += "-Descripcion de la Idea Requerido<br>";
             }
-           /* var valida=0;
-                $("#integrantes[] option:selected").each(function() {			
-                valida++;		
-            });
-            if(valida != 3){
-               msg += "-Idea con 3 integrantes Requeridos<br>"; 
-            }*/
+            /* var valida=0;
+             $("#integrantes[] option:selected").each(function() {			
+             valida++;		
+             });
+             if(valida != 3){
+             msg += "-Idea con 3 integrantes Requeridos<br>"; 
+             }*/
             if (msg) {
                 $("#error").html('<span class="glyphicon glyphicon-bell"></span><strong>Tiene los Siguientes Problemas:</strong><br>' + msg);
                 $("#error").addClass('alert alert-warning');
@@ -86,13 +86,28 @@ echo form_open(base_url() . 'ideas/validar', $arrayform);
             <label class="col-md-4 control-label" for="selectmultiple">Integrantes del Grupo</label>
             <div class="col-md-4">
                 <select multiple id="integrantes[]" name="integrantes[]" class="form-control">
-                   <?php
-                   foreach ($listaestudiantes->result() as $lista) {
-                         ?>
-                    <option value="<?=$lista->id_usuario?>" <?php if($lista->id_usuario==$this->session->userdata('id_usuario')){ ?> selected="selected" <?php } ?>><?=$lista->nombre_usuario?></option>
-                             <?php
-                        }
+                    <?php
+                    foreach ($listaestudiantes->result() as $lista) {
                         ?>
+                        <option value="<?= $lista->id_usuario ?>" <?php if ($lista->id_usuario == $this->session->userdata('id_usuario')) { ?> selected="selected" <?php } ?>><?= $lista->nombre_usuario ?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="selectmultiple">Linea Tematica</label>
+            <div class="col-md-4">
+                <select id="linea" name="linea" class="form-control">
+                    <?php
+                    foreach ($lineas->result() as $linea) {
+                        ?>
+                        <option value="<?= $linea->id_linea ?>"><?= $linea->nombre_linea ?></option>
+                        <?php
+                    }
+                    ?>
                 </select>
             </div>
         </div>
@@ -103,7 +118,8 @@ echo form_open(base_url() . 'ideas/validar', $arrayform);
             <label class="col-md-4 control-label" for="button1id">&nbsp;</label>
             <div class="col-md-8">
                 <button name="validar" id="validar" type="button" class="btn btn-success">GUARDAR</button>
-                <a href="<?= base_url() ?>ideas" class="btn btn-danger">Volver</a>
+                <button name="enviar" id="enviar" type="button" class="btn btn-danger" onclick="validarVolver('<?= base_url() ?>ideas', '');">VOLVER</button>
+
             </div>
         </div>
     </fieldset>

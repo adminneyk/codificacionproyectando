@@ -21,6 +21,7 @@ class Ideas extends CI_Controller {
         public function registro()
 	{
                 $datos['listaestudiantes'] = $this->ideas_model->obtenerEstudiantes($this->session->userdata('id_usuario'));
+                $datos['lineas'] = $this->ideas_model->obtenerLineas();
                 $this->load->helper('url');
 		$this->load->view('Ideas/registro',$datos);
                 $this->load->view('footer');
@@ -31,7 +32,8 @@ class Ideas extends CI_Controller {
           $nombreidea = $this->input->post('nombreidea');
           $descripidea = $this->input->post('descripidea');
           $integrantes = $this->input->post('integrantes');
-          $this->ideas_model->guardar($nombreidea,$descripidea,$integrantes,$this->session->userdata('id_usuario'));
+          $linea = $this->input->post('linea');
+          $this->ideas_model->guardar($nombreidea,$descripidea,$integrantes,$this->session->userdata('id_usuario'),$linea);
                $this->session->set_flashdata('correcto', 'Idea Guardada Correctamente!');
                 redirect(base_url().'ideas','refresh');  
         }

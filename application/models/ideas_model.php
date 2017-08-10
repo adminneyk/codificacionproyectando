@@ -23,14 +23,14 @@ class Ideas_model extends CI_Model {
        
     }
 
-    public function guardar($nombreidea,$descripidea,$integrantes,$idEstudiante) {
+    public function guardar($nombreidea,$descripidea,$integrantes,$idEstudiante,$linea) {
 
         $this->db->select('id_grupo');
         $this->db->where('id_usuario', $idEstudiante);
         $grupo=$this->db->get('cursos')->row()->id_grupo;
         $data = array(
             'id_grupo' => $grupo,
-            'id_linea' => 1,
+            'id_linea' => $linea,
             'nombre_idea' => $nombreidea,
             'descripcion_idea' => $descripidea,
             'estado' => 1,
@@ -68,6 +68,17 @@ foreach ($integrantes as $id) {
         //echo  $this->db->last_query();
         return $this->db->get()->row()->id_parametrizacion;
          
+    }
+    
+     public function obtenerLineas() {
+        
+            $query = $this->db->get_where('linea', array('estado' => 1));
+       // echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
     }
 
 
