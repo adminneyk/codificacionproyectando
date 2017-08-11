@@ -35,6 +35,21 @@ $(document).ready(function()
             </select>
         </div>
     </div>
+    
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="radios">Profesor Asignado</label>
+        <div class="col-md-4">
+            <select class="form-control" id="profesor" name="profesor">
+            <?php 
+            foreach ($profesores->result() as $profesor) {
+    echo "<option value='".$profesor->id_usuario."'>".$profesor->nombre_usuario."</option>";
+     
+    }
+               
+            ?>
+            </select>
+        </div>
+    </div>
     <input type="hidden" name="idgrupo" id="idgrupo" value="<?= $grupo; ?>">
     <!-- Button (Double) -->
     <div class="form-group">
@@ -44,6 +59,5 @@ $(document).ready(function()
             <button onclick="validarVolver('<?= base_url() ?>parametrizacion/parametrizarCursos','')" class="btn btn-danger" type="button">Volver</button>
         </div>
     </div>
-
-</fieldset>
 </form>
+</fieldset>

@@ -20,6 +20,23 @@ $descripciondeidea = array(
     'cols' => '30',
     'class' => 'form-control'
 );
+$objetivogeneral = array(
+    'name' => 'objetivogeneral',
+    'id' => 'objetivogeneral',
+    'value' => '',
+    'rows' => '10',
+    'cols' => '30',
+    'class' => 'form-control'
+);
+
+$objetivoespecifico = array(
+    'name' => 'objetivoespecifico',
+    'id' => 'objetivoespecifico',
+    'value' => '',
+    'rows' => '10',
+    'cols' => '30',
+    'class' => 'form-control'
+);
 
 echo form_open(base_url() . 'ideas/validar', $arrayform);
 ?>
@@ -111,8 +128,27 @@ echo form_open(base_url() . 'ideas/validar', $arrayform);
                 </select>
             </div>
         </div>
-
-
+       
+        <!-- Textarea -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textarea">Objetivo General</label>
+            <div class="col-md-4">                     
+                <?php
+                echo form_textarea($objetivogeneral);
+                echo form_error('objetivogeneral', '<div class="alert alert-danger">', '</div>');
+                ?>
+            </div>
+        </div>
+ <!-- Textarea -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textarea">Objetivo Especifico</label>
+            <div class="col-md-4">                     
+                <?php
+                echo form_textarea($objetivoespecifico);
+                echo form_error('objetivoespecifico', '<div class="alert alert-danger">', '</div>');
+                ?>
+            </div>
+        </div>
         <!-- Button (Double) -->
         <div class="form-group">
             <label class="col-md-4 control-label" for="button1id">&nbsp;</label>

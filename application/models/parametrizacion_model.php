@@ -153,10 +153,12 @@ public function obtenerActividades($idparametro = 0) {
     
     public function guardaParambase(
                         $publicacion,
-                        $idgrupo
+                        $idgrupo,
+                        $profesor
                 ){
         $data = array(
-            'id_parametrizacion' => $publicacion
+            'id_parametrizacion' => $publicacion,
+            'id_responsable' => $profesor    
         );
         
             $this->db->where('id_grupo', $idgrupo);

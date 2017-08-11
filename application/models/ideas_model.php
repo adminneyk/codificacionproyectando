@@ -23,7 +23,7 @@ class Ideas_model extends CI_Model {
        
     }
 
-    public function guardar($nombreidea,$descripidea,$integrantes,$idEstudiante,$linea) {
+    public function guardar($nombreidea,$descripidea,$integrantes,$idEstudiante,$linea,$objetivogeneral,$objetivoespecifico) {
 
         $this->db->select('id_grupo');
         $this->db->where('id_usuario', $idEstudiante);
@@ -33,6 +33,8 @@ class Ideas_model extends CI_Model {
             'id_linea' => $linea,
             'nombre_idea' => $nombreidea,
             'descripcion_idea' => $descripidea,
+            'objetivo_general' => $objetivogeneral,
+            'objetivo_especifico' => $objetivoespecifico,
             'estado' => 1,
         );
          $this->db->insert('ideas', $data);
@@ -103,11 +105,18 @@ foreach ($integrantes as $id) {
     }
     public function obtenerAyuda($identregable) {
 
-        $this->db->select('texto_ayuda');
+        $this->db->select('texto_ayuda,nombre_entregable,descripcion_entregable');
         $this->db->from('entregable');
         $this->db->where('id_entregable',$identregable);
-        //echo  $this->db->last_query();
-        return $this->db->get()->row()->texto_ayuda;
+        $query=$this->db->get();
+
+        echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    
          
     }
      public function guardarVersion($id,$idea,$entregable,$texto) {

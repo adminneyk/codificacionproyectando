@@ -19,7 +19,7 @@ if (empty($cursos)) {
 <table class="table table-condensed">
     <thead>
         <tr>
-            <th>Entregable</th>
+            <th>Nombre del Grupo</th>
             <th>Acciones</th>
 
         </tr>
@@ -30,7 +30,7 @@ if (empty($cursos)) {
         <tr>
             <td><?php echo $curso->nombre_grupo; ?></td>
             
-            <td> <a href="<?= base_url()?>parametrizacion/formasignacionCursos/<?=$curso->id_grupo; ?>"><span class="glyphicon glyphicon-pencil"></span> Asignar Parametrizacion</a></td>
+            <td> <a href="<?= base_url()?>parametrizacion/formasignacionCursos/<?=$curso->id_grupo; ?>"><span class="glyphicon glyphicon-pencil"></span> Gestionar Parametrización</a></td>
         </tr>
         <?php
     }

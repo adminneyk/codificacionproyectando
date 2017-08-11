@@ -58,7 +58,7 @@
         if (in_array('banco', $this->session->userdata('permisos')) == true) {
             ?>
             <li id="fondo">
-                <a href="<?= base_url() ?>banco">Banco de Ideas</a>
+                <a href="<?= base_url() ?>banco">Aprobacion de Ideas</a>
             </li>
             <?php
         }

@@ -32,8 +32,10 @@ class Ideas extends CI_Controller {
           $nombreidea = $this->input->post('nombreidea');
           $descripidea = $this->input->post('descripidea');
           $integrantes = $this->input->post('integrantes');
+          $objetivogeneral = $this->input->post('objetivogeneral');
+          $objetivoespecifico = $this->input->post('objetivoespecifico');
           $linea = $this->input->post('linea');
-          $this->ideas_model->guardar($nombreidea,$descripidea,$integrantes,$this->session->userdata('id_usuario'),$linea);
+          $this->ideas_model->guardar($nombreidea,$descripidea,$integrantes,$this->session->userdata('id_usuario'),$linea,$objetivogeneral,$objetivoespecifico);
                $this->session->set_flashdata('correcto', 'Idea Guardada Correctamente!');
                 redirect(base_url().'ideas','refresh');  
         }

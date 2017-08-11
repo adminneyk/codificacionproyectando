@@ -5,6 +5,15 @@ $texto = "";
 $versiona= 0;
 $mensaje = "";
 $guarda = true;
+
+
+foreach ($ayuda->result() as $ms) {
+        $entregable = $ms->nombre_entregable;
+        $ayuda = $ms->texto_ayuda;
+        $descripdata = $ms->descripcion_entregable;
+        
+    }
+
 if (!empty($versiones)) {
     foreach ($versiones->result() as $version) {
         $id = $version->id_version;
@@ -22,7 +31,7 @@ if (!empty($versiones)) {
 ?>
 <form class="form-horizontal" action="<?= base_url()?>ideas/guardarVersion" method="POST">
 <fieldset>
-<legend>Formulario de Gestiones</legend>
+    <legend>Gestion del Entregable "<?=$entregable?>" <span class="glyphicon glyphicon-info-sign" title="<?="Descripcion del Entregable: ".$descripdata?>"></span></legend>
 <div class="form-group">
   <label class="control-label col-sm-2" for="textarea">Estructura del Entregable</label>
   <div class="col-sm-10">

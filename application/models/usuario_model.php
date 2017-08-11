@@ -39,6 +39,19 @@ class Usuario_model extends CI_Model {
             return 0;
         }
     }
+    
+    
+    public function obtenerProfesores() {
+        
+            $query = $this->db->get_where('usuario', array('id_perfil'=>2));
+        
+       // echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
 
 }
 

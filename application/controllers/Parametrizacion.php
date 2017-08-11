@@ -5,6 +5,7 @@ class Parametrizacion extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('parametrizacion_model');
+        $this->load->model('usuario_model');
         $this->load->view('cabecera');
         $this->load->view('menus');
         $this->load->library('form_validation');
@@ -110,6 +111,7 @@ class Parametrizacion extends CI_Controller {
             $grupo = $this->uri->segment(3, 0);
             $datos['grupo'] = $grupo;
             $datos['parame'] = $this->parametrizacion_model->obtenerParametrizacion(0,$this->session->userdata('id_usuario'));
+            $datos['profesores'] = $this->usuario_model->obtenerProfesores();
             $this->load->view('Parametrizacion/formulariocursos',$datos);
             $this->load->view('footer');
     }
@@ -171,9 +173,11 @@ class Parametrizacion extends CI_Controller {
             print_r($_POST);
         $publicacion = $this->input->post('publicacion');
         $idgrupo = $this->input->post('idgrupo');
+        $profesor = $this->input->post('profesor');
                 $this->parametrizacion_model->guardaParambase(
                         $publicacion,
-                        $idgrupo
+                        $idgrupo,
+                        $profesor
                 );
                 
                 $this->session->set_flashdata('correcto', 'Parametrización Asignada Correctamente!'); 
