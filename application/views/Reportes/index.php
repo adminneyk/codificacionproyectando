@@ -7,5 +7,6 @@
 <ul class="list-group">
   <li class="list-group-item"><a href="<?=base_url()?>reportes/parametrizaciones">Reporte de Parametrizaciones</a></li>
   <li class="list-group-item"><a href="<?=base_url()?>reportes/progresoReal">Reporte de Progreso</a></li>
+  <li class="list-group-item"><a href="<?=base_url()?>reportes/Indicadores">Indicadores Por Fases</a></li>
 </ul>
 </fieldset>

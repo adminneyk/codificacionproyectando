@@ -9,25 +9,28 @@ class Ideas_model extends CI_Model {
     }
 
     public function obtenerEstudiantes($idEstudiante = 0) {
-        $this->db->select('id_grupo');
-        $this->db->where('id_usuario', $idEstudiante);
-        $grupo=$this->db->get('cursos')->row()->id_grupo;
-        //echo  $this->db->last_query();
-        $query = $this->db->get_where('usuariosporgrupo', array('id_grupo' => $grupo));
-        //echo  $this->db->last_query();
-          if ($query->num_rows() > 0) {
-          return $query;
-          } else {
-          return false;
-          }
+        $dbdatos = $this->load->database('proyectandooracle', TRUE);
+        $dbdatos->select('DISTINCT(art_histac_act.GRU_CODIGO) as id_grupo');
+        $dbdatos->join('art_histac_act','art_estudiantes.EST_CODIGO=art_histac_act.EST_CODIGO');
+        $dbdatos->where('art_estudiantes.CLI_NUMDCTO', $idEstudiante);
+        $grupo = $dbdatos->get('art_estudiantes')->row()->id_grupo;
+       // echo  $dbdatos->last_query();
+        
+        $dbdatos->select('art_estudiantes.CLI_NUMDCTO as id_usuario,art_estudiantes.CLI_NOMBRE_COMP as nombre_usuario');
+        $dbdatos->join('art_histac_act','art_estudiantes.EST_CODIGO=art_histac_act.EST_CODIGO');
+        $dbdatos->where('art_histac_act.GRU_CODIGO', $grupo);
+        return $query = $dbdatos->get('art_estudiantes');
        
     }
 
     public function guardar($nombreidea,$descripidea,$integrantes,$idEstudiante,$linea,$objetivogeneral,$objetivoespecifico) {
 
-        $this->db->select('id_grupo');
-        $this->db->where('id_usuario', $idEstudiante);
-        $grupo=$this->db->get('cursos')->row()->id_grupo;
+
+        $dbdatos = $this->load->database('proyectandooracle', TRUE);
+        $dbdatos->select('DISTINCT(art_histac_act.GRU_CODIGO) as id_grupo');
+        $dbdatos->join('art_histac_act','art_estudiantes.EST_CODIGO=art_histac_act.EST_CODIGO');
+        $dbdatos->where('art_estudiantes.CLI_NUMDCTO', $idEstudiante);
+        $grupo = $dbdatos->get('art_estudiantes')->row()->id_grupo;
         $data = array(
             'id_grupo' => $grupo,
             'id_linea' => $linea,
@@ -40,7 +43,7 @@ class Ideas_model extends CI_Model {
          $this->db->insert('ideas', $data);
          $this->db->select('max(id_idea) as idea');
          $idea=$this->db->get('ideas')->row()->idea;
-          
+         
 foreach ($integrantes as $id) {
         $data = array(
             'id_idea' => $idea,
@@ -58,16 +61,19 @@ foreach ($integrantes as $id) {
         $this->db->join('ideas','equipos.id_idea=ideas.id_idea');
         $this->db->where('equipos.id_usuario',$ididea);
         $this->db->where('ideas.estado',3);
+        echo  $this->db->last_query();
         return $query = $this->db->get();
     }
 
     public function obtenerParametrizacion($idIdea) {
 
-        $this->db->select('grupo.id_parametrizacion','parametrizacion');
-        $this->db->from('grupo');
-        $this->db->join('ideas','grupo.id_grupo=ideas.id_grupo');
+       // SELECT * FROM ideas INNER JOIN config ON ideas.id_grupo= config.GRU_CODIGO AND ideas.id_idea=1 
+        
+        $this->db->select('config.id_parametrizacion','parametrizacion');
+        $this->db->from('ideas');
+        $this->db->join('config','ideas.id_grupo= config.GRU_CODIGO');
         $this->db->where('ideas.id_idea',$idIdea);
-        //echo  $this->db->last_query();
+        echo  $this->db->last_query();
         return $this->db->get()->row()->id_parametrizacion;
          
     }

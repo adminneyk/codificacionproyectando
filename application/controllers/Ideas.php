@@ -42,14 +42,14 @@ class Ideas extends CI_Controller {
         public function desarrollarIdea()
         {
                 $this->load->helper('url');
-                 $datos['listaIdeas'] = $this->ideas_model->mostrarIntegrantes($this->session->userdata('id_usuario'));
+                $datos['listaIdeas'] = $this->ideas_model->mostrarIntegrantes($this->session->userdata('id_usuario'));
                 $this->load->view('Ideas/listaIdeas',$datos);
                 $this->load->view('footer');
         }
         public function mostrarMarco()
         {    
             $codIdea = $this->uri->segment(3, 0);
-            $parame=$this->ideas_model->obtenerParametrizacion($codIdea);
+            $parame = $this->ideas_model->obtenerParametrizacion($codIdea);
             $fases = $this->reportes_model->obtenerFases();
         $cantfases=0;
         $totalavance=0;

@@ -8,13 +8,9 @@ class Parametrizacion_model extends CI_Model {
         parent::__construct();
     }
 
-    public function obtenerParametrizacion($idparametro = 0,$usuario) {
-        if ($idparametro > 0) {
-            $query = $this->db->get_where('parametrizacion', array('id_parametrizacion' => $idparametro,
-                                                                     'id_responsable'=>$usuario));
-        } else {
-             $query = $this->db->get_where('parametrizacion', array('id_responsable'=>$usuario));
-        }
+    public function obtenerParametrizacion() {
+        
+             $query = $this->db->get('parametrizacion');
         //echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
@@ -22,13 +18,22 @@ class Parametrizacion_model extends CI_Model {
             return false;
         }
     }
+    public function obtenerMaterias() {
+        $db_prueba = $this->load->database('proyectandooracle', TRUE);
+        $query = $db_prueba->get_where('art_materias',array());
+        //echo $db_prueba->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
 
-    public function guardar($nombrepara,$descritarea,$estado,$respo,  $id = 0) {
+    public function guardar($nombrepara,$descritarea,$estado,  $id = 0) {
         $data = array(
             'nom_parametrizacion' => $nombrepara,
             'descripcion_parametrizacion' => $descritarea,
-            'estado' => $estado,
-            'id_responsable' => $respo
+            'estado' => $estado
         );
         if ($id > 0) {
             $this->db->where('id_parametrizacion', $id);
@@ -143,7 +148,7 @@ public function obtenerActividades($idparametro = 0) {
         
             $query = $this->db->get_where('grupo', array('id_responsable'=>$uduario,'id_parametrizacion'=>0));
         
-       // echo  $this->db->last_query();
+       echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {

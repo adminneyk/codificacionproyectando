@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
   <li><a href="<?=base_url()?>home">Home</a></li>
-  <li class="active">Gestion de Cursos</li>
+  <li class="active">Gestion de Materias</li>
 </ol>
 <fieldset>
 	<legend>Gestion de Parametrizaciones</legend>

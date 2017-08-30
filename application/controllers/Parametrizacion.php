@@ -21,7 +21,7 @@ class Parametrizacion extends CI_Controller {
             $id = $this->uri->segment(3, 0);
             
             if(isset($id) && $id>0){
-                $data['parametrizaciones'] = $this->parametrizacion_model->obtenerParametrizacion($id,$this->session->userdata('id_usuario'));
+                $data['parametrizaciones'] = $this->parametrizacion_model->obtenerParametrizacion();
                 $data['validador']=$this->parametrizacion_model->validarfaltantes($id);
             } else {
                 $data['noid']="";
@@ -40,7 +40,7 @@ class Parametrizacion extends CI_Controller {
             $this->form_validation->set_rules('descritarea', 'Descripcion', 'required|min_length[3]');
             $this->form_validation->set_message('required', 'El campo %s es obligatorio');
             if($this->form_validation->run() === true){
-                $this->parametrizacion_model->guardar($nombrepara,$descritarea,$estado,$this->session->userdata('id_usuario'),$id);
+                $this->parametrizacion_model->guardar($nombrepara,$descritarea,$estado,$id);
                 $this->session->set_flashdata('correcto', 'Parametrización Guardada Correctamente!');
                 redirect(base_url().'parametrizacion','refresh');  
               }else{
@@ -96,7 +96,7 @@ class Parametrizacion extends CI_Controller {
         
     public function parametrizarCursos()
 	{
-            $idactividad = $this->uri->segment(3, 0);
+            /*$idactividad = $this->uri->segment(3, 0);
             $idparametrizacion = $this->uri->segment(4, 0);
             $datos['cursos'] = $this->parametrizacion_model->obtenerCursos($this->session->userdata('id_usuario'));
             
@@ -104,9 +104,24 @@ class Parametrizacion extends CI_Controller {
                 $datos['idactividad'] = $idactividad;
             $this->load->view('Parametrizacion/vistacursos',$datos);
             $this->load->view('footer');
-	}
+             * *
+             */
+        $this->gestionarMateria();
+	
         
-        public function formasignacionCursos()
+        
+        
+        }
+        
+        public function  gestionarMateria(){
+         $datos['materias'] = $this->parametrizacion_model->obtenerMaterias();
+         $datos['parametrizaciones'] = $this->parametrizacion_model->obtenerParametrizacion();
+         $this->load->view('Parametrizacion/formulariocursos',$datos);
+         $this->load->view('footer');   
+                
+        }
+
+                public function formasignacionCursos()
     {
             $grupo = $this->uri->segment(3, 0);
             $datos['grupo'] = $grupo;

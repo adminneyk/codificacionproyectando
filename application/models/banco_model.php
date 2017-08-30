@@ -9,10 +9,19 @@ class Banco_model extends CI_Model {
     }
 
     public function obtenerGrupos($idUsuario = 0) {
+        $dbdatos = $this->load->database('proyectandooracle', TRUE);
+        $this->db->select('MAT_CODIGO as materia');
+        $materia = $this->db->get('configuracion')->row()->materia;
+        
+        
         if ($idUsuario > 0) {
-            $query = $this->db->get_where('grupo', array('id_responsable' => $idUsuario));
+           // $query = $db_prueba->get_where('art_horario', array('MAT_CODIGO' => $materia,'CLI_NDCTO_PROF' => $idUsuario));
+          $dbdatos->select('GRU_CODIGO as id_grupo,GRU_CODIGO as nombre_grupo');
+        $dbdatos->where('MAT_CODIGO', $materia);
+        $dbdatos->where('CLI_NDCTO_PROF', $idUsuario);
+        $query = $dbdatos->get('art_horario');
         } else {
-            $query = $this->db->get('grupo');
+            $query = $db_prueba->get('art_horario');
         }
         //echo  $this->db->last_query();
         if ($query->num_rows() > 0) {

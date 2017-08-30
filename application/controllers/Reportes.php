@@ -17,6 +17,12 @@ class Reportes extends CI_Controller {
         $this->load->view('Reportes/index');
         $this->load->view('footer');
     }
+    public function Indicadores() {
+        $this->load->view('cabecera');
+        $this->load->view('menus');
+        $this->load->view('Reportes/indicadores');
+        $this->load->view('footer');
+    }
 
     public function parametrizaciones() {
         $data['nombreinforme'] = "Parametrizaciones";

@@ -5,6 +5,7 @@ class Welcome extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
+         $this->load->model('welcome_model');
     }
 
     /**
@@ -25,6 +26,11 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
                 $this->load->helper('url');
-		$this->load->view('welcome_message');
-	}
+		//$this->load->view('welcome_message');
+                 $datos = $this->welcome_model->obtenerdata();
+                var_export($datos);
+                echo "<hr>";
+                $datos = $this->welcome_model->obtenerdata2();
+                var_export($datos);
+        }
 }

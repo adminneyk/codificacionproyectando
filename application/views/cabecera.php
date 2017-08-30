@@ -10,12 +10,9 @@ $urlactual="http://" . $host . $url;
 $url= str_replace(base_url(),"", $urlactual);
 $controlador[0] = explode("/", $url);
 $controlador = $controlador[0][0];
-
 if(in_array($controlador, $this->session->userdata('permisos')) == FALSE){
     redirect(base_url().'home');
 }
-
-
 ?><!DOCTYPE html>
 <html lang="en">
     <head>

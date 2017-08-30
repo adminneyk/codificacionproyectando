@@ -4,7 +4,7 @@ $arrayform = array(
     "id" => "form"
 );
 
-echo form_open(base_url() . 'parametrizacion/asigParamBase', $arrayform);
+echo form_open(base_url() . 'parametrizacion/asigDataparam', $arrayform);
 ?>
 <script type="text/javascript">
 $(document).ready(function()
@@ -18,16 +18,16 @@ $(document).ready(function()
 <fieldset>
 
     <!-- Form Name -->
-    <legend>Formulario de Entregable</legend>
+    <legend>Formulario de Gestión de Materias</legend>
     <div id="error"></div>
     <!-- Multiple Radios -->
     <div class="form-group">
-        <label class="col-md-4 control-label" for="radios">Parametrización</label>
+        <label class="col-md-4 control-label" for="radios">Materias</label>
         <div class="col-md-4">
             <select class="form-control" id="publicacion" name="publicacion">
             <?php 
-            foreach ($parame->result() as $param) {
-    echo "<option value='".$param->id_parametrizacion."'>".$param->nom_parametrizacion."</option>";
+            foreach ($materias->result() as $materia) {
+    echo "<option value='".$materia->MAT_CODIGO."'>".$materia->MAT_NOMBRE."</option>";
      
     }
                
@@ -37,12 +37,12 @@ $(document).ready(function()
     </div>
     
     <div class="form-group">
-        <label class="col-md-4 control-label" for="radios">Profesor Asignado</label>
+        <label class="col-md-4 control-label" for="radios">Parametrizaciones</label>
         <div class="col-md-4">
             <select class="form-control" id="profesor" name="profesor">
             <?php 
-            foreach ($profesores->result() as $profesor) {
-    echo "<option value='".$profesor->id_usuario."'>".$profesor->nombre_usuario."</option>";
+            foreach ($parametrizaciones->result() as $param) {
+    echo "<option value='".$param->id_parametrizacion."'>".$param->nom_parametrizacion."</option>";
      
     }
                
@@ -50,13 +50,12 @@ $(document).ready(function()
             </select>
         </div>
     </div>
-    <input type="hidden" name="idgrupo" id="idgrupo" value="<?= $grupo; ?>">
     <!-- Button (Double) -->
     <div class="form-group">
         <label class="col-md-4 control-label" for="button1id"></label>
         <div class="col-md-8">
-            <button name="validar" id="validar" type="button" class="btn btn-success">Guardar</button>
-            <button onclick="validarVolver('<?= base_url() ?>parametrizacion/parametrizarCursos','')" class="btn btn-danger" type="button">Volver</button>
+            <button name="validar" id="validar" type="button" class="btn btn-success">Asignar Parametrización</button>
+            
         </div>
     </div>
 </form>
