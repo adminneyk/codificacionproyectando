@@ -9,9 +9,6 @@ class Notificaciones_model extends CI_Model {
     }
 
     public function notificar($idusuario, $mensaje) {
-
-
-
         $data = array(
             'mensaje' => $mensaje,
             'id_usuario' => $idusuario,
@@ -29,23 +26,22 @@ class Notificaciones_model extends CI_Model {
             return false;
         }
     }
+public function obtenerGrupos($idusuario) {
 
-    public function obtenerRecordatorioRevision($idUsuario, $tipo = 0) {
-        if ($tipo == 0) {
+        $dbdatos = $this->load->database('proyectandooracle', TRUE);
+        $dbdatos->select('GRU_CODIGO');
+        $dbdatos->from('art_horario');
+        $dbdatos->where('CLI_NDCTO_PROF',$idusuario);
+       // echo  $dbdatos->last_query();
+        return $query = $dbdatos->get();
+    }
+    public function obtenerRecordatorioRevision($grupos) {
+        
             $this->db->select('*');
             $this->db->from('recordatorios');
-            $this->db->where(array('usuario' => $idUsuario, 'estado' => 4));
-            // $query = $this->db->get_where('recordatorios', array('usuario'=>$idUsuario,'estado'=>4));
-        } else {
-            $this->db->select('*');
-            $this->db->from('recordatorios');
-            $this->db->where(array('responsable' => $idUsuario, 'estado' => 2));
-            $this->db->group_by('nombreidea');
-
-            // $query = $this->db->get_where('recordatorios', array('responsable'=>$idUsuario,'estado'=>2));
-        }
-        $query = $this->db->get();
-//        echo $this->db->last_query();
+            $this->db->where_in("id_grupo","{$grupos}");
+            $this->db->group_by('id_grupo');
+            $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query;
         } else {
@@ -53,14 +49,12 @@ class Notificaciones_model extends CI_Model {
         }
     }
     
-    public function obtenerPendientesBanco($idUsuario) {
-            $this->db->select('*');
+    public function obtenerPendientesBanco($grupos) {
+     $this->db->select('*');
             $this->db->from('pendientesactuales');
-            $this->db->where(array('id_responsable' => $idUsuario));
-            // $query = $this->db->get_where('recordatorios', array('responsable'=>$idUsuario,'estado'=>2));
-        
-        $query = $this->db->get();
-  //      echo $this->db->last_query();
+            $this->db->where_in("grupo","{$grupos}");
+            $this->db->group_by('grupo');
+            $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query;
         } else {

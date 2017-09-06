@@ -112,7 +112,7 @@ if ($query->num_rows() > 0) {
                                                                     'id_idea' => $idea,
                                                                     'id_parametrizacion' => $parame));
        
-       //echo  $this->db->last_query();
+       echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {

@@ -73,7 +73,7 @@ foreach ($integrantes as $id) {
         $this->db->from('ideas');
         $this->db->join('config','ideas.id_grupo= config.GRU_CODIGO');
         $this->db->where('ideas.id_idea',$idIdea);
-        echo  $this->db->last_query();
+        //echo  $this->db->last_query();
         return $this->db->get()->row()->id_parametrizacion;
          
     }

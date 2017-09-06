@@ -21,6 +21,8 @@ class Usuario_model extends CI_Model {
         $this->db->where('CLI_NUMDCTO', md5($documento));
 
         $querydata = $this->db->get();
+        //echo  $this->db->last_query();
+//die();
         $admin = FALSE;
         if ($querydata->num_rows() > 0) {
             $admin = true;

@@ -11,7 +11,7 @@ class Banco_model extends CI_Model {
     public function obtenerGrupos($idUsuario = 0) {
         $dbdatos = $this->load->database('proyectandooracle', TRUE);
         $this->db->select('MAT_CODIGO as materia');
-        $materia = $this->db->get('configuracion')->row()->materia;
+        $materia = $this->db->get('config')->row()->materia;
         
         
         if ($idUsuario > 0) {
