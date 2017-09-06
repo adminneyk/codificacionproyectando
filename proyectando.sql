@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-08-2017 a las 04:13:33
+-- Tiempo de generación: 06-09-2017 a las 06:09:29
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyectando20`
 --
+DROP DATABASE proyectando20;
 CREATE DATABASE IF NOT EXISTS `proyectando20` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `proyectando20`;
 
@@ -38,25 +39,35 @@ CREATE TABLE IF NOT EXISTS `actividad` (
   `orden` int(11) NOT NULL DEFAULT '1' COMMENT 'Orden de Muestra',
   PRIMARY KEY (`id_actividad`),
   KEY `id_fase` (`id_fase`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `actividad`
+--
+
+INSERT INTO `actividad` (`id_actividad`, `id_fase`, `nombre_actividad`, `descripcion_actividad`, `estado`, `orden`) VALUES
+(1, 1, 'Actividad de prueba', 'Descripcion de actividad', 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cursos`
+-- Estructura de tabla para la tabla `config`
 --
 
-DROP TABLE IF EXISTS `cursos`;
-CREATE TABLE IF NOT EXISTS `cursos` (
-  `id_cursos` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificacion de Curso',
-  `id_grupo` int(11) NOT NULL COMMENT 'Relacion con el Grupo',
-  `id_usuario` int(11) NOT NULL COMMENT 'Relacion con el Usuario',
-  PRIMARY KEY (`id_cursos`),
-  KEY `id_grupo` (`id_grupo`),
-  KEY `id_usuario` (`id_usuario`),
-  KEY `id_grupo_2` (`id_grupo`),
-  KEY `id_usuario_2` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+DROP TABLE IF EXISTS `config`;
+CREATE TABLE IF NOT EXISTS `config` (
+  `id_config` int(11) NOT NULL,
+  `MAT_CODIGO` varchar(100) NOT NULL,
+  `GRU_CODIGO` varchar(100) NOT NULL,
+  `id_parametrizacion` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `config`
+--
+
+INSERT INTO `config` (`id_config`, `MAT_CODIGO`, `GRU_CODIGO`, `id_parametrizacion`) VALUES
+(1, 'LNALS', '800', 1);
 
 -- --------------------------------------------------------
 
@@ -76,7 +87,14 @@ CREATE TABLE IF NOT EXISTS `entregable` (
   PRIMARY KEY (`id_entregable`),
   KEY `id_actividad` (`id_actividad`),
   KEY `id_parametrizacion` (`id_parametrizacion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `entregable`
+--
+
+INSERT INTO `entregable` (`id_entregable`, `id_parametrizacion`, `id_actividad`, `nombre_entregable`, `descripcion_entregable`, `texto_ayuda`, `estado`) VALUES
+(1, 1, 1, 'Entregable', 'Descripcion del entregable', 'Texto de ayuda', 1);
 
 -- --------------------------------------------------------
 
@@ -93,7 +111,16 @@ CREATE TABLE IF NOT EXISTS `equipos` (
   PRIMARY KEY (`id_equipo`),
   KEY `id_usuario` (`id_usuario`),
   KEY `id_idea` (`id_idea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `equipos`
+--
+
+INSERT INTO `equipos` (`id_equipo`, `id_idea`, `id_usuario`, `estado`) VALUES
+(1, 1, 1033759479, 1),
+(2, 2, 1033759479, 1),
+(3, 2, 2147483647, 1);
 
 -- --------------------------------------------------------
 
@@ -103,30 +130,20 @@ CREATE TABLE IF NOT EXISTS `equipos` (
 
 DROP TABLE IF EXISTS `fases`;
 CREATE TABLE IF NOT EXISTS `fases` (
-  `id_fase` int(11) NOT NULL COMMENT 'identificador de la fase dela idea',
+  `id_fase` int(11) NOT NULL AUTO_INCREMENT COMMENT 'identificador de la fase dela idea',
   `nombre_fase` varchar(100) COLLATE utf16_spanish_ci NOT NULL COMMENT 'nombre de la fase de la idea',
   `descripcion` varchar(150) COLLATE utf16_spanish_ci NOT NULL,
   `orden` int(11) NOT NULL DEFAULT '1' COMMENT 'Orden de Mostrar',
   `estado` int(11) NOT NULL DEFAULT '0' COMMENT 'Estado de la Fase',
   PRIMARY KEY (`id_fase`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
 
 --
--- Estructura de tabla para la tabla `grupo`
+-- Volcado de datos para la tabla `fases`
 --
 
-DROP TABLE IF EXISTS `grupo`;
-CREATE TABLE IF NOT EXISTS `grupo` (
-  `id_grupo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificable del Grupo',
-  `nombre_grupo` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre del Grupo',
-  `id_responsable` int(11) NOT NULL COMMENT 'Relacion con Usuario Responsable',
-  `id_parametrizacion` int(11) NOT NULL DEFAULT '0' COMMENT 'Identificador de la Parametrizacion',
-  PRIMARY KEY (`id_grupo`),
-  KEY `id_responsable` (`id_responsable`),
-  KEY `id_parametrizacion` (`id_parametrizacion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+INSERT INTO `fases` (`id_fase`, `nombre_fase`, `descripcion`, `orden`, `estado`) VALUES
+(1, 'FASE 001', 'Descripcion de la fase', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -142,24 +159,20 @@ CREATE TABLE IF NOT EXISTS `ideas` (
   `nombre_idea` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre de la Idea',
   `descripcion_idea` varchar(200) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Descripcion de la Idea',
   `estado` int(11) NOT NULL DEFAULT '1' COMMENT 'Estado de la Idea',
+  `objetivo_general` text COLLATE utf8_spanish_ci NOT NULL COMMENT 'Objetivos Generales de la Idea',
+  `objetivo_especifico` text COLLATE utf8_spanish_ci NOT NULL COMMENT 'Objetivos Especificos de la Idea',
   PRIMARY KEY (`id_idea`),
   KEY `id_linea` (`id_linea`),
   KEY `id_grupo` (`id_grupo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Estructura Stand-in para la vista `ideasgrupo`
--- (Véase abajo para la vista actual)
+-- Volcado de datos para la tabla `ideas`
 --
-DROP VIEW IF EXISTS `ideasgrupo`;
-CREATE TABLE IF NOT EXISTS `ideasgrupo` (
-`id_idea` int(11)
-,`nombre_idea` varchar(100)
-,`id_grupo` int(11)
-,`id_parametrizacion` int(11)
-);
+
+INSERT INTO `ideas` (`id_idea`, `id_grupo`, `id_linea`, `nombre_idea`, `descripcion_idea`, `estado`, `objetivo_general`, `objetivo_especifico`) VALUES
+(1, 800, 1, 'Nombre de la idea', 'Descripcion de la idea totaal', 3, 'objetivo general', 'objetivo especifico'),
+(2, 800, 1, 'IDEA DE PRUEBA FINAL', 'DESCRIPCION DE LA IDEA DE PRUEBA FINAL', 3, 'Objetivo General', 'Objetivo Especifico');
 
 -- --------------------------------------------------------
 
@@ -172,8 +185,16 @@ CREATE TABLE IF NOT EXISTS `linea` (
   `id_linea` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la Linea Tematica',
   `nombre_linea` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre de la Linea Tematic',
   `descripcion_linea` varchar(200) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Descripcion de la Linea Tematica',
+  `estado` int(11) NOT NULL,
   PRIMARY KEY (`id_linea`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `linea`
+--
+
+INSERT INTO `linea` (`id_linea`, `nombre_linea`, `descripcion_linea`, `estado`) VALUES
+(1, 'Liea de prueba', 'prUEBA DE LINEAS', 1);
 
 -- --------------------------------------------------------
 
@@ -188,26 +209,11 @@ CREATE TABLE IF NOT EXISTS `mostraversiones` (
 ,`id_idea` int(11)
 ,`id_parametrizacion` int(11)
 ,`id_actividad` int(11)
-,`id_grupo` int(11)
+,`id_grupo` varchar(100)
 ,`conteoentregable` bigint(21)
 ,`conteoentregablesaprobados` bigint(21)
 ,`entregable` text
 );
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `notificaciones`
---
-
-DROP TABLE IF EXISTS `notificaciones`;
-CREATE TABLE IF NOT EXISTS `notificaciones` (
-  `id_notificacion` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del Mensaje',
-  `id_usuario` int(11) NOT NULL COMMENT 'Persona destinataria',
-  `mensaje` text NOT NULL COMMENT 'Mensaje Contreto',
-  `estado` int(11) NOT NULL COMMENT 'Estado de la Notificacion',
-  PRIMARY KEY (`id_notificacion`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -224,7 +230,14 @@ CREATE TABLE IF NOT EXISTS `parametrizacion` (
   `estado` int(11) NOT NULL COMMENT 'Estado de la Parametrizacion',
   PRIMARY KEY (`id_parametrizacion`),
   KEY `id_responsable` (`id_responsable`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `parametrizacion`
+--
+
+INSERT INTO `parametrizacion` (`id_parametrizacion`, `nom_parametrizacion`, `descripcion_parametrizacion`, `id_responsable`, `estado`) VALUES
+(1, 'Parametrizacion 001', 'Descripcion de la parametrizacion', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -234,35 +247,8 @@ CREATE TABLE IF NOT EXISTS `parametrizacion` (
 --
 DROP VIEW IF EXISTS `pendientesactuales`;
 CREATE TABLE IF NOT EXISTS `pendientesactuales` (
-`conteo` bigint(21)
-,`nombre_grupo` varchar(100)
-,`id_responsable` int(11)
-,`id_grupo` int(11)
+`grupo` int(11)
 );
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `perfiles`
---
-
-DROP TABLE IF EXISTS `perfiles`;
-CREATE TABLE IF NOT EXISTS `perfiles` (
-  `id_perfil` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador de perfil',
-  `nombre_perfil` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre de Perfil',
-  `permisos` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Permisos Suministrados por Perfil',
-  `visible` int(11) NOT NULL COMMENT 'Oculta los Perfiles',
-  PRIMARY KEY (`id_perfil`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `perfiles`
---
-
-INSERT INTO `perfiles` (`id_perfil`, `nombre_perfil`, `permisos`, `visible`) VALUES
-(1, 'Administrador', 'perfiles', 0),
-(2, 'Profesor', 'reportes,parametrizacion,revision,banco,paramcurso', 0),
-(3, 'Estudiante', 'ideas', 0);
 
 -- --------------------------------------------------------
 
@@ -272,14 +258,8 @@ INSERT INTO `perfiles` (`id_perfil`, `nombre_perfil`, `permisos`, `visible`) VAL
 --
 DROP VIEW IF EXISTS `recordatorios`;
 CREATE TABLE IF NOT EXISTS `recordatorios` (
-`entregable` int(11)
-,`estado` int(11)
-,`responsable` int(11)
-,`usuario` int(11)
-,`grupo` int(11)
-,`idea` int(11)
-,`nombreidea` varchar(100)
-,`nombregrupo` varchar(100)
+`conteo` bigint(21)
+,`id_grupo` int(11)
 );
 
 -- --------------------------------------------------------
@@ -295,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `resumengeneral` (
 ,`id_idea` int(11)
 ,`id_parametrizacion` int(11)
 ,`id_actividad` int(11)
-,`id_grupo` int(11)
+,`id_grupo` varchar(100)
 ,`conteoentregable` bigint(21)
 ,`conteoentregablesaprobados` bigint(21)
 );
@@ -320,40 +300,22 @@ CREATE TABLE IF NOT EXISTS `resumenpendientes` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `id_usuario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Autoincremental de usuarios',
-  `nombre_usuario` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre Completo',
-  `usuario` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre de Usuario',
-  `clave` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Clave de Acceso de Usuario',
-  `id_perfil` int(11) NOT NULL COMMENT 'Relacion con Perfil ',
-  PRIMARY KEY (`id_usuario`),
-  KEY `id_perfil` (`id_perfil`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+DROP TABLE IF EXISTS `usuarios`;
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+  `CLI_NUMDCTO` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `usuario`
+-- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `usuario`, `clave`, `id_perfil`) VALUES
-(1, 'Administrador del Sistema', 'admin', 'admin', 1),
-(2, 'Carlos Donoso', 'cdonoso', 'p1234', 2);
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `usuariosporgrupo`
--- (Véase abajo para la vista actual)
---
-DROP VIEW IF EXISTS `usuariosporgrupo`;
-CREATE TABLE IF NOT EXISTS `usuariosporgrupo` (
-`id_usuario` int(11)
-,`nombre_usuario` varchar(100)
-,`id_grupo` int(11)
-);
+INSERT INTO `usuarios` (`id_usuario`, `CLI_NUMDCTO`) VALUES
+(1, '0eb33bb157c40fef3884fa3faad1b418');
 
 -- --------------------------------------------------------
 
@@ -374,7 +336,15 @@ CREATE TABLE IF NOT EXISTS `versiones` (
   PRIMARY KEY (`id_version`),
   KEY `id_idea` (`id_idea`),
   KEY `id_entregable` (`id_entregable`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `versiones`
+--
+
+INSERT INTO `versiones` (`id_version`, `id_idea`, `id_entregable`, `fecharegistro`, `entregable`, `revision`, `comentarios`, `estado`) VALUES
+(1, 1, 1, '2017-09-06 02:59:18', '<p>entregable de prueba</p>', '', 'Aprobado el entregable', 3),
+(2, 2, 1, '2017-09-06 04:31:32', '<p>version de prueba 001</p>', '', 'Correcto', 3);
 
 -- --------------------------------------------------------
 
@@ -387,34 +357,8 @@ CREATE TABLE IF NOT EXISTS `vistaconteopendientes` (
 `id_idea` int(11)
 ,`nombre_idea` varchar(100)
 ,`id_grupo` int(11)
-,`id_responsable` int(11)
 ,`conteo` bigint(21)
 );
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `vista_parametrizacion`
--- (Véase abajo para la vista actual)
---
-DROP VIEW IF EXISTS `vista_parametrizacion`;
-CREATE TABLE IF NOT EXISTS `vista_parametrizacion` (
-`PARAMETRIZACION` varchar(100)
-,`FASE` varchar(100)
-,`ACTIVIDAD` varchar(100)
-,`ENTREGABLE` varchar(100)
-,`USUARIO` varchar(100)
-,`ESTADO` varchar(10)
-);
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `ideasgrupo`
---
-DROP TABLE IF EXISTS `ideasgrupo`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ideasgrupo`  AS  select `ideas`.`id_idea` AS `id_idea`,`ideas`.`nombre_idea` AS `nombre_idea`,`ideas`.`id_grupo` AS `id_grupo`,`grupo`.`id_parametrizacion` AS `id_parametrizacion` from (`ideas` join `grupo` on((`ideas`.`id_grupo` = `grupo`.`id_grupo`))) ;
 
 -- --------------------------------------------------------
 
@@ -432,7 +376,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `pendientesactuales`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pendientesactuales`  AS  select count(0) AS `conteo`,`grupo`.`nombre_grupo` AS `nombre_grupo`,`grupo`.`id_responsable` AS `id_responsable`,`grupo`.`id_grupo` AS `id_grupo` from (`ideas` join `grupo` on((`grupo`.`id_grupo` = `ideas`.`id_grupo`))) where (`ideas`.`estado` = 1) group by `grupo`.`id_grupo` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pendientesactuales`  AS  select `ideas`.`id_grupo` AS `grupo` from (`versiones` join `ideas` on((`ideas`.`id_idea` = `versiones`.`id_idea`))) where (`versiones`.`estado` = 2) ;
 
 -- --------------------------------------------------------
 
@@ -441,7 +385,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `recordatorios`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `recordatorios`  AS  select `versiones`.`id_entregable` AS `entregable`,`versiones`.`estado` AS `estado`,`grupo`.`id_responsable` AS `responsable`,`equipos`.`id_usuario` AS `usuario`,`grupo`.`id_grupo` AS `grupo`,`ideas`.`id_idea` AS `idea`,`ideas`.`nombre_idea` AS `nombreidea`,`grupo`.`nombre_grupo` AS `nombregrupo` from (((`versiones` join `ideas` on((`ideas`.`id_idea` = `versiones`.`id_idea`))) join `equipos` on((`equipos`.`id_idea` = `ideas`.`id_idea`))) join `grupo` on((`ideas`.`id_grupo` = `grupo`.`id_grupo`))) where (`versiones`.`estado` in (2,4)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `recordatorios`  AS  select count(0) AS `conteo`,`ideas`.`id_grupo` AS `id_grupo` from `ideas` where (`ideas`.`estado` = 1) group by `ideas`.`id_grupo` ;
 
 -- --------------------------------------------------------
 
@@ -450,7 +394,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `resumengeneral`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `resumengeneral`  AS  select `entregable`.`id_entregable` AS `id_entregable`,`entregable`.`nombre_entregable` AS `nombre_entregable`,`ideas`.`id_idea` AS `id_idea`,`para`.`id_parametrizacion` AS `id_parametrizacion`,`actividad`.`id_actividad` AS `id_actividad`,`grupo`.`id_grupo` AS `id_grupo`,(select count(0) from `versiones` where ((`versiones`.`id_entregable` = `entregable`.`id_entregable`) and (`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `conteoentregable`,(select count(0) from `versiones` where ((`versiones`.`id_entregable` = `entregable`.`id_entregable`) and (`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`) and (`versiones`.`id_idea` = `ideas`.`id_idea`) and (`versiones`.`estado` = 3))) AS `conteoentregablesaprobados` from ((((`actividad` join `entregable` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `parametrizacion` `para` on((`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`))) join `grupo` on((`grupo`.`id_parametrizacion` = `para`.`id_parametrizacion`))) join `ideas` on((`ideas`.`id_grupo` = `grupo`.`id_grupo`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `resumengeneral`  AS  select `entregable`.`id_entregable` AS `id_entregable`,`entregable`.`nombre_entregable` AS `nombre_entregable`,`ideas`.`id_idea` AS `id_idea`,`para`.`id_parametrizacion` AS `id_parametrizacion`,`actividad`.`id_actividad` AS `id_actividad`,`config`.`GRU_CODIGO` AS `id_grupo`,(select count(0) from `versiones` where ((`versiones`.`id_entregable` = `entregable`.`id_entregable`) and (`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `conteoentregable`,(select count(0) from `versiones` where ((`versiones`.`id_entregable` = `entregable`.`id_entregable`) and (`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`) and (`versiones`.`id_idea` = `ideas`.`id_idea`) and (`versiones`.`estado` = 3))) AS `conteoentregablesaprobados` from ((((`parametrizacion` `para` join `config` on((`config`.`id_parametrizacion` = `para`.`id_parametrizacion`))) join `ideas` on((`ideas`.`id_grupo` = `config`.`GRU_CODIGO`))) join `entregable` on((`entregable`.`id_parametrizacion` = `para`.`id_parametrizacion`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) ;
 
 -- --------------------------------------------------------
 
@@ -464,84 +408,11 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Estructura para la vista `usuariosporgrupo`
---
-DROP TABLE IF EXISTS `usuariosporgrupo`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `usuariosporgrupo`  AS  select `usuario`.`id_usuario` AS `id_usuario`,`usuario`.`nombre_usuario` AS `nombre_usuario`,`cursos`.`id_grupo` AS `id_grupo` from (`cursos` join `usuario` on((`cursos`.`id_usuario` = `usuario`.`id_usuario`))) ;
-
--- --------------------------------------------------------
-
---
 -- Estructura para la vista `vistaconteopendientes`
 --
 DROP TABLE IF EXISTS `vistaconteopendientes`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistaconteopendientes`  AS  select `ideas`.`id_idea` AS `id_idea`,`ideas`.`nombre_idea` AS `nombre_idea`,`ideas`.`id_grupo` AS `id_grupo`,`grupo`.`id_responsable` AS `id_responsable`,(select count(0) from `versiones` where ((`versiones`.`id_idea` = `ideas`.`id_idea`) and (`versiones`.`estado` = 2))) AS `conteo` from (`ideas` join `grupo` on((`ideas`.`id_grupo` = `grupo`.`id_grupo`))) ;
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `vista_parametrizacion`
---
-DROP TABLE IF EXISTS `vista_parametrizacion`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_parametrizacion`  AS  select `parametrizacion`.`nom_parametrizacion` AS `PARAMETRIZACION`,`fases`.`nombre_fase` AS `FASE`,`actividad`.`nombre_actividad` AS `ACTIVIDAD`,`entregable`.`nombre_entregable` AS `ENTREGABLE`,`usuario`.`usuario` AS `USUARIO`,(case `entregable`.`estado` when 1 then 'Activo' when 0 then 'Inactivo' else 'Sin Estado' end) AS `ESTADO` from ((((`parametrizacion` join `entregable` on((`entregable`.`id_parametrizacion` = `parametrizacion`.`id_parametrizacion`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) join `usuario` on((`parametrizacion`.`id_responsable` = `usuario`.`id_usuario`))) ;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `actividad`
---
-ALTER TABLE `actividad`
-  ADD CONSTRAINT `actividad_ibfk_1` FOREIGN KEY (`id_fase`) REFERENCES `fases` (`id_fase`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `cursos`
---
-ALTER TABLE `cursos`
-  ADD CONSTRAINT `cursos_ibfk_1` FOREIGN KEY (`id_grupo`) REFERENCES `grupo` (`id_grupo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `entregable`
---
-ALTER TABLE `entregable`
-  ADD CONSTRAINT `entregable_ibfk_1` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `entregable_ibfk_2` FOREIGN KEY (`id_parametrizacion`) REFERENCES `parametrizacion` (`id_parametrizacion`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `grupo`
---
-ALTER TABLE `grupo`
-  ADD CONSTRAINT `grupo_ibfk_1` FOREIGN KEY (`id_parametrizacion`) REFERENCES `parametrizacion` (`id_parametrizacion`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `ideas`
---
-ALTER TABLE `ideas`
-  ADD CONSTRAINT `ideas_ibfk_1` FOREIGN KEY (`id_grupo`) REFERENCES `grupo` (`id_grupo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ideas_ibfk_2` FOREIGN KEY (`id_linea`) REFERENCES `linea` (`id_linea`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `parametrizacion`
---
-ALTER TABLE `parametrizacion`
-  ADD CONSTRAINT `parametrizacion_ibfk_1` FOREIGN KEY (`id_responsable`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_perfil`) REFERENCES `perfiles` (`id_perfil`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `versiones`
---
-ALTER TABLE `versiones`
-  ADD CONSTRAINT `versiones_ibfk_1` FOREIGN KEY (`id_entregable`) REFERENCES `entregable` (`id_entregable`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `versiones_ibfk_2` FOREIGN KEY (`id_idea`) REFERENCES `ideas` (`id_idea`) ON DELETE CASCADE ON UPDATE CASCADE;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistaconteopendientes`  AS  select `ideas`.`id_idea` AS `id_idea`,`ideas`.`nombre_idea` AS `nombre_idea`,`ideas`.`id_grupo` AS `id_grupo`,(select count(0) from `versiones` where ((`versiones`.`id_idea` = `ideas`.`id_idea`) and (`versiones`.`estado` = 2))) AS `conteo` from (`config` join `ideas` on((`config`.`GRU_CODIGO` = `ideas`.`id_grupo`))) ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
