@@ -52,14 +52,14 @@ if (!empty($devueltos)) {
     ?>
     <div class="panel panel-primary"> 
         <div class="panel-heading"> 
-            <h3 class="panel-title">Notificaciones</h3>
+            <h3 class="panel-title">Devoluciones</h3>
         </div>
         <div class="panel-body">
             <div class="list-group">
     <?php
     foreach ($devueltos->result() as $notificacion) {
         ?>
-                    <a href="<?= base_url() ?>ideas/historiales/<?= $notificacion->idea; ?>/<?= $notificacion->entregable; ?>" class="list-group-item">Fue Devuelta una Version Generada </a>
+                    <a href="<?= base_url() ?>ideas/gestionVersion/<?= $notificacion->id_idea; ?>/<?= $notificacion->id_entregable; ?>/<?= $notificacion->id_version; ?>" class="list-group-item">Fue Devuelta una Version Generada </a>
                     <?php
                 }
                 ?>
