@@ -20,7 +20,8 @@ class Reportes extends CI_Controller {
     public function Indicadores() {
         $this->load->view('cabecera');
         $this->load->view('menus');
-        $this->load->view('Reportes/indicadores');
+        $data['inforfases'] = '2, 2, 2, 2, 2, 2';
+        $this->load->view('Reportes/indicadores',$data);
         $this->load->view('footer');
     }
 
