@@ -1,76 +1,49 @@
-Avance General de la Idea<br>
-<div class="progress progress-striped active">
-  <div class="progress-bar" role="progressbar"
-       aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"
-       style="width: <?=$total?>%">
-    <span class="sr-only"><?=$total?>% completado</span>
-   <?=$total?>%
-  </div>
+<canvas id="speedChart" width="600" height="400"></canvas>
+<script>
+    var speedCanvas = document.getElementById("speedChart");
 
-</div>
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 18;
 
-<table class="table table-bordered">
-<thead>
-    <tr>
-        <th>Fases</th>
-        <th>Resumen de Actividades</th>
-        <th>Avance Actual</th>
-    </tr>
-</thead>
-<?php foreach ($datos as $key => $listdatos) { ?>
-<tr>
-<td>
-Fase <?php echo $listdatos['nombrefase'];?>
-</td>
-<td>
- <table class="table table-bordered">
- <thead>
-     <tr>
-         <th>Nombre de Actividad</th>
-         <th>Resumen de Entregables</th>
-         <th>Avance de la Actividad</th>
-     </tr>
- </thead>
-    <?php foreach ($listdatos['actividades'] as $key => $listactividades) { ?>
-            <tr>
-            <td>
-            <?=$listactividades['nombreactividad'];?>
-            </td>
-            <td>
-            <table class="table table-bordered">
-            <thead>
-     <tr>
-         <th>Nombre de Entregable</th>
-         <th>Versiones Generadas</th>
-         <th>Estado Entregable</th>
-     </tr>
- </thead>
-                  <?php foreach ($listactividades['entregables'] as $key => $listentregables) { ?>
-                    <tr>
-                    <td><?=$listentregables['nombre_entregable'];?></td>
-                     <td><?=$listentregables['conteoentregable'];?></td>
-                      <td><?php 
-                      if($listentregables['conteoentregableaprobados']==1) {
-                        echo " Aprobado";
-                        } else {
-                        echo " No Aprobado";    
-                        }?></td>
-                    </tr>
-                    <?php } ?>
-            </table>
-            </td>
-            <td>
-            <?=$listactividades['avancereal']."%"?>
-            </td>
-            </tr>
+var cars = [];
+    <?php  
+for($i=2;$i<=6;$i++)
+{
+    $numero=rand(1, 10);
+    $numero2=rand(1, 10);
+   $numero3=rand(1, 10);
+   
+    ?>
+   var campo<?=$i?> = <?php echo "{
+    label: 'Proyecto  {$i} ',
+    data: [{$i}, {$numero}, {$numero2}, 3, ,1 , {$numero3}],
+    lineTension: 0.3,
+    fill: false,
+    pointStyle: 'rect'
+  };"; ?>
+    cars.push(campo<?=$i?>); 
+    <?php
+}
+?>
+var speedData = {
+  labels: ["FASE 1", "FASE 2", "FASE 3", "FASE 4", "FASE 5"],
+  datasets: cars
+};
 
-    <?php } ?>
-</table>
-</td>
-<td> <?php echo $listdatos['avancefase']."%";?></td>
-</tr>
-<?php } ?>
-</table>
+var chartOptions = {
+  legend: {
+    display: true,
+    position: 'top',
+    labels: {
+      boxWidth: 80,
+      fontColor: 'black'
+    }
+  }
+};
 
-
-
+var lineChart = new Chart(speedCanvas, {
+  type: 'line',
+  data: speedData,
+  options: chartOptions
+});
+    </script>

@@ -44,7 +44,7 @@ class Reportes extends CI_Controller {
     }
 
     public function progresoReal() {
-        $data['nombreinforme'] = "Progreso de Ideas";
+        $data['nombreinforme'] = "Indicador Entregables de Fases por Idea";
         $data['parametrizaciones'] = $this->reportes_model->obtenerParametros();
         $this->load->view('cabecera');
         $this->load->view('menus');

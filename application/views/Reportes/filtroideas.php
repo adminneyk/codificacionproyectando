@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
     <li><a href="<?= base_url() ?>home">Home</a></li>
-    <li><a href="<?= base_url() ?>reportes">Listado de Infomes</a></li>
+    <li><a href="<?= base_url() ?>reportes">Listado de Infomes e Indicadores</a></li>
     <li class="active"><?= $nombreinforme ?></li>
 </ol>
 
@@ -33,7 +33,7 @@
             var parametrizaciones = $('#parametrizaciones').val();
             
             $.post("<?= base_url() ?>reportes/consultarEstadoProyecto", {idea: idea, parametrizaciones: parametrizaciones}, function (mensaje) {
-                $("#divmostrar").html("<h2>Informe de Progreso de Ideas</h2><br>"+mensaje);
+                $("#divmostrar").html("<h2>Indicador Entregables de Fases por Idea</h2><br>"+mensaje);
             });
         });
     });
