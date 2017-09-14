@@ -36,12 +36,11 @@ class Reportes_model extends CI_Model {
     public function obtenerIdeas($idparametrizacion = "") {
            $this->db->order_by("1", "asc");
         if ($idparametrizacion == "") {
-            $query = $this->db->get('ideasgrupo');
+            $query = $this->db->get('config');
         } else {
-             $query = $this->db->get_where('ideasgrupo', array('id_parametrizacion'=>$idparametrizacion));
+             $query = $this->db->get_where('config', array('id_parametrizacion'=>$idparametrizacion));
         }
-        echo  $this->db->last_query();
-
+        
         if ($query->num_rows() > 0) {
             return $query;
         } else {
@@ -112,7 +111,7 @@ if ($query->num_rows() > 0) {
                                                                     'id_idea' => $idea,
                                                                     'id_parametrizacion' => $parame));
        
-       echo  $this->db->last_query();
+      // echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {

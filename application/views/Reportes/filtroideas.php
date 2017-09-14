@@ -12,7 +12,7 @@
     {
         $('#divmostrar').html('');
         $("#parametrizaciones").change(function () {
-            $('#idea').html('<option value="">Seleccione Idea</option>');
+            $('#idea').html('<option value="">Seleccione Grupo</option>');
             var parametrizaciones = $("#parametrizaciones").val();
             $.ajax({
                 type: 'POST',
@@ -62,10 +62,10 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-4 control-label" for="radios">Nombre de la Idea</label>
+            <label class="col-md-4 control-label" for="radios">Codigo del Grupo</label>
             <div class="col-md-4">
                 <select class="form-control" id="idea" name="idea">
-                    <option value="">Seleccione Idea</option>
+                    <option value="">Seleccione Grupo</option>
                 </select>
             </div>
         </div>

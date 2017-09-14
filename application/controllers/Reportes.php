@@ -61,8 +61,8 @@ class Reportes extends CI_Controller {
         $ideaslist = "";
         if ($param) {
             foreach ($param->result() as $listaideas) {
-                $id = $listaideas->id_idea;
-                $nombre = $listaideas->nombre_idea;
+                $id = $listaideas->GRU_CODIGO;
+                $nombre = $listaideas->GRU_CODIGO;
                 $ideaslist .= '<option value="' . $id . '">' . $nombre . '</option>';
             }
         }

@@ -1,33 +1,27 @@
 <?php
- header('Content-type: application/vnd.ms-word');
- header("Content-Disposition: attachment; filename=hola.doc");
- header("Pragma: no-cache");
- header("Expires: 0");?>
-<ul>
-<?php 
+require_once 'Generacion/classes/CreateDocx.inc';
+$docx = new CreateDocx();
+$infor="";
+$i=0;
 foreach ($datos as $key => $listdatos) { 
-?>
-<li>Fase <?php echo $listdatos['nombrefase'];
-?>
-</li>
-<ul>
-    <?php foreach ($listdatos['actividades'] as $key => $listactividades) { ?>
-           <li>
-            <?=$listactividades['nombreactividad'];?>
-            </li>
-            <ul>
-                  <?php foreach ($listactividades['entregables'] as $key => $listentregables) { ?>
-                    
-                    <li><?=$listentregables['nombre_entregable'];?>
-                    </li>
-                    <ul>
-                        <li><?=$listentregables['entregable'];?>
-                    </li>
-                    </ul>
-                    <?php } ?>
-                    </ul>
-    <?php } ?>
-    </ul>
-<?php
- } ?>
- </ul>
+    $i++;
+    $infor .=$i.') '.$listdatos['nombrefase'].'</strong><br>';
+    $j=0;
+     foreach ($listdatos['actividades'] as $key => $listactividades) { 
+     $j++;
+         $infor .=$i.'.'.$j.') '.$listactividades['nombreactividad'].'</strong><br>';
+                    $k++;
+                   foreach ($listactividades['entregables'] as $key => $listentregables) {
+                       $k++;
+                       $infor .=$i.'.'.$j.''.$k.') '.$listentregables['nombre_entregable'].'<br>'.$listentregables['entregable'].'</strong>';
+                    } 
+                   
+     } 
+ } 
+//$infor .=' </ul>';
+
+$docx->embedHTML($infor);
+$docx->createDocx('DocumentoAnteProyecto');
+header("Content-disposition: attachment; filename=DocumentoAnteProyecto.docx");
+header("Content-type: MIME");
+readfile("DocumentoAnteProyecto.docx");
