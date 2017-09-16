@@ -64,3 +64,17 @@ if (!empty($versiones)) {
 <input type="hidden" name="entregable" id="entregable" value="<?=$this->uri->segment(4, 0)?>">
 </fieldset>
 </form>
+<script type="text/javascript">
+	
+var editor = CKEDITOR.replace( 'ckeditor', {
+    filebrowserBrowseUrl : '<?=base_url()?>application/libraries/ckfinder/ckfinder.html',
+    filebrowserImageBrowseUrl : '<?=base_url()?>application/libraries/ckfinder/ckfinder.html?type=Images',
+    filebrowserFlashBrowseUrl : '<?=base_url()?>application/libraries/ckfinder/ckfinder.html?type=Flash',
+    filebrowserUploadUrl : '<?=base_url()?>application/libraries/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+    filebrowserImageUploadUrl : '<?=base_url()?>application/libraries/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+    filebrowserFlashUploadUrl : '<?=base_url()?>application/libraries/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+    
+});
+
+CKFinder.setupCKEditor( editor, '../' );
+</script>

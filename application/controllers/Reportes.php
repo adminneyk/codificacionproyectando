@@ -71,8 +71,11 @@ class Reportes extends CI_Controller {
     }
 
     public function consultarEstadoProyecto() {
-
-        $idea = $this->input->post('idea');
+        
+    $data = array();
+    array_push($data,array("Fase 1","5,6,2,3,8"));
+    $info['datos']= $data;
+        /*$idea = $this->input->post('idea');
         $idparametrizaciones = $this->input->post('parametrizaciones');
         $fases = $this->reportes_model->obtenerFases();
         $cantfases=0;
@@ -159,7 +162,7 @@ $avancefases=0;
             }
         $data['datos'] = $arrayfase;
         $data['total'] = $totalavance/$cantfases;
-        $this->load->view('Reportes/vistaavances',$data);
+        */$this->load->view('Reportes/vistaavances',$info);
     }
 
 }

@@ -19,6 +19,7 @@ if(in_array($controlador, $this->session->userdata('permisos')) == FALSE){
         <meta charset="utf-8">
         <title>Proyectando</title>
         <script src="<?=base_url()?>application/libraries/ckeditor/ckeditor.js"></script>
+        <script src="<?=base_url()?>application/libraries/ckfinder/ckfinder.js"></script>
         <script src="<?=base_url()?>application/asset/js/char.js"></script>
         <script src="<?=base_url()?>application/asset/js/genericas.js"></script>
         <!-- Latest compiled and minified CSS -->

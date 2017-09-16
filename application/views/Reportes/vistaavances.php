@@ -7,12 +7,13 @@ Chart.defaults.global.defaultFontSize = 18;
 
 var cars = [];
     <?php  
+    
 for($i=2;$i<=6;$i++)
 {
     $numero=rand(1, 10);
     $numero2=rand(1, 10);
    $numero3=rand(1, 10);
-   
+   $datos=array()
     ?>
    var campo<?=$i?> = <?php echo "{
     label: 'Proyecto  {$i} ',
@@ -47,3 +48,4 @@ var lineChart = new Chart(speedCanvas, {
   options: chartOptions
 });
     </script>
+
