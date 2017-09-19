@@ -43,7 +43,7 @@ class Usuario_model extends CI_Model {
             }
             if ($data->estudiante == 1) {
                 $idpefil = 3;
-                $nombreper="ESTUDUANTE";
+                $nombreper="ESTUDIANTE";
                 $permisos = array('ideas', 'home');
             }
             $nombreusuario = $data->USUARIO;

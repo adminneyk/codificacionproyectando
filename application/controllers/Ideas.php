@@ -10,6 +10,7 @@ class Ideas extends CI_Controller {
         $this->load->model('ideas_model');
         $this->load->model('parametrizacion_model');
         $this->load->model('reportes_model');
+        $this->load->model('banco_model');
         
     }
 	public function index()
@@ -203,6 +204,13 @@ $avancefases=0;
     
   }
 
+        public function ListadodeBanco()
+        {
+                $this->load->helper('url');
+                $datos['listaIdeas'] = $this->banco_model->mostrarListaIdeas();
+                $this->load->view('Ideas/listaBancos',$datos);
+                $this->load->view('footer');
+        }
   
 
   

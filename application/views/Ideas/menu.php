@@ -10,5 +10,6 @@ $this->load->view('Genericas/mensajes');
 <ul class="list-group">
   <li class="list-group-item"><a href="<?=base_url()?>ideas/registro">Registrar Idea</a></li>
   <li class="list-group-item"><a href="<?=base_url()?>ideas/desarrollarIdea">Desarrollar Idea</a></li>
+  <li class="list-group-item"><a href="<?=base_url()?>ideas/ListadodeBanco">Usar Banco como Base de Idea </a></li>
 </ul>
 </fieldset>

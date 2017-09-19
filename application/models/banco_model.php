@@ -87,6 +87,17 @@ class Banco_model extends CI_Model {
         $this->db->where('ideas.id_idea',$ididea);
         return $query = $this->db->get();
     }
+    public function mostrarListaIdeas() {
+        
+            $query = $this->db->get_where('ideas_banco', array('1' => 1));
+        
+        // echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
 
 }
 

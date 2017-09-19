@@ -19,6 +19,7 @@ class Banco extends CI_Controller {
         $this->load->view('Banco/menu', $datos);
         $this->load->view('footer');
     }
+    
 
     public function bancoIdeas() {
         $this->load->helper('url');
@@ -59,13 +60,11 @@ class Banco extends CI_Controller {
            if($estado==2){
             $mensaje="Su Idea ".$nombreidea." No es viable para continuar!";
            }
-
-          // $this->notificaciones_model->notificar($idea,$mensaje);
-
          }
       
         $this->session->set_flashdata('correcto', 'Idea Clasificada Correctamente!');
         redirect(base_url().'banco/bancoIdeas/'.$grupo,'refresh'); 
     }
+    
 
 }
