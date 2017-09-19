@@ -26,18 +26,32 @@ class Ideas extends CI_Controller {
 		$this->load->view('Ideas/registro',$datos);
                 $this->load->view('footer');
 	}
+        public function registrobanco()
+	{
+                //$datos['listaestudiantes'] = $this->ideas_model->obtenerEstudiantes($this->session->userdata('id_usuario'));
+                $datos['lineas'] = $this->ideas_model->obtenerLineas();
+                $datos['generabanco'] = "S";
+                $this->load->helper('url');
+		$this->load->view('Ideas/registro',$datos);
+                $this->load->view('footer');
+	}
         public function validar()
-    {
-           //print_r($_POST);
+        {
+          $tipoguardado = $this->uri->segment(3, 0);
           $nombreidea = $this->input->post('nombreidea');
           $descripidea = $this->input->post('descripidea');
           $integrantes = $this->input->post('integrantes');
           $objetivogeneral = $this->input->post('objetivogeneral');
           $objetivoespecifico = $this->input->post('objetivoespecifico');
           $linea = $this->input->post('linea');
-          $this->ideas_model->guardar($nombreidea,$descripidea,$integrantes,$this->session->userdata('id_usuario'),$linea,$objetivogeneral,$objetivoespecifico);
-               $this->session->set_flashdata('correcto', 'Idea Guardada Correctamente!');
-                redirect(base_url().'ideas','refresh');  
+          $this->ideas_model->guardar($nombreidea,$descripidea,$integrantes,$this->session->userdata('id_usuario'),$linea,$objetivogeneral,$objetivoespecifico,$tipoguardado);
+          $this->session->set_flashdata('correcto', 'Idea Guardada Correctamente!');
+          if($tipoguardado==1){
+          redirect(base_url().'home','refresh');    
+          } else {
+          redirect(base_url().'ideas','refresh');    
+          }
+            
         }
         public function desarrollarIdea()
         {

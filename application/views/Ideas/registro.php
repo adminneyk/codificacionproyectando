@@ -1,4 +1,9 @@
 <?php
+if(isset($generabanco)){
+    $datostipog = 1;
+} else{
+    $datostipog = 0;
+}
 $id = "";
 $arrayform = array(
     "class" => "form-horizontal",
@@ -38,7 +43,7 @@ $objetivoespecifico = array(
     'class' => 'form-control'
 );
 
-echo form_open(base_url() . 'ideas/validar', $arrayform);
+echo form_open(base_url() . 'ideas/validar/'.$datostipog, $arrayform);
 ?>
 <script type="text/javascript">
     $(document).ready(function ()
@@ -55,13 +60,6 @@ echo form_open(base_url() . 'ideas/validar', $arrayform);
             if (descripidea == "") {
                 msg += "-Descripcion de la Idea Requerido<br>";
             }
-            /* var valida=0;
-             $("#integrantes[] option:selected").each(function() {			
-             valida++;		
-             });
-             if(valida != 3){
-             msg += "-Idea con 3 integrantes Requeridos<br>"; 
-             }*/
             if (msg) {
                 $("#error").html('<span class="glyphicon glyphicon-bell"></span><strong>Tiene los Siguientes Problemas:</strong><br>' + msg);
                 $("#error").addClass('alert alert-warning');
@@ -97,7 +95,9 @@ echo form_open(base_url() . 'ideas/validar', $arrayform);
                 echo form_error('descripidea', '<div class="alert alert-danger">', '</div>');
                 ?>
             </div>
-        </div>   
+        </div> 
+        <?php if($datostipog == 0) {
+            ?>
         <!-- Select Multiple -->
         <div class="form-group">
             <label class="col-md-4 control-label" for="selectmultiple">Integrantes del Grupo</label>
@@ -112,7 +112,10 @@ echo form_open(base_url() . 'ideas/validar', $arrayform);
                     ?>
                 </select>
             </div>
+        
         </div>
+        <?php }
+            ?>
 
         <div class="form-group">
             <label class="col-md-4 control-label" for="selectmultiple">Linea Tematica</label>
@@ -154,7 +157,14 @@ echo form_open(base_url() . 'ideas/validar', $arrayform);
             <label class="col-md-4 control-label" for="button1id">&nbsp;</label>
             <div class="col-md-8">
                 <button name="validar" id="validar" type="button" class="btn btn-success">GUARDAR</button>
-                <button name="enviar" id="enviar" type="button" class="btn btn-danger" onclick="validarVolver('<?= base_url() ?>ideas', '');">VOLVER</button>
+                <?php 
+                if($datostipog ==1){
+                    $volver = "home";
+                } else {
+                    $volver = "ideas";
+                }
+                ?>
+                <button name="enviar" id="enviar" type="button" class="btn btn-danger" onclick="validarVolver('<?= base_url().$volver ?>', '');">VOLVER</button>
 
             </div>
         </div>

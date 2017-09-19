@@ -23,9 +23,20 @@ class Ideas_model extends CI_Model {
        
     }
 
-    public function guardar($nombreidea,$descripidea,$integrantes,$idEstudiante,$linea,$objetivogeneral,$objetivoespecifico) {
+    public function guardar($nombreidea,$descripidea,$integrantes,$idEstudiante,$linea,$objetivogeneral,$objetivoespecifico,$tipo) {
 
-
+        if($tipo==1){
+        $data = array(
+            'id_linea' => $linea,
+            'nombre_idea' => $nombreidea,
+            'descripcion_idea' => $descripidea,
+            'objetivo_general' => $objetivogeneral,
+            'objetivo_especifico' => $objetivoespecifico,
+            'estado' => 1,
+        );
+         $this->db->insert('ideas_banco', $data);    
+            
+        } else {
         $dbdatos = $this->load->database('proyectandooracle', TRUE);
         $dbdatos->select('DISTINCT(art_histac_act.GRU_CODIGO) as id_grupo');
         $dbdatos->join('art_histac_act','art_estudiantes.EST_CODIGO=art_histac_act.EST_CODIGO');
@@ -52,7 +63,7 @@ foreach ($integrantes as $id) {
         );
          $this->db->insert('equipos', $data);
 }
-         
+        }
     }
     public function mostrarIntegrantes($ididea) {
 

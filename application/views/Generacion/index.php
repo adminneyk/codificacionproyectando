@@ -20,7 +20,7 @@ foreach ($datos as $key => $listdatos) {
  } 
 //$infor .=' </ul>';
 
-$docx->embedHTML($infor);
+$docx->embedHTML(utf8_decode($infor));
 $docx->createDocx('DocumentoAnteProyecto');
 header("Content-disposition: attachment; filename=DocumentoAnteProyecto.docx");
 header("Content-type: MIME");

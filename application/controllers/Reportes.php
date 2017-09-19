@@ -52,6 +52,15 @@ class Reportes extends CI_Controller {
         //  $this->load->view('Reportes/filtrador');
         //  $this->load->view('footer'); 
     }
+    public function progresoEntregables() {
+        $data['nombreinforme'] = "Estadistica por Parametrizacion";
+        $data['parametrizaciones'] = $this->reportes_model->obtenerParametros();
+        $this->load->view('cabecera');
+        $this->load->view('menus');
+        $this->load->view('Reportes/filtroideas', $data);
+        //  $this->load->view('Reportes/filtrador');
+        //  $this->load->view('footer'); 
+    }
 
     public function consultarIdeas() {
 
@@ -73,8 +82,22 @@ class Reportes extends CI_Controller {
     public function consultarEstadoProyecto() {
         
     $data = array();
-    array_push($data,array("Fase 1","5,6,2,3,8"));
-    $info['datos']= $data;
+    
+    $grupo = $this->input->post('idea');
+    $parametrizacion = $this->input->post('parametrizaciones');
+    $dato = $this->reportes_model->obtenerInforme($grupo);
+    $informacion= "";
+    foreach ($dato->result() as $notificacion) {
+        $informacion .="{$notificacion->nombre_idea}|{$notificacion->faseuno},"
+        . "{$notificacion->fasedos},{$notificacion->fasetres},"
+        . "{$notificacion->fasecuatro},{$notificacion->fasecinco}_";
+                    
+     }
+     $info['informaciongeneral'] = $informacion;
+               
+    //var_export($dato);
+   // array_push($data,array("Fase 1","5,6,2,3,8"));
+   // $info['datos']= $data;
         /*$idea = $this->input->post('idea');
         $idparametrizaciones = $this->input->post('parametrizaciones');
         $fases = $this->reportes_model->obtenerFases();

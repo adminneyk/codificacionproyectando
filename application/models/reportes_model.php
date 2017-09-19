@@ -32,6 +32,20 @@ class Reportes_model extends CI_Model {
             return false;
         }
     }
+    
+    public function obtenerInforme($grupo) {
+        $this->db->select('*');
+        $this->db->from('conteoporfases');
+        $this->db->where('id_grupo', $grupo );
+        $query=$this->db->get();
+
+        //echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
 
     public function obtenerIdeas($idparametrizacion = "") {
            $this->db->order_by("1", "asc");
