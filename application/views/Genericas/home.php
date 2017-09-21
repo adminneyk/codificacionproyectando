@@ -1,12 +1,8 @@
-<h2>Bienvenid@ a Proyectando</h2>
-La herramienta diseñada para volver las ideas en una verdadera iniciativa de proyecto de grado
-<hr>
+<h2>PROYECTANDO</h2>
 <?php
 $this->load->view('Genericas/mensajes');
 ?>
-<div class="col-md-4">
-    <a href="<?= base_url() ?>ideas/registrobanco" class="btn btn-warning">REGISTRAR UNA IDEA PARA EL BANCO</a>
-</div>
+
 <?php
 if (!empty($listanotificaciones)) {
     ?>
@@ -94,4 +90,12 @@ if (!empty($pendientesrevision)) {
                 <?php
             }
             ?>
+<hr>
+<fieldset>
+    <legend>¿Tiene una Idea ?</legend>
+    Si usted tiene una idea para ser utilizada le recomendamos  agregar una nueva idea a nuestro banco de ideas <br><br>
+<a href="<?= base_url() ?>ideas/registrobanco" class="btn btn-warning">REGISTRAR UNA IDEA PARA EL BANCO</a>
+</fieldset>
+
+<hr>
   

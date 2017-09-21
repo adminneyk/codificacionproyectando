@@ -147,6 +147,18 @@ if ($query->num_rows() > 0) {
         } 
 
     }
+    public function obtenerInformeGeneral($idparametrizacion){
+       
+            $query = $this->db->get_where('resumenentregablesgenerales ', array('id_parametrizacion' => $idparametrizacion));
+       
+       echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        } 
+
+    }
 
      
     
