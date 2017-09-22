@@ -1,5 +1,6 @@
-<h2>PROYECTANDO</h2>
-<?php
+<img src="<?= base_url() ?>application/asset/img/baner1.png" class="img-fluid">
+<hr>
+    <?php
 $this->load->view('Genericas/mensajes');
 ?>
 

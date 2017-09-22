@@ -55,7 +55,7 @@ class Reportes extends CI_Controller {
     }
 
     public function progresoEntregables() {
-        $data['nombreinforme'] = "Estadistica por Parametrizacion";
+        $data['nombreinforme'] = "Estadistica por Marco de Trabajo";
         $data['parametrizaciones'] = $this->reportes_model->obtenerParametros();
         $this->load->view('cabecera');
         $this->load->view('menus');
@@ -101,23 +101,18 @@ class Reportes extends CI_Controller {
     public function analizadorEntregable() {
         $parametrizacion = $this->input->post('parametrizaciones');
         $dato = $this->reportes_model->obtenerInformeGeneral($parametrizacion);
-        
-/*
-        $data = array();
-
-        $grupo = $this->input->post('idea');
-        $parametrizacion = $this->input->post('parametrizaciones');
-        $dato = $this->reportes_model->obtenerInforme($grupo);
-        $informacion = "";
-        foreach ($dato->result() as $notificacion) {
-            $informacion .= "{$notificacion->nombre_idea}|{$notificacion->faseuno},"
-                    . "{$notificacion->fasedos},{$notificacion->fasetres},"
-                    . "{$notificacion->fasecuatro},{$notificacion->fasecinco}_";
+        $datalabel = "";
+        $datainfo = "";
+        foreach ($dato->result() as $info) {
+            $label = $info->nombre_entregable;
+            $dt = $info->conteoentregable;
+            $datalabel .= "{$label}|";
+            $datainfo .= "{$dt}|";
         }
-        $info['informaciongeneral'] = $informacion;*/
-        $info['s']="s";
-        $this->load->view('Reportes/vistaEntregable', $info);
-        //echo "HOLA";
+        $infor['labels']= $datalabel;
+        $infor['infor']= $datainfo;
+        
+        $this->load->view('Reportes/vistaEntregable', $infor);
     }
 
 }
