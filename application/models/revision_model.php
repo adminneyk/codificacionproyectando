@@ -9,9 +9,9 @@ class revision_model extends CI_Model {
     }
 
     public function obtenerConteos($idgrupo) {
-       $this->db->select('*');
-        $this->db->from('vistaconteopendientes'); 
-        $this->db->where('conteo>0 and id_grupo = '.$idgrupo);
+        $this->db->select('*');
+        $this->db->from('vistaconteopendientes');
+        $this->db->where('conteo>0 and id_grupo = ' . $idgrupo);
         $query = $this->db->get();
         //echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
@@ -73,13 +73,14 @@ class revision_model extends CI_Model {
 
         $this->db->select('*');
         $this->db->from('equipos');
-        $this->db->join('ideas','equipos.id_idea=ideas.id_idea');
-        $this->db->where('ideas.id_idea',$ididea);
+        $this->db->join('ideas', 'equipos.id_idea=ideas.id_idea');
+        $this->db->where('ideas.id_idea', $ididea);
         return $query = $this->db->get();
     }
-public function mostrarPendientes($ididea = 0) {
-       
-        $query = $this->db->get_where('resumenpendientes', array('id_idea' => $ididea,'estado' => 2));        
+
+    public function mostrarPendientes($ididea = 0) {
+
+        $query = $this->db->get_where('resumenpendientes', array('id_idea' => $ididea, 'estado' => 2));
         // echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
@@ -87,9 +88,10 @@ public function mostrarPendientes($ididea = 0) {
             return false;
         }
     }
+
     public function mostrarPendiente($idversion = 0) {
-       
-        $query = $this->db->get_where('versiones', array('id_version' => $idversion));        
+
+        $query = $this->db->get_where('versiones', array('id_version' => $idversion));
         // echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
@@ -97,18 +99,36 @@ public function mostrarPendientes($ididea = 0) {
             return false;
         }
     }
-    public function actualizaversion($revision,$estado,$id)
-            {
-            $data = array(
+
+    public function actualizaversion($revision, $estado, $id) {
+        $data = array(
             'comentarios' => $revision,
             'estado' => $estado
         );
         $this->db->where('id_version', $id);
         return $this->db->update('versiones', $data);
-                
-        
-             }
-    
+    }
+
+    public function verificarVersiones($idversion) {
+
+        $this->db->select('id_entregable,id_idea');
+        $this->db->where('id_version', $idversion);
+        $id_entregable = $this->db->get('versiones')->row()->id_entregable;
+        $id_idea = $this->db->get('versiones')->row()->id_idea;
+
+        $this->db->select('*');
+        $this->db->from('versiones');
+        $this->db->where("id_idea", $id_idea);
+        $this->db->where("id_entregable", $id_entregable);
+        $this->db->order_by("fecharegistro", "desc");
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
+
 }
 
 ?>

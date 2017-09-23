@@ -22,8 +22,8 @@ $datatextarea = array(
         'name'        => 'ckeditor',
         'id'          => 'ckeditor',
         'value'       => $contenido,
-        'rows'        => '10',
-        'cols'        => '30',
+        'rows'        => '100',
+        'cols'        => '300',
         'class'       => 'ckeditor form-control'
     );
 $datatextarea2 = array(
@@ -70,32 +70,45 @@ if (r == true) {
  }); 
 </script>
 <fieldset>
-<legend>Parametrización</legend>
+<legend>Entregable </legend>
 <div id="error"></div>
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="textarea">contenido Enviado</label>
-  <div class="col-md-4">                     
+  <label class="col-md-2 control-label" for="textarea">contenido Enviado</label>
+  <div class="col-md-9">                     
     <?php
                 echo form_textarea($datatextarea);
                 echo form_error('descritarea', '<div class="alert alert-danger">', '</div>');
                 ?>
   </div>
 </div>
-
+<div class="form-group">
+  <div class="col-md-2">     
+    
+  </div>
+    
+  <div class="col-md-2">   
+      <?php 
+                $version = $this->uri->segment(5, 0);
+      ?>
+      
+      <a href="<?= base_url() ?>revision/verHistorial/<?=$version?>" target="popup" class="btn btn-warning" onClick="window.open(this.href, this.target, 'width=1400,height=700'); return false;">Ver Historial de Versiones</a>
+  </div>
+</div>
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="textarea">Comentarios</label>
-  <div class="col-md-4">                     
+  <label class="col-md-2 control-label" for="textarea">Comentarios</label>
+  <div class="col-md-9">                     
     <?php
                 echo form_textarea($datatextarea2);
                 echo form_error('revision', '<div class="alert alert-danger">', '</div>');
                 ?>
   </div>
 </div>
+
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="selectbasic">Publicar </label>
+  <label class="col-md-2 control-label" for="selectbasic">Publicar </label>
   <div class="col-md-4">
    
         <?php 
