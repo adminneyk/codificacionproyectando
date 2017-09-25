@@ -1,10 +1,10 @@
 <ol class="breadcrumb">
   <li><a href="<?=base_url()?>home">Home</a></li>
-  <li class="active">Mis Parametrizaciones</li>
+  <li class="active">Mis Marcos de Trabajo</li>
 </ol>
 
-<legend>Mis Parametrizaciones</legend>
-<a href="<?=base_url()?>parametrizacion/formulario" class="btn btn-warning">Agregar Parametrización</a>
+<legend>Mis Marcos de Trabajo</legend>
+<a href="<?=base_url()?>parametrizacion/formulario" class="btn btn-warning">Agregar Marco de Trabajo</a>
 <br><br>
 <?php
 $this->load->view('Genericas/mensajes');
@@ -15,7 +15,7 @@ if($parametrizaciones==FALSE){
     ?>
     <div class="alert alert-info" role="alert">
 	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span> No se Encuentran Parametrizaciones Creadas por Usted
+  <span class="sr-only">Error:</span> No se Encuentran Marcos de Trabajo Creados por Usted
     </div>
         <?php
 } else {

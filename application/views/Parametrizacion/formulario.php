@@ -32,7 +32,7 @@ $arrayform = array(
 $arrayparame = array("class" => "form-control",
     "id" => "nombrepara",
     "name" => "nombrepara",
-    "placeholder" => "Nombre de Parametrización",
+    "placeholder" => "Nombre del Marco de Trabajo",
     "value" => $nombrepara,
     "required" => "requited",
     "pattern" =>"[A-Za-z0-9]+",
@@ -67,10 +67,10 @@ $(document).ready(function()
     var descritarea= $("#descritarea").val();
     var msg="";
     if(nombrepara=="" ){
-        msg+="-Nombre de Parametrización Requerida<br>";
+        msg+="-Nombre del Marco de Trabajo Requerida<br>";
     }  
     if(descritarea==""){
-        msg+="-Descripcion de la Parametrización Requerida";
+        msg+="-Descripcion del Marco de Trabajo Requerida";
     }
       if(msg){
         $("#error").html('<span class="glyphicon glyphicon-bell"></span><strong>Tiene los Siguientes Problemas:</strong><br>'+msg);
@@ -83,11 +83,11 @@ $(document).ready(function()
  }); 
 </script>
 <fieldset>
-<legend>Parametrización</legend>
+<legend>Marco de Trabajo</legend>
 <div id="error"></div>
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">Nombre de Parametrizacion</label>  
+  <label class="col-md-4 control-label" for="textinput">Nombre de Marco de Trabajo</label>  
   <div class="col-md-4">
   <?php
                 echo form_input($arrayparame);
@@ -97,7 +97,7 @@ $(document).ready(function()
 </div>
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="textarea">Descripcion</label>
+  <label class="col-md-4 control-label" for="textarea">Descripcion del Marco de Trabajo</label>
   <div class="col-md-4">                     
     <?php
                 echo form_textarea($datatextarea);

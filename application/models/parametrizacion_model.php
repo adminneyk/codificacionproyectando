@@ -148,7 +148,7 @@ public function obtenerActividades($idparametro = 0) {
         
             $query = $this->db->get_where('grupo', array('id_responsable'=>$uduario,'id_parametrizacion'=>0));
         
-       echo  $this->db->last_query();
+       //echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {
@@ -173,6 +173,38 @@ public function obtenerActividades($idparametro = 0) {
         
     }
     
+        public function inforActividadFase($idactividad) {
+
+        $this->db->select('fases.nombre_fase,actividad.nombre_actividad');
+        $this->db->from('fases');
+        $this->db->join('actividad', 'actividad.id_fase=fases.id_fase');
+        $this->db->where('actividad.id_actividad', $idactividad);
+        return $query = $this->db->get();
+        
+    }
+    public function materiaHorario($horario) {
+
+    $db_prueba = $this->load->database('proyectandooracle', TRUE);
+        $query = $db_prueba->get_where('art_horario',array("MAT_CODIGO" => $horario));
+        //echo $db_prueba->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+
+}
+    public function asignacionConfig($materia,$marcotrabajo,$grupo){
+        $data = array(
+            'MAT_CODIGO' => $materia,
+            'GRU_CODIGO' => $grupo,
+            'id_parametrizacion' => $marcotrabajo
+        );
+        
+        return $this->db->insert('config', $data);
+             
+        
+    }
 
 
 }

@@ -22,6 +22,9 @@ if ($ideasgrupo==null) {
         <tr>
             <th>Nombre Idea</th>
             <th>Descripcion Idea</th>
+            <th>Objetivo General</th>
+            <th>Objetivo Especifico</th>
+            
             <th>Acciones</th>
 
         </tr>
@@ -32,6 +35,8 @@ if ($ideasgrupo==null) {
         <tr>
             <td><?php echo $idea->nombre_idea; ?></td>
             <td><?php echo $idea->descripcion_idea; ?></td>
+            <td><?php echo $idea->objetivo_general; ?></td>
+            <td><?php echo $idea->objetivo_especifico; ?></td>
             <td> <a href="<?= base_url()?>banco/aprobar/<?=$idea->id_grupo?>/<?=$idea->id_idea?>/3"><span class="glyphicon glyphicon-play"></span> Aprobar</a></td>
             <td> <a href="<?= base_url()?>banco/aprobar/<?=$idea->id_grupo?>/<?=$idea->id_idea?>/2"><span class="glyphicon glyphicon-stop"></span> Rechazar</a></td>
         </tr>

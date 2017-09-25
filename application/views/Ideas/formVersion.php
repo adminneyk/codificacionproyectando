@@ -18,7 +18,7 @@ if (!empty($versiones)) {
     foreach ($versiones->result() as $version) {
         $id = $version->id_version;
         $texto = $version->entregable;
-        if($version->estado==2 || $version->estado==5){
+        if($version->estado==2 || $version->estado==5 || $version->estado==3){
            $guarda=false; 
         }
         if($version->comentarios!=""){

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-09-2017 a las 05:44:26
+-- Tiempo de generación: 25-09-2017 a las 03:02:53
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyectando20`
 --
-drop database proyectando20;
+DROP DATABASE proyectando20;
 CREATE DATABASE IF NOT EXISTS `proyectando20` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `proyectando20`;
 
@@ -67,13 +67,6 @@ CREATE TABLE IF NOT EXISTS `config` (
   KEY `id_parametrizacion` (`id_parametrizacion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `config`
---
-
-INSERT INTO `config` (`id_config`, `MAT_CODIGO`, `GRU_CODIGO`, `id_parametrizacion`) VALUES
-(1, 'LNALS', '800', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -111,17 +104,6 @@ CREATE TABLE IF NOT EXISTS `entregable` (
   KEY `id_parametrizacion` (`id_parametrizacion`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `entregable`
---
-
-INSERT INTO `entregable` (`id_entregable`, `id_parametrizacion`, `id_actividad`, `nombre_entregable`, `descripcion_entregable`, `texto_ayuda`, `estado`) VALUES
-(1, 1, 1, 'Entregable 1 actividad 1 fase 1', 'Entregable 1 actividad 1 fase 1', 'Este es el Entregable de la Fase 1 actividad 1', 1),
-(2, 1, 2, 'Entregable de actividad 2', 'Entregable de actividad 2', 'Mensaje de ayuda Entregable actividad de fase 2 actividad 1', 1),
-(4, 1, 3, 'Entregable 1 actividad 1 fase 3', 'Entregable 1 actividad 1 fase 3', 'Este es el mensae de el Entregable 1 actividad 1 fase 3', 1),
-(5, 1, 4, 'Entregable de la  fase 4 activad 1 entregable 1', 'Entregable de la  fase 4 activad 1 entregable 1', 'Mensaje de ayuda de Entregable de la  fase 4 activad 1 entregable 1', 1),
-(6, 1, 5, 'Entregable de la  fase 5 activad 1 entregable 1', 'Entregable de la  fase 5 activad 1 entregable 1', 'MEnsaje de ayuda de Entregable de la  fase 5 activad 1 entregable 1', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -138,16 +120,7 @@ CREATE TABLE IF NOT EXISTS `equipos` (
   KEY `id_usuario` (`id_usuario`),
   KEY `id_idea` (`id_idea`),
   KEY `id_idea_2` (`id_idea`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `equipos`
---
-
-INSERT INTO `equipos` (`id_equipo`, `id_idea`, `id_usuario`, `estado`) VALUES
-(1, 1, 1033759479, 1),
-(2, 2, 1033759479, 1),
-(3, 2, 2147483647, 1);
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -209,15 +182,7 @@ CREATE TABLE IF NOT EXISTS `ideas` (
   PRIMARY KEY (`id_idea`),
   KEY `id_linea` (`id_linea`),
   KEY `id_grupo` (`id_grupo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `ideas`
---
-
-INSERT INTO `ideas` (`id_idea`, `id_grupo`, `id_linea`, `nombre_idea`, `descripcion_idea`, `estado`, `objetivo_general`, `objetivo_especifico`) VALUES
-(1, 800, 1, 'Nombre de la idea', 'Descripcion de la idea totaal', 3, 'objetivo general', 'objetivo especifico'),
-(2, 800, 1, 'IDEA DE PRUEBA FINAL', 'DESCRIPCION DE LA IDEA DE PRUEBA FINAL', 3, 'Objetivo General', 'Objetivo Especifico');
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -235,14 +200,7 @@ CREATE TABLE IF NOT EXISTS `ideas_banco` (
   `objetivo_general` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL COMMENT 'Objetivos Generales de la Idea',
   `objetivo_especifico` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL COMMENT 'Objetivos Especificos de la Idea',
   PRIMARY KEY (`id_idea`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `ideas_banco`
---
-
-INSERT INTO `ideas_banco` (`id_idea`, `id_linea`, `nombre_idea`, `descripcion_idea`, `estado`, `objetivo_general`, `objetivo_especifico`) VALUES
-(1, 1, 'Ideas Registradas', 'Descripcionde la idea', 1, 'Objetivo general', 'Objetivo Especifico');
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -264,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `linea` (
 --
 
 INSERT INTO `linea` (`id_linea`, `nombre_linea`, `descripcion_linea`, `estado`) VALUES
-(1, 'Liea de prueba', 'prUEBA DE LINEAS', 1);
+(1, 'Linea de prueba', 'prUEBA DE LINEAS', 1);
 
 -- --------------------------------------------------------
 
@@ -302,13 +260,6 @@ CREATE TABLE IF NOT EXISTS `parametrizacion` (
   KEY `id_responsable` (`id_responsable`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `parametrizacion`
---
-
-INSERT INTO `parametrizacion` (`id_parametrizacion`, `nom_parametrizacion`, `descripcion_parametrizacion`, `id_responsable`, `estado`) VALUES
-(1, 'Parametrizacion 001', 'Descripcion de la parametrizacion', 0, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -330,6 +281,26 @@ DROP VIEW IF EXISTS `recordatorios`;
 CREATE TABLE IF NOT EXISTS `recordatorios` (
 `conteo` bigint(21)
 ,`id_grupo` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `resumenentregablesgenerales`
+-- (Véase abajo para la vista actual)
+--
+DROP VIEW IF EXISTS `resumenentregablesgenerales`;
+CREATE TABLE IF NOT EXISTS `resumenentregablesgenerales` (
+`id_parametrizacion` int(11)
+,`id_fase` int(11)
+,`ordenfase` int(11)
+,`nombre_fase` varchar(100)
+,`id_actividad` int(11)
+,`nombre_actividad` varchar(100)
+,`ordenactividad` int(11)
+,`id_entregable` int(11)
+,`nombre_entregable` varchar(100)
+,`conteoentregable` bigint(21)
 );
 
 -- --------------------------------------------------------
@@ -406,17 +377,7 @@ CREATE TABLE IF NOT EXISTS `versiones` (
   PRIMARY KEY (`id_version`),
   KEY `id_idea` (`id_idea`),
   KEY `id_entregable` (`id_entregable`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `versiones`
---
-
-INSERT INTO `versiones` (`id_version`, `id_idea`, `id_entregable`, `fecharegistro`, `entregable`, `revision`, `comentarios`, `estado`) VALUES
-(6, 2, 1, '2017-09-15 01:40:23', '<p><em><strong>sjddnsdnsjndskdn</strong></em></p><p>&nbsp;</p><p>&nbsp;</p><ol><li><em><strong>asdsadasdasd</strong></em></li></ol>', '', 'Aprobado', 3),
-(7, 2, 2, '2017-09-15 02:53:01', '<p>PRUEBA</p>', '', 'NO ME SIRVE', 5),
-(8, 2, 2, '2017-09-16 02:40:19', '<p>PRUEBA22YYY</p>', '', 'ESTE SI ES', 5),
-(9, 2, 2, '2017-09-16 02:40:24', '<p><img alt=\"\" src=\"/Proyectando/application/uploads/images/Capture001.PNG\" style=\"height:113px; width:335px\" /></p>\r\n\r\n<p>PRUEBA22YYY</p>\r\n', '', 'comentario', 3);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -476,6 +437,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `recordatorios`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `recordatorios`  AS  select count(0) AS `conteo`,`ideas`.`id_grupo` AS `id_grupo` from `ideas` where (`ideas`.`estado` = 1) group by `ideas`.`id_grupo` ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `resumenentregablesgenerales`
+--
+DROP TABLE IF EXISTS `resumenentregablesgenerales`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `resumenentregablesgenerales`  AS  select `entregable`.`id_parametrizacion` AS `id_parametrizacion`,`fases`.`id_fase` AS `id_fase`,`fases`.`orden` AS `ordenfase`,`fases`.`nombre_fase` AS `nombre_fase`,`actividad`.`id_actividad` AS `id_actividad`,`actividad`.`nombre_actividad` AS `nombre_actividad`,`actividad`.`orden` AS `ordenactividad`,`entregable`.`id_entregable` AS `id_entregable`,`entregable`.`nombre_entregable` AS `nombre_entregable`,(select count(0) from `versiones` where (`versiones`.`id_entregable` = `entregable`.`id_entregable`)) AS `conteoentregable` from ((`entregable` join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) ;
 
 -- --------------------------------------------------------
 

@@ -22,7 +22,7 @@
                     if(resp){
                     $('#idea').html(resp).fadeIn();
                 } else {
-                     $('#idea').html('<option value="">Seleccione Idea</option>');
+                     $('#idea').html('<option value="0">Seleccione Idea</option>');
                 }
                 }
             });
@@ -44,7 +44,7 @@
         <legend>Filtro</legend>
         <!-- Multiple Radios -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="radios">Nombre de la Parametrización</label>
+            <label class="col-md-4 control-label" for="radios">Marco de Trabajo</label>
             <div class="col-md-4">
                 <select class="form-control" id="parametrizaciones" name="parametrizaciones">
                     <option value="0">Seleccione</option>

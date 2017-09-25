@@ -68,7 +68,7 @@ if (empty($versiones)) {
              ?></td>
             <td> 
             <?php
-              if($versiones->estado==2)
+              if($versiones->estado==2 || $versiones->estado==3)
               {
                 $mensaje='<span class="glyphicon glyphicon-zoom-in"></span> Ver Version';
                 

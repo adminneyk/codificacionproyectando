@@ -41,7 +41,7 @@ class Parametrizacion extends CI_Controller {
             $this->form_validation->set_message('required', 'El campo %s es obligatorio');
             if($this->form_validation->run() === true){
                 $this->parametrizacion_model->guardar($nombrepara,$descritarea,$estado,$id);
-                $this->session->set_flashdata('correcto', 'Parametrización Guardada Correctamente!');
+                $this->session->set_flashdata('correcto', 'Marco de Trabajo Guardado Correctamente!');
                 redirect(base_url().'parametrizacion','refresh');  
               }else{
                 redirect(base_url().'parametrizacion','refresh');  
@@ -96,21 +96,8 @@ class Parametrizacion extends CI_Controller {
         
     public function parametrizarCursos()
 	{
-            /*$idactividad = $this->uri->segment(3, 0);
-            $idparametrizacion = $this->uri->segment(4, 0);
-            $datos['cursos'] = $this->parametrizacion_model->obtenerCursos($this->session->userdata('id_usuario'));
-            
-                $datos['idparametrizacion'] = $idparametrizacion;
-                $datos['idactividad'] = $idactividad;
-            $this->load->view('Parametrizacion/vistacursos',$datos);
-            $this->load->view('footer');
-             * *
-             */
         $this->gestionarMateria();
 	
-        
-        
-        
         }
         
         public function  gestionarMateria(){
@@ -148,6 +135,8 @@ class Parametrizacion extends CI_Controller {
             }
             $datos['idparametrizacion'] = $idparametrizacion;
             $datos['idactividad'] = $idactividad;
+            $datos['datosactividad'] = $this->parametrizacion_model->inforActividadFase(
+                    $idactividad);
             $this->load->view('Parametrizacion/formularioentregables',$datos);
             $this->load->view('footer');
     }
@@ -185,7 +174,7 @@ class Parametrizacion extends CI_Controller {
         }
         
         function asigParamBase (){
-            print_r($_POST);
+            
         $publicacion = $this->input->post('publicacion');
         $idgrupo = $this->input->post('idgrupo');
         $profesor = $this->input->post('profesor');
@@ -195,7 +184,23 @@ class Parametrizacion extends CI_Controller {
                         $profesor
                 );
                 
-                $this->session->set_flashdata('correcto', 'Parametrización Asignada Correctamente!'); 
+                $this->session->set_flashdata('correcto', 'Marco de Trabajo Asignada Correctamente!'); 
+        redirect(base_url().'parametrizacion/parametrizarCursos');
+        
+        
+        }
+        function asigDataparam (){
+            
+        $materia = $this->input->post('publicacion');
+        $marcotrabajo = $this->input->post('profesor');
+        $grupos = $this->parametrizacion_model->materiaHorario($materia);
+        foreach ($grupos->result() as $grupos) {
+        $grupo = $grupos->GRU_CODIGO;
+            //echo $grupo;
+            $this->parametrizacion_model->asignacionConfig($materia,$marcotrabajo,$grupo);
+        }
+        
+        $this->session->set_flashdata('correcto', 'Marco de Trabajo Asignada Correctamente!'); 
         redirect(base_url().'parametrizacion/parametrizarCursos');
         
         

@@ -80,9 +80,14 @@ $(document).ready(function()
  }); 
 </script>
 <fieldset>
-
+<?php
+    foreach ($datosactividad->result() as $datactiv) {
+        $nombrefase = $datactiv->nombre_fase ;
+        $nombreactividad= $datactiv->nombre_actividad;
+       
+    }?>
     <!-- Form Name -->
-    <legend>Formulario de Entregable</legend>
+    <legend>Formulario de Entregable para la Fase de <strong><?=$nombrefase." y la Actividad ".$nombreactividad?></strong>)</legend>
     <div id="error"></div>
     <!-- Text input-->
     <div class="form-group">

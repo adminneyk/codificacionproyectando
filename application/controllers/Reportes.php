@@ -89,29 +89,33 @@ class Reportes extends CI_Controller {
         $parametrizacion = $this->input->post('parametrizaciones');
         $dato = $this->reportes_model->obtenerInforme($grupo);
         $informacion = "";
-        foreach ($dato->result() as $notificacion) {
-            $informacion .= "{$notificacion->nombre_idea}|{$notificacion->faseuno},"
-                    . "{$notificacion->fasedos},{$notificacion->fasetres},"
-                    . "{$notificacion->fasecuatro},{$notificacion->fasecinco}_";
+        if ($dato != "") {
+            foreach ($dato->result() as $notificacion) {
+                $informacion .= "{$notificacion->nombre_idea}|{$notificacion->faseuno},"
+                        . "{$notificacion->fasedos},{$notificacion->fasetres},"
+                        . "{$notificacion->fasecuatro},{$notificacion->fasecinco}_";
+            }
         }
         $info['informaciongeneral'] = $informacion;
         $this->load->view('Reportes/vistaavances', $info);
     }
-    
+
     public function analizadorEntregable() {
         $parametrizacion = $this->input->post('parametrizaciones');
         $dato = $this->reportes_model->obtenerInformeGeneral($parametrizacion);
         $datalabel = "";
         $datainfo = "";
-        foreach ($dato->result() as $info) {
-            $label = $info->nombre_entregable;
-            $dt = $info->conteoentregable;
-            $datalabel .= "{$label}|";
-            $datainfo .= "{$dt}|";
+        if ($dato != null) {
+            foreach ($dato->result() as $info) {
+                $label = $info->nombre_entregable;
+                $dt = $info->conteoentregable;
+                $datalabel .= "{$label}|";
+                $datainfo .= "{$dt}|";
+            }
         }
-        $infor['labels']= $datalabel;
-        $infor['infor']= $datainfo;
-        
+        $infor['labels'] = $datalabel;
+        $infor['infor'] = $datainfo;
+
         $this->load->view('Reportes/vistaEntregable', $infor);
     }
 

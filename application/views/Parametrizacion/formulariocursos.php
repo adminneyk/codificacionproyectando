@@ -37,14 +37,16 @@ $(document).ready(function()
     </div>
     
     <div class="form-group">
-        <label class="col-md-4 control-label" for="radios">Parametrizaciones</label>
+        <label class="col-md-4 control-label" for="radios">Marco de Trabajo</label>
         <div class="col-md-4">
             <select class="form-control" id="profesor" name="profesor">
             <?php 
+            if($parametrizaciones!=null) {
             foreach ($parametrizaciones->result() as $param) {
     echo "<option value='".$param->id_parametrizacion."'>".$param->nom_parametrizacion."</option>";
      
     }
+            }
                
             ?>
             </select>
@@ -54,7 +56,7 @@ $(document).ready(function()
     <div class="form-group">
         <label class="col-md-4 control-label" for="button1id"></label>
         <div class="col-md-8">
-            <button name="validar" id="validar" type="button" class="btn btn-success">Asignar Parametrización</button>
+            <button name="validar" id="validar" type="button" class="btn btn-success">Asignar Marco a Materia</button>
             
         </div>
     </div>

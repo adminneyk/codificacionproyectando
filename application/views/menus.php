@@ -27,42 +27,15 @@
     <?php
 }
 ?>
-        <?php
-        if (in_array('reportes', $this->session->userdata('permisos')) == true) {
-            ?>
-            <li id="fondo">
-                <a href="<?= base_url() ?>reportes">Reportes</a>
-            </li>
             <?php
-        }
-        ?>
-        <?php
         if (in_array('parametrizacion', $this->session->userdata('permisos')) == true) {
             ?>
             <li id="fondo">
-                <a href="<?= base_url() ?>parametrizacion">Parametrización</a>
+                <a href="<?= base_url() ?>parametrizacion">Marco de Trabajo</a>
             </li>
             <?php
         }
         ?>
-        <?php
-        if (in_array('revision', $this->session->userdata('permisos')) == true) {
-            ?>
-            <li id="fondo">
-                <a href="<?= base_url() ?>revision">Revision de Entregable</a>
-            </li>
-            <?php
-        }
-        ?>  
-        <?php
-        if (in_array('banco', $this->session->userdata('permisos')) == true) {
-            ?>
-            <li id="fondo">
-                <a href="<?= base_url() ?>banco">Aprobacion de Ideas</a>
-            </li>
-            <?php
-        }
-        ?>      
             
         <?php
         if (in_array('paramcurso', $this->session->userdata('permisos')) == true) {
@@ -73,6 +46,35 @@
             <?php
         }
         ?> 
+        <?php
+        if (in_array('banco', $this->session->userdata('permisos')) == true) {
+            ?>
+            <li id="fondo">
+                <a href="<?= base_url() ?>banco">Aprobacion de Ideas</a>
+            </li>
+            <?php
+        }
+        ?>      
+        <?php
+        if (in_array('revision', $this->session->userdata('permisos')) == true) {
+            ?>
+            <li id="fondo">
+                <a href="<?= base_url() ?>revision">Revision de Entregable</a>
+            </li>
+            <?php
+        }
+        ?>  
+        <?php
+        if (in_array('reportes', $this->session->userdata('permisos')) == true) {
+            ?>
+            <li id="fondo">
+                <a href="<?= base_url() ?>reportes">Reportes</a>
+            </li>
+            <?php
+        }
+        ?>
+        
+            
          
             
             
