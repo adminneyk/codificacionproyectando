@@ -33,7 +33,7 @@ if (empty($listaIdeas)) {
             <td><?php echo $ideas->descripcion_idea; ?></td>
             <td><?php echo $ideas->objetivo_general; ?></td>
             <td><?php echo $ideas->objetivo_especifico; ?></td>
-            <td> <a href="<?= base_url()?>ideas/mostrarMarco/<?=$ideas->id_idea?>"><span class="glyphicon glyphicon-edit"></span> Utilizar Idea </a></td>
+            <td> <a href="<?= base_url()?>ideas/registro/<?=$ideas->id_idea?>"><span class="glyphicon glyphicon-edit"></span> Utilizar Idea </a></td>
         </tr>
      <?php
     }

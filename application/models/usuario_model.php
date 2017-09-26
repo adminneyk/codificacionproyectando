@@ -34,10 +34,10 @@ class Usuario_model extends CI_Model {
             if ($data->profesor == 1) {
                 $idpefil = 2;
                 if ($admin) {
-                    $permisos = array('reportes', 'revision', 'banco', 'home', 'parametrizacion', 'paramcurso');
+                    $permisos = array('reportes', 'revision', 'banco', 'home', 'parametrizacion', 'paramcurso','ideas');
                     $nombreper="PROFESOR";
                 } else {
-                    $permisos = array('reportes', 'revision', 'banco', 'home');
+                    $permisos = array('reportes', 'revision', 'banco', 'home','ideas');
                     $nombreper="PROFESOR";
                 }
             }

@@ -20,11 +20,14 @@
 ?>
         <?php
         if (in_array('ideas', $this->session->userdata('permisos')) == true) {
+            if($this->session->userdata('perfil')==3){
             ?>
+            
             <li id="fondo">
                 <a href="<?= base_url() ?>ideas">Ideas</a>
             </li>
     <?php
+            }
 }
 ?>
             <?php

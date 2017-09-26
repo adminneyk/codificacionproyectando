@@ -5,11 +5,11 @@
 </ol>
 
 <?php 
-if (empty($listaIdeas)) {
+if ($listaIdeas==FALSE) {
 	?>
 <div class="alert alert-info" role="alert">
 	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span> No se Encuentran Entregables Registrados
+  <span class="sr-only">Error:</span> No Tiene una Idea Aprobada Registrada
 </div>
 	<?php
 } else {

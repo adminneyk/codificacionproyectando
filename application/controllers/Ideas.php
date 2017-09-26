@@ -21,6 +21,11 @@ class Ideas extends CI_Controller {
 	}
         public function registro()
 	{
+                $ideabanco = $this->uri->segment(3, 0);
+                if($ideabanco){
+                  $datos['ideabanco'] = $this->ideas_model->obtenerideabanco($ideabanco);
+                  
+                }
                 $datos['listaestudiantes'] = $this->ideas_model->obtenerEstudiantes($this->session->userdata('id_usuario'));
                 $datos['lineas'] = $this->ideas_model->obtenerLineas();
                 $this->load->helper('url');
@@ -160,6 +165,8 @@ $avancefases=0;
      $this->load->view('Ideas/historiales',$datos);
 
   }
+  
+  
 
     public function gestionVersion(){
      $idea = $this->uri->segment(3, 0);

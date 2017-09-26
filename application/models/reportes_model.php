@@ -22,6 +22,17 @@ class Reportes_model extends CI_Model {
             return false;
         }
     }
+    public function obtenerIdeasBanco() {
+           $this->db->order_by("1", "asc");
+       
+            $query = $this->db->get('ideas_banco');
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
+    
     public function obtenerParametros($nombreusuario = "") {
            $this->db->order_by("2", "asc");
            $query = $this->db->get('parametrizacion');

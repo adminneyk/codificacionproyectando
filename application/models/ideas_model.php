@@ -72,8 +72,13 @@ foreach ($integrantes as $id) {
         $this->db->join('ideas','equipos.id_idea=ideas.id_idea');
         $this->db->where('equipos.id_usuario',$ididea);
         $this->db->where('ideas.estado',3);
-        echo  $this->db->last_query();
-        return $query = $this->db->get();
+       // echo  $this->db->last_query();
+         $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
     }
 
     public function obtenerParametrizacion($idIdea) {
@@ -113,7 +118,7 @@ foreach ($integrantes as $id) {
          }
     
 
-        echo  $this->db->last_query();
+       // echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {
@@ -186,6 +191,16 @@ public function solicitarRevision($idea,$entregable,$version) {
         );
                 $this->db->insert('versiones', $data);     
      }
+     public function obtenerideabanco($idea) {
+        
+            $query = $this->db->get_where('ideas_banco', array('id_idea' => $idea));
+       // echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
 
 
 }

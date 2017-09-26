@@ -63,6 +63,15 @@ class Reportes extends CI_Controller {
         //  $this->load->view('Reportes/filtrador');
         //  $this->load->view('footer'); 
     }
+    public function bancoIdeasLista() {
+        $data['nombreinforme'] = "Estadistica por Marco de Trabajo";
+        $data['listabanco'] = $this->reportes_model->obtenerIdeasBanco();
+        $this->load->view('cabecera');
+        $this->load->view('menus');
+        $this->load->view('Reportes/bancoIdeasLista', $data);
+        //  $this->load->view('Reportes/filtrador');
+        //  $this->load->view('footer'); 
+    }
 
     public function consultarIdeas() {
 

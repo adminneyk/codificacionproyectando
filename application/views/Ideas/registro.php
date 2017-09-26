@@ -4,7 +4,28 @@ if(isset($generabanco)){
 } else{
     $datostipog = 0;
 }
+
+
 $id = "";
+$nombre = "";
+$descripcion = "";
+$objgeneral = "";
+$objespecificos = "";
+$linea = "";
+
+
+if(isset($ideabanco)){
+    
+    foreach ($ideabanco->result() as $parametros) {
+        $nombre = $parametros->nombre_idea; 
+          $descripcion = $parametros->descripcion_idea; 
+           $objgeneral =  $parametros->objetivo_general;
+           $objespecificos =  $parametros->objetivo_especifico; 
+           $linea =  $parametros->id_linea; 
+            
+    }
+}
+
 $arrayform = array(
     "class" => "form-horizontal",
     "id" => "form"
@@ -13,14 +34,14 @@ $arrayperfil = array("class" => "form-control",
     "id" => "nombreidea",
     "name" => "nombreidea",
     "placeholder" => "Nombre Idea",
-    "value" => '',
+    "value" => $nombre,
     "required" => "required",
     "pattern" => "[A-Za-z0-9]{3}",
     "title" => "Campo Alfanumerico Minimo 3 Caracteres");
 $descripciondeidea = array(
     'name' => 'descripidea',
     'id' => 'descripidea',
-    'value' => '',
+    'value' => $descripcion,
     'rows' => '10',
     'cols' => '30',
     'class' => 'form-control'
@@ -28,7 +49,7 @@ $descripciondeidea = array(
 $objetivogeneral = array(
     'name' => 'objetivogeneral',
     'id' => 'objetivogeneral',
-    'value' => '',
+    'value' => $objgeneral,
     'rows' => '10',
     'cols' => '30',
     'class' => 'form-control'
@@ -37,7 +58,7 @@ $objetivogeneral = array(
 $objetivoespecifico = array(
     'name' => 'objetivoespecifico',
     'id' => 'objetivoespecifico',
-    'value' => '',
+    'value' => $objespecificos,
     'rows' => '10',
     'cols' => '30',
     'class' => 'form-control'
@@ -124,7 +145,7 @@ echo form_open(base_url() . 'ideas/validar/'.$datostipog, $arrayform);
                     <?php
                     foreach ($lineas->result() as $linea) {
                         ?>
-                        <option value="<?= $linea->id_linea ?>"><?= $linea->nombre_linea ?></option>
+                    <option value="<?= $linea->id_linea ?>" <?php if($linea==$linea->id_linea) { ?> selected="selected" <?php } ?>><?= $linea->nombre_linea ?></option>
                         <?php
                     }
                     ?>

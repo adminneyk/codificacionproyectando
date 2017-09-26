@@ -35,13 +35,15 @@ public function obtenerGrupos($idusuario) {
        // echo  $dbdatos->last_query();
         return $query = $dbdatos->get();
     }
-    public function obtenerRecordatorioRevision($grupos) {
+    public function obtenerRecordatorioRevision($grupos = array()) {
+            
         
             $this->db->select('*');
             $this->db->from('recordatorios');
-            $this->db->where_in("id_grupo","{$grupos}");
+            $this->db->where_in("id_grupo",$grupos);
             $this->db->group_by('id_grupo');
             $query = $this->db->get();
+           // echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {
@@ -52,7 +54,7 @@ public function obtenerGrupos($idusuario) {
     public function obtenerPendientesBanco($grupos) {
      $this->db->select('*');
             $this->db->from('pendientesactuales');
-            $this->db->where_in("grupo","{$grupos}");
+            $this->db->where_in("grupo",$grupos);
             $this->db->group_by('grupo');
             $query = $this->db->get();
         if ($query->num_rows() > 0) {
