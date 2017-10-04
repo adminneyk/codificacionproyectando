@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-09-2017 a las 03:02:53
+-- Tiempo de generación: 04-10-2017 a las 02:38:57
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -67,6 +67,14 @@ CREATE TABLE IF NOT EXISTS `config` (
   KEY `id_parametrizacion` (`id_parametrizacion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `config`
+--
+
+INSERT INTO `config` (`id_config`, `MAT_CODIGO`, `GRU_CODIGO`, `id_parametrizacion`) VALUES
+(0, 'LNALS', '800', 3),
+(0, 'LNALS', '801', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -102,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `entregable` (
   PRIMARY KEY (`id_entregable`),
   KEY `id_actividad` (`id_actividad`),
   KEY `id_parametrizacion` (`id_parametrizacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -120,7 +128,19 @@ CREATE TABLE IF NOT EXISTS `equipos` (
   KEY `id_usuario` (`id_usuario`),
   KEY `id_idea` (`id_idea`),
   KEY `id_idea_2` (`id_idea`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `equipos`
+--
+
+INSERT INTO `equipos` (`id_equipo`, `id_idea`, `id_usuario`, `estado`) VALUES
+(4, 4, 1033759479, 1),
+(5, 4, 2147483647, 1),
+(6, 5, 1033759479, 1),
+(7, 5, 2147483647, 1),
+(8, 6, 1033759479, 1),
+(9, 6, 2147483647, 1);
 
 -- --------------------------------------------------------
 
@@ -176,13 +196,22 @@ CREATE TABLE IF NOT EXISTS `ideas` (
   `id_linea` int(11) NOT NULL COMMENT 'Identificador de la Linea',
   `nombre_idea` varchar(100) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre de la Idea',
   `descripcion_idea` varchar(200) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Descripcion de la Idea',
-  `estado` int(11) NOT NULL DEFAULT '1' COMMENT 'Estado de la Idea',
+  `estado` int(11) NOT NULL DEFAULT '1' COMMENT 'Estado de la Idea (1 registrada , 2 rechazada ,3 aprobada , 4 Terminada )',
   `objetivo_general` text COLLATE utf8_spanish_ci NOT NULL COMMENT 'Objetivos Generales de la Idea',
   `objetivo_especifico` text COLLATE utf8_spanish_ci NOT NULL COMMENT 'Objetivos Especificos de la Idea',
   PRIMARY KEY (`id_idea`),
   KEY `id_linea` (`id_linea`),
   KEY `id_grupo` (`id_grupo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `ideas`
+--
+
+INSERT INTO `ideas` (`id_idea`, `id_grupo`, `id_linea`, `nombre_idea`, `descripcion_idea`, `estado`, `objetivo_general`, `objetivo_especifico`) VALUES
+(4, 800, 1, 'Registro inicial de Banco de Idea', 'Descripcion del registro de la base de datos de idea', 2, 'Objetivos Generales', 'Objetivos Especificos'),
+(5, 800, 1, 'Registro inicial de Banco de Idea Nueva 001', 'Descripcion del registro de la base de datos de idea 001', 3, 'Objetivos Generales', 'Objetivos Especificos'),
+(6, 800, 1, 'Idea de Registro 003', 'Idea de Registro 00e', 2, 'Objetivos Generales', 'Objetivos Especificos');
 
 -- --------------------------------------------------------
 
@@ -200,7 +229,14 @@ CREATE TABLE IF NOT EXISTS `ideas_banco` (
   `objetivo_general` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL COMMENT 'Objetivos Generales de la Idea',
   `objetivo_especifico` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL COMMENT 'Objetivos Especificos de la Idea',
   PRIMARY KEY (`id_idea`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `ideas_banco`
+--
+
+INSERT INTO `ideas_banco` (`id_idea`, `id_linea`, `nombre_idea`, `descripcion_idea`, `estado`, `objetivo_general`, `objetivo_especifico`) VALUES
+(3, 1, 'Registro inicial de Banco de Idea', 'Descripcion del registro de la base de datos de idea', 1, 'Objetivos Generales', 'Objetivos Especificos');
 
 -- --------------------------------------------------------
 
@@ -258,7 +294,14 @@ CREATE TABLE IF NOT EXISTS `parametrizacion` (
   `estado` int(11) NOT NULL COMMENT 'Estado de la Parametrizacion',
   PRIMARY KEY (`id_parametrizacion`),
   KEY `id_responsable` (`id_responsable`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `parametrizacion`
+--
+
+INSERT INTO `parametrizacion` (`id_parametrizacion`, `nom_parametrizacion`, `descripcion_parametrizacion`, `id_responsable`, `estado`) VALUES
+(3, 'Marco de trabajo', 'descripcion del marco de trabajo', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -377,7 +420,7 @@ CREATE TABLE IF NOT EXISTS `versiones` (
   PRIMARY KEY (`id_version`),
   KEY `id_idea` (`id_idea`),
   KEY `id_entregable` (`id_entregable`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -400,7 +443,7 @@ CREATE TABLE IF NOT EXISTS `vistaconteopendientes` (
 --
 DROP TABLE IF EXISTS `conteoporfases`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `conteoporfases`  AS  select `ideas`.`nombre_idea` AS `nombre_idea`,`ideas`.`id_grupo` AS `id_grupo`,(select count(0) from ((((`versiones` join `entregable` on((`entregable`.`id_entregable` = `versiones`.`id_entregable`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `config` on((`config`.`id_parametrizacion` = `entregable`.`id_parametrizacion`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) where ((`fases`.`id_fase` = 1) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `faseuno`,(select count(0) from ((((`versiones` join `entregable` on((`entregable`.`id_entregable` = `versiones`.`id_entregable`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `config` on((`config`.`id_parametrizacion` = `entregable`.`id_parametrizacion`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) where ((`fases`.`id_fase` = 2) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `fasedos`,(select count(0) from ((((`versiones` join `entregable` on((`entregable`.`id_entregable` = `versiones`.`id_entregable`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `config` on((`config`.`id_parametrizacion` = `entregable`.`id_parametrizacion`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) where ((`fases`.`id_fase` = 3) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `fasetres`,(select count(0) from ((((`versiones` join `entregable` on((`entregable`.`id_entregable` = `versiones`.`id_entregable`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `config` on((`config`.`id_parametrizacion` = `entregable`.`id_parametrizacion`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) where ((`fases`.`id_fase` = 4) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `fasecuatro`,(select count(0) from ((((`versiones` join `entregable` on((`entregable`.`id_entregable` = `versiones`.`id_entregable`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `config` on((`config`.`id_parametrizacion` = `entregable`.`id_parametrizacion`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) where ((`fases`.`id_fase` = 5) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `fasecinco` from `ideas` where 1 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `conteoporfases`  AS  select `ideas`.`nombre_idea` AS `nombre_idea`,`ideas`.`id_grupo` AS `id_grupo`,(select count(0) from ((((`versiones` join `entregable` on((`entregable`.`id_entregable` = `versiones`.`id_entregable`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `config` on((`config`.`id_parametrizacion` = `entregable`.`id_parametrizacion`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) where ((`fases`.`id_fase` = 1) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `faseuno`,(select count(0) from ((((`versiones` join `entregable` on((`entregable`.`id_entregable` = `versiones`.`id_entregable`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `config` on((`config`.`id_parametrizacion` = `entregable`.`id_parametrizacion`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) where ((`fases`.`id_fase` = 2) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `fasedos`,(select count(0) from ((((`versiones` join `entregable` on((`entregable`.`id_entregable` = `versiones`.`id_entregable`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `config` on((`config`.`id_parametrizacion` = `entregable`.`id_parametrizacion`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) where ((`fases`.`id_fase` = 3) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `fasetres`,(select count(0) from ((((`versiones` join `entregable` on((`entregable`.`id_entregable` = `versiones`.`id_entregable`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `config` on((`config`.`id_parametrizacion` = `entregable`.`id_parametrizacion`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) where ((`fases`.`id_fase` = 4) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `fasecuatro`,(select count(0) from ((((`versiones` join `entregable` on((`entregable`.`id_entregable` = `versiones`.`id_entregable`))) join `actividad` on((`actividad`.`id_actividad` = `entregable`.`id_actividad`))) join `config` on((`config`.`id_parametrizacion` = `entregable`.`id_parametrizacion`))) join `fases` on((`fases`.`id_fase` = `actividad`.`id_fase`))) where ((`fases`.`id_fase` = 5) and (`versiones`.`id_idea` = `ideas`.`id_idea`))) AS `fasecinco` from `ideas` where (`ideas`.`estado` in (3,4)) ;
 
 -- --------------------------------------------------------
 
