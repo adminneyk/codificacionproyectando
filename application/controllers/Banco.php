@@ -19,7 +19,6 @@ class Banco extends CI_Controller {
         $this->load->view('Banco/menu', $datos);
         $this->load->view('footer');
     }
-    
 
     public function bancoIdeas() {
         $this->load->helper('url');
@@ -49,22 +48,23 @@ class Banco extends CI_Controller {
         $grupo = $this->uri->segment(3, 0);
         $idea = $this->uri->segment(4, 0);
         $estado = $this->uri->segment(5, 0);
-        $this->banco_model->aprobarIdea($idea,$estado);
         $integrantes = $this->banco_model->mostrarIntegrantes($idea);
+        $integran = array();
         foreach ($integrantes->result() as $integrante) {
-           $usuario = $integrante->id_usuario;
-           $nombreidea = $integrante->nombre_idea;
-           if($estado==3){
-            $mensaje="Su Idea ".$nombreidea." Es viable para continuar!";
-           }
-           if($estado==2){
-            $mensaje="Su Idea ".$nombreidea." No es viable para continuar!";
-           }
-         }
-      
+            $usuario = $integrante->id_usuario;
+            array_push($integran, $usuario);
+        }
+        if ($estado == 3) {
+            $cierreIdeas = $this->banco_model->mostrarIntegrantesConteo($idea, $integran);
+            foreach ($cierreIdeas->result() as $retun) {
+                $ideasdata = $retun->ididea;
+                $this->banco_model->aprobarIdea($ideasdata, 2);
+            }
+        }
+        $this->banco_model->aprobarIdea($idea, $estado);
+
         $this->session->set_flashdata('correcto', 'Idea Clasificada Correctamente!');
-        redirect(base_url().'banco/bancoIdeas/'.$grupo,'refresh'); 
+        redirect(base_url() . 'banco/bancoIdeas/' . $grupo, 'refresh');
     }
-    
 
 }

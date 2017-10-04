@@ -1,9 +1,9 @@
 <ol class="breadcrumb">
   <li><a href="<?=base_url()?>home">Home</a></li>
-  <li class="active">Listado de Infomes e Indicadores</li>
+  <li class="active">Listado de Informes e Indicadores</li>
 </ol>
 <fieldset>
-<legend>Listado de Infomes e Indicadores</legend>
+<legend>Listado de Informes e Indicadores</legend>
 <ul class="list-group">
   <li class="list-group-item" style="display: none"><a href="<?=base_url()?>reportes/parametrizaciones">Reporte de Parametrizaciones</a></li>
   <li class="list-group-item"><a href="<?=base_url()?>reportes/progresoReal">Indicador Entregables de Fases por Idea</a></li>
