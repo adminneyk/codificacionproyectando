@@ -81,6 +81,18 @@ foreach ($integrantes as $id) {
         }
     }
 
+    public function conteoIdeasActivas($usuario) {
+
+        $this->db->select('COUNT(*) as conteo');
+        $this->db->from('ideas');
+        $this->db->join('equipos','equipos.id_idea=ideas.id_idea');
+        $this->db->where('ideas.estado',3);
+        $this->db->where('equipos.id_usuario',$usuario);
+       // echo  $this->db->last_query();
+         return $this->db->get()->row()->conteo;
+    }
+
+
     public function obtenerParametrizacion($idIdea) {
 
        // SELECT * FROM ideas INNER JOIN config ON ideas.id_grupo= config.GRU_CODIGO AND ideas.id_idea=1 

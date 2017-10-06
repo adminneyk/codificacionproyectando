@@ -15,8 +15,11 @@ class Ideas extends CI_Controller {
     }
 	public function index()
 	{
-                $this->load->helper('url');
-		        $this->load->view('Ideas/menu');
+   
+             $datos['conteoideas'] = $this->ideas_model->conteoIdeasActivas($this->session->userdata('id_usuario'));
+             
+             $this->load->helper('url');
+		        $this->load->view('Ideas/menu',$datos);
                 $this->load->view('footer');
 	}
         public function registro()
