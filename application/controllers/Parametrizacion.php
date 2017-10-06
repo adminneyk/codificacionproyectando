@@ -102,7 +102,7 @@ class Parametrizacion extends CI_Controller {
         
         public function  gestionarMateria(){
          $datos['materias'] = $this->parametrizacion_model->obtenerMaterias();
-         $datos['parametrizaciones'] = $this->parametrizacion_model->obtenerParametrizacion();
+         $datos['parametrizaciones'] = $this->parametrizacion_model->obtenerParametrizacion(1);
          $this->load->view('Parametrizacion/formulariocursos',$datos);
          $this->load->view('footer');   
                 

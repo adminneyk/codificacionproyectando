@@ -8,9 +8,13 @@ class Parametrizacion_model extends CI_Model {
         parent::__construct();
     }
 
-    public function obtenerParametrizacion() {
-        
+    public function obtenerParametrizacion($estad=0) {
+        if($estad>0)
+        {
+            $query = $this->db->get_where('parametrizacion', array('estado'=>$estad));
+        }else{
              $query = $this->db->get('parametrizacion');
+        }
         //echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
