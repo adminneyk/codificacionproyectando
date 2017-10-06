@@ -35,7 +35,7 @@ class Reportes_model extends CI_Model {
     
     public function obtenerParametros($nombreusuario = "") {
            $this->db->order_by("2", "asc");
-           $query = $this->db->get('parametrizacion');
+           $query = $this->db->get_where('parametrizacion', array('estado'=>1));
        // echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
