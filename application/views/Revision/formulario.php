@@ -77,9 +77,10 @@ if (r == true) {
   <label class="col-md-2 control-label" for="textarea">contenido Enviado</label>
   <div class="col-md-9">                     
     <?php
-                echo form_textarea($datatextarea);
-                echo form_error('descritarea', '<div class="alert alert-danger">', '</div>');
+                //echo form_textarea($datatextarea);
+                //echo form_error('descritarea', '<div class="alert alert-danger">', '</div>');
                 ?>
+      <textarea name="ckeditor" class="ckeditor form-control" id="ckeditor" rows="1"><?=$contenido?></textarea>
   </div>
 </div>
 <div class="form-group">
@@ -129,3 +130,17 @@ if (r == true) {
 </div>
 </fieldset>
 </form>
+<script type="text/javascript">
+	
+var editor = CKEDITOR.replace( 'ckeditor', {
+    filebrowserBrowseUrl : '<?=base_url()?>application/libraries/ckfinder/ckfinder.html',
+    filebrowserImageBrowseUrl : '<?=base_url()?>application/libraries/ckfinder/ckfinder.html?type=Images',
+    filebrowserFlashBrowseUrl : '<?=base_url()?>application/libraries/ckfinder/ckfinder.html?type=Flash',
+    filebrowserUploadUrl : '<?=base_url()?>application/libraries/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+    filebrowserImageUploadUrl : '<?=base_url()?>application/libraries/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+    filebrowserFlashUploadUrl : '<?=base_url()?>application/libraries/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+    
+});
+
+CKFinder.setupCKEditor( editor, '../' );
+</script>

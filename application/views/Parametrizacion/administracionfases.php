@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
   <li><a href="<?=base_url()?>home">Home</a></li>
-  <li><a href="<?=base_url()?>parametrizacion">Mis Parametrizaciones</a></li>
+  <li><a href="<?=base_url()?>parametrizacion">Mis Marcos de Trabajo</a></li>
   <li class="active">Consolidado  de Actividades</li>
 </ol>
 <legend>Consolidado  de Actividades</legend>
