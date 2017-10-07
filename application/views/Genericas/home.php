@@ -1,5 +1,4 @@
-<img src="<?= base_url() ?>application/asset/img/baner1.png" class="img-fluid">
-<hr>
+
     <?php
 $this->load->view('Genericas/mensajes');
 ?>
@@ -91,6 +90,8 @@ if (!empty($pendientesrevision)) {
                 <?php
             }
             ?>
+<img src="<?= base_url() ?>application/asset/img/baner1.png" class="img-fluid">
+<hr>
 <hr>
 <fieldset>
     <legend>¿Tiene una Idea ?</legend>

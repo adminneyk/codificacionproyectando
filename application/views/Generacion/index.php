@@ -5,15 +5,15 @@ $infor="";
 $i=0;
 foreach ($datos as $key => $listdatos) { 
     $i++;
-    $infor .=$i.') '.$listdatos['nombrefase'].'</strong><br>';
+    $infor .="<h2>".$i.'- '.$listdatos['nombrefase'].'</h2>';
     $j=0;
      foreach ($listdatos['actividades'] as $key => $listactividades) { 
      $j++;
-         $infor .=$i.'.'.$j.') '.$listactividades['nombreactividad'].'</strong><br>';
-                    $k++;
+         $infor .="<h3>".$i.'.'.$j.' -'.$listactividades['nombreactividad'].'</h3>';
+                    $k=0;
                    foreach ($listactividades['entregables'] as $key => $listentregables) {
                        $k++;
-                       $infor .=$i.'.'.$j.''.$k.') '.$listentregables['nombre_entregable'].'<br>'.$listentregables['entregable'].'</strong>';
+                       $infor .="<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$i.'.'.$j.'.'.$k.' '.$listentregables['nombre_entregable'].'</h4>'.$listentregables['entregable'].'';
                     } 
                    
      } 

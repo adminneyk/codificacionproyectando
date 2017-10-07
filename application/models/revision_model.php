@@ -120,6 +120,7 @@ class revision_model extends CI_Model {
         $this->db->from('versiones');
         $this->db->where("id_idea", $id_idea);
         $this->db->where("id_entregable", $id_entregable);
+        $this->db->where("estado", 5);
         $this->db->order_by("fecharegistro", "desc");
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
