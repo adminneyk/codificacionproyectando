@@ -91,6 +91,21 @@ foreach ($integrantes as $id) {
        // echo  $this->db->last_query();
          return $this->db->get()->row()->conteo;
     }
+    
+    public function conteoIdeasCerradas($usuario) {
+
+        $this->db->select('distinct(ideas.id_idea) as id_idea');
+        $this->db->from('ideas');
+        $this->db->join('equipos','equipos.id_idea=ideas.id_idea');
+        $this->db->where('ideas.estado',4);
+        $this->db->where('equipos.id_usuario',$usuario);
+        $query = $this->db->get();
+       if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }    
+    }
 
 
     public function obtenerParametrizacion($idIdea) {
@@ -130,7 +145,7 @@ foreach ($integrantes as $id) {
          }
     
 
-       // echo  $this->db->last_query();
+        //echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {
@@ -144,7 +159,7 @@ foreach ($integrantes as $id) {
         $this->db->where('id_entregable',$identregable);
         $query=$this->db->get();
 
-        echo  $this->db->last_query();
+  //      echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {

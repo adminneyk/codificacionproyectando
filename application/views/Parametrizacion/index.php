@@ -25,8 +25,8 @@ if($parametrizaciones==FALSE){
     <thead>
         <tr>
 
-            <th>Parametrizacion</th>
-            <th>Descripcion</th>
+            <th>Marco de Trabajo</th>
+            <th>Descripción</th>
             <th>Estado</th>
             <th>Acciones</th>
 

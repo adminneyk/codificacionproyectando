@@ -38,7 +38,7 @@ if($listabanco==FALSE){
         <tr>
 
             <th>Nombre de la Idea</th>
-            <th>Descripcion de la Idea</th>
+            <th>Descripción de la Idea</th>
             <th>Onjetivo General</th>
             <th>Objetivo Especifico</th>
 

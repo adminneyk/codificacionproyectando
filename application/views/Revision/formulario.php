@@ -93,7 +93,7 @@ if (r == true) {
                 $version = $this->uri->segment(5, 0);
       ?>
       
-      <a href="<?= base_url() ?>revision/verHistorial/<?=$version?>" target="popup" class="btn btn-warning" onClick="window.open(this.href, this.target, 'width=1400,height=700'); return false;">Ver Historial de Versiones</a>
+      <a href="<?= base_url() ?>revision/verHistorial/<?=$version?>/<?=$idea?>" target="popup" class="btn btn-warning" onClick="window.open(this.href, this.target, 'width=1400,height=700'); return false;">Ver Historial de Versiones</a>
   </div>
 </div>
 <!-- Textarea -->

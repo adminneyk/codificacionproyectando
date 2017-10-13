@@ -21,7 +21,7 @@ if ($ideasgrupo==null) {
     <thead>
         <tr>
             <th>Nombre Idea</th>
-            <th>Descripcion Idea</th>
+            <th>Descripción Idea</th>
             <th>Objetivo General</th>
             <th>Objetivo Especifico</th>
             

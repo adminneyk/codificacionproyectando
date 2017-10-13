@@ -44,7 +44,7 @@
         if (in_array('paramcurso', $this->session->userdata('permisos')) == true) {
             ?>
             <li id="fondo">
-                <a href="<?= base_url() ?>parametrizacion/parametrizarCursos">Gestion de Materias</a>
+                <a href="<?= base_url() ?>parametrizacion/parametrizarCursos">Gestión de Materias</a>
             </li>
             <?php
         }

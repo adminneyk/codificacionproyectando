@@ -70,10 +70,10 @@ if (empty($versiones)) {
             <?php
               if($versiones->estado==2 || $versiones->estado==3 || $versiones->estado==5)
               {
-                $mensaje='<span class="glyphicon glyphicon-zoom-in"></span> Ver Version';
+                $mensaje='<span class="glyphicon glyphicon-zoom-in"></span> Ver Versión';
                 
               } else {
-                $mensaje='<span class="glyphicon glyphicon-edit"></span> Editar Version';
+                $mensaje='<span class="glyphicon glyphicon-edit"></span> Editar Versión';
               }
             ?>
 

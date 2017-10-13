@@ -15,7 +15,7 @@
                         Actividad
                     </th>
                     <th>
-                        Descripcion
+                        Descripción
                     </th>
                     <th>
                         Actividades Configuradas

@@ -18,7 +18,7 @@ if (empty($listaIdeas)) {
     <thead>
         <tr>
             <th>Nombre de Idea</th>
-            <th>Descripcion de la Idea</th>
+            <th>Descripción de la Idea</th>
             <th>Objetivo General</th>
             <th>Objetivo Especifico</th>
             <th>Acciones</th>

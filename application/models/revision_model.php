@@ -109,16 +109,15 @@ class revision_model extends CI_Model {
         return $this->db->update('versiones', $data);
     }
 
-    public function verificarVersiones($idversion) {
+    public function verificarVersiones($idversion,$idea) {
 
         $this->db->select('id_entregable,id_idea');
         $this->db->where('id_version', $idversion);
         $id_entregable = $this->db->get('versiones')->row()->id_entregable;
-        $id_idea = $this->db->get('versiones')->row()->id_idea;
-
+        
         $this->db->select('*');
         $this->db->from('versiones');
-        $this->db->where("id_idea", $id_idea);
+        $this->db->where("id_idea", $idea);
         $this->db->where("id_entregable", $id_entregable);
         $this->db->where("estado", 5);
         $this->db->order_by("fecharegistro", "desc");
@@ -128,6 +127,21 @@ class revision_model extends CI_Model {
         } else {
             return false;
         }
+    }
+    
+    public function verificarAvanceReal($idea) {
+
+        $this->db->select('(aprobados*100)/total as conteo');
+        $this->db->where('id_idea', $idea);
+        return round($this->db->get('gestorcierre')->row()->conteo);
+        
+    }   
+    public function updateIdea($id) {
+        $data = array(
+            'estado' => 4
+        );
+        $this->db->where('id_idea', $id);
+        return $this->db->update('ideas', $data);
     }
 
 }

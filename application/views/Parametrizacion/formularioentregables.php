@@ -67,7 +67,7 @@ $(document).ready(function()
         msg+="-Nombre del Entregable Requerido<br>";
     }  
     if(descrientregable==""){
-        msg+="-Descripcion del Entregable Requerida";
+        msg+="-Descripción del Entregable Requerida";
     }
       if(msg){
         $("#error").html('<span class="glyphicon glyphicon-bell"></span><strong>Tiene los Siguientes Problemas:</strong><br>'+msg);
@@ -101,7 +101,7 @@ $(document).ready(function()
     </div>
     <!-- Textarea -->
     <div class="form-group">
-        <label class="col-md-4 control-label" for="textarea">Descripcion de Entregable</label>
+        <label class="col-md-4 control-label" for="textarea">Descripción de Entregable</label>
         <div class="col-md-4">                     
             <?php
             echo form_textarea($datatextarea);

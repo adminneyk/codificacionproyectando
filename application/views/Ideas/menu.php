@@ -26,6 +26,14 @@ if ($conteoideas==0) {
   <li class="list-group-item"><a href="<?=base_url()?>ideas/ListadodeBanco">Usar Banco como Base de Idea </a></li>
   <?php 
 }
+if($conteoideasgest!=FALSE)
+{
+   ?>
+       <li class="list-group-item"><a href="<?=base_url()?>ideas/mostrarMarco/<?=$conteoideasgest?>">Ver Idea Madurada</a></li>
+       <?php 
+    
+}
 ?>
+  
 </ul>
 </fieldset>

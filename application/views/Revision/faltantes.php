@@ -18,7 +18,7 @@ if($listaconteo!=null) {
             <th>Fase</th>
             <th>Actividad</th>
             <th>Entregable</th>
-            <th>Descripcion del Entregable</th>
+            <th>Descripción del Entregable</th>
             <th>Acciones</th>
 
         </tr>

@@ -1,9 +1,9 @@
 <ol class="breadcrumb">
   <li><a href="<?=base_url()?>home">Home</a></li>
-  <li class="active">Gestion de Materias</li>
+  <li class="active">Gestión de Materias</li>
 </ol>
 <fieldset>
-	<legend>Gestion de Parametrizaciones</legend>
+	<legend>Gestión de Parametrizaciones</legend>
 <?php
 $this->load->view('Genericas/mensajes');
 ?><br>
@@ -12,7 +12,7 @@ if (empty($cursos)) {
 	?>
 <div class="alert alert-info" role="alert">
 	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only"></span> Tiene Todos sus Grupos Parametrizados
+  <span class="sr-only"></span> Tiene Todos sus Grupos En Marco de Trabajo
 </div>
 	<?php
 } else { ?>

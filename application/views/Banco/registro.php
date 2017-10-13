@@ -36,7 +36,7 @@ echo form_open(base_url() . 'ideas/validar', $arrayform);
             }
             
             if (descripidea == "") {
-                msg += "-Descripcion de la Idea Requerido<br>";
+                msg += "-Descripción de la Idea Requerido<br>";
             }
            /* var valida=0;
                 $("#integrantes[] option:selected").each(function() {			
@@ -73,7 +73,7 @@ echo form_open(base_url() . 'ideas/validar', $arrayform);
 
         <!-- Textarea -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="textarea">Descripcion de la Idea</label>
+            <label class="col-md-4 control-label" for="textarea">Descripción de la Idea</label>
             <div class="col-md-4">                     
                 <?php
                 echo form_textarea($descripciondeidea);

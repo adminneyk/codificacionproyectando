@@ -24,7 +24,7 @@ if (empty($entregables)) {
     <thead>
         <tr>
             <th>Entregable</th>
-            <th>Descripcion de Entregable</th>
+            <th>Descripción de Entregable</th>
             <th>Estado</th>
             <th>Acciones</th>
 

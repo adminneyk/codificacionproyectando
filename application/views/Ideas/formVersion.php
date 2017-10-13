@@ -31,7 +31,7 @@ if (!empty($versiones)) {
 ?>
 <form class="form-horizontal" action="<?= base_url()?>ideas/guardarVersion" method="POST">
 <fieldset>
-    <legend>Gestion del Entregable "<?=$entregable?>" <span class="glyphicon glyphicon-info-sign" title="<?="Descripcion del Entregable: ".$descripdata?>"></span></legend>
+    <legend>Gestion del Entregable "<?=$entregable?>" <span class="glyphicon glyphicon-info-sign" title="<?="Descripción del Entregable: ".$descripdata?>"></span></legend>
 <div class="form-group">
   <label class="control-label col-sm-2" for="textarea">Estructura del Entregable</label>
   <div class="col-sm-10">

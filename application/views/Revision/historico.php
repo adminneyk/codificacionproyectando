@@ -43,18 +43,31 @@
         </style>
     </head>
     <body>
+        <?php 
+        if ($info != FALSE) {
+        ?>
         <h2>Historial de Versiones</h2>
         <?php
         $i = 0;
+        
         foreach ($info->result() as $lista) {
             $i++;
+         echo "<hr>";
             ?>
-            <button class="accordion"><strong>Version #<?= $i ?></strong>) <?= $lista->fecharegistro ?> <br><blockquote><?= "" . $lista->comentarios . "" ?></blockquote> </button>
+        
+        <button class="accordion">Version No.<?=$i;?>
+            <br>FECHA DE GENERACION: <?= $lista->fecharegistro ?> 
+            <br>RAZÓN DE DEVOLUCIÓN:<?= "" . $lista->comentarios . "" ?>
+            <br><br><u>click para Ocultar/Mostrar version</u>
+        </button>
             <div class="panel">
-                <?= $lista->entregable ?>
+                <?= $lista->entregable; ?>
             </div>
             <?php
+           
         }
+        echo "<hr><button class='accordion' onclick='window.close()' >CERRAR VENTANA</button>";
+        
         ?>
         <script>
             var acc = document.getElementsByClassName("accordion");
@@ -72,6 +85,10 @@
                 }
             }
         </script>
-
+<?php 
+        } else {
+            echo "<button class='accordion' onclick='window.close();' >NO SE ENCUENTRAN VERSIONES EN EL HOSTORICO CLICK PARA CERRAR</button>";
+        }
+?>
     </body>
 </html>

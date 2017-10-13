@@ -79,7 +79,7 @@ echo form_open(base_url() . 'ideas/validar/'.$datostipog, $arrayform);
             }
 
             if (descripidea == "") {
-                msg += "-Descripcion de la Idea Requerido<br>";
+                msg += "-Descripción de la Idea Requerido<br>";
             }
             if (msg) {
                 $("#error").html('<span class="glyphicon glyphicon-bell"></span><strong>Tiene los Siguientes Problemas:</strong><br>' + msg);
@@ -109,7 +109,7 @@ echo form_open(base_url() . 'ideas/validar/'.$datostipog, $arrayform);
 
         <!-- Textarea -->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="textarea">Descripcion de la Idea</label>
+            <label class="col-md-4 control-label" for="textarea">Descripción de la Idea</label>
             <div class="col-md-4">                     
                 <?php
                 echo form_textarea($descripciondeidea);

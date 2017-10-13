@@ -52,7 +52,10 @@ class Revision extends CI_Controller {
                 $this->load->helper('url');
                 $this->load->view('cabecera');
                 $this->load->view('menus');
+                
         //resumenpendientes
+                $datos['idea'] = $ididea;
+                $datos['version'] = $version;
                 $datos['registros'] = $this->revision_model->mostrarPendiente($version);
 		$this->load->view('Revision/formulario',$datos);
                 $this->load->view('footer');
@@ -65,13 +68,20 @@ class Revision extends CI_Controller {
             $grupo = $this->input->post('grupo');
             $idea = $this->input->post('idea');
              $this->revision_model->actualizaversion($revision,$estado,$id);
-                $this->session->set_flashdata('correcto', 'Entregable Revisado Correctamente!'); 
+            $avance = $this->revision_model->verificarAvanceReal($idea);
+            if ($avance==100){
+                $this->revision_model->updateIdea($idea);
+                $msg = "Idea Madurada Correctamente";
+            }
+             
+                $this->session->set_flashdata('correcto', 'Entregable Revisado Correctamente '.$msg.'!'); 
                 redirect(base_url().'revision/verificar/'.$grupo.'/'.$idea);           
 	}
         public function verHistorial()
 	{
             $version = $this->uri->segment(3, 0);
-            $data['info'] = $this->revision_model->verificarVersiones($version); 
+            $idea = $this->uri->segment(4, 0);
+            $data['info'] = $this->revision_model->verificarVersiones($version,$idea); 
             $this->load->view('Revision/historico',$data);
 	}
         
