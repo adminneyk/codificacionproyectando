@@ -1,58 +1,42 @@
 <script>
 Highcharts.chart('container', {
-
+    chart: {
+        type: 'column'
+    },
     title: {
-        text: 'Cantidad de versiones Generadas Dentro de las Fases por Idea'
+        text: 'Cantidad de versiones por Fase en Idea '
     },
-
-   /* subtitle: {
-        text: 'Source: thesolarfoundation.com'
-    },*/
     xAxis: {
-        title: {
-            text: 'Fases de Marco'
-        }
-    },    
+        categories: [
+            'FASE 1',
+            'FASE 2',
+            'FASE 3',
+            'FASE 4',
+            'FASE 5'
+        ],
+        crosshair: true
+    },
     yAxis: {
+        min: 0,
         title: {
-            text: 'Cantidad de Versiones'
+            text: 'cantidad de versiones'
         }
     },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:f} Versiones</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
     },
-
     plotOptions: {
-        series: {
-            label: {
-                connectorAllowed: false
-            },
-            pointStart: 2010
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
         }
     },
-    <?php 
-    
-    ?>
-            
-    series: [<?=$informaciongeneral?>],
-
-    responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500
-            },
-            chartOptions: {
-                legend: {
-                    layout: 'horizontal',
-                    align: 'center',
-                    verticalAlign: 'bottom'
-                }
-            }
-        }]
-    }
-
+    series: [<?=$informaciongeneral?>]
 });
 </script>
 
