@@ -21,9 +21,9 @@ if(in_array($controlador, $this->session->userdata('permisos')) == FALSE){
         <script src="<?=base_url()?>application/libraries/ckeditor/ckeditor.js"></script>
         <script src="<?=base_url()?>application/libraries/ckfinder/ckfinder.js"></script>
         <script src="<?=base_url()?>application/asset/js/char.js"></script>
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/series-label.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="<?=base_url()?>application/asset/js/highcharts/highcharts.js"></script>
+<script src="<?=base_url()?>application/asset/js/highcharts/modules/series-label.js"></script>
+<script src="<?=base_url()?>application/asset/js/highcharts/modules/exporting.js"></script>
         <script src="<?=base_url()?>application/asset/js/genericas.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="<?=base_url()?>application/asset/bootstrap/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
