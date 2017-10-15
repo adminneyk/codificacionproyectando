@@ -139,4 +139,4 @@
 </div>
 
 </nav>
-<div class="jumbotron">
+<div class="jumbotron" id="contenedorprincipal">
