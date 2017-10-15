@@ -1,77 +1,59 @@
-<canvas id="speedChart" width="500" height="150"></canvas>
 <script>
-    var speedCanvas = document.getElementById("speedChart");
+Highcharts.chart('container', {
 
-    Chart.defaults.global.defaultFontFamily = "Lato";
-    Chart.defaults.global.defaultFontSize = 18;
+    title: {
+        text: 'Cantidad de versiones Generadas Dentro de las Fases por Idea'
+    },
 
-    var cars = [];
-<?php
-$exploideas = explode("_", $informaciongeneral);
-for ($i = 0; $i < count($exploideas); $i++) {
-//echo $exploideas[$i].'<br>';
-    $informacion = explode("|", $exploideas[$i]);
-    if ($informacion[0] && $informacion[1]) {
-       
-        ?>
+   /* subtitle: {
+        text: 'Source: thesolarfoundation.com'
+    },*/
+    xAxis: {
+        title: {
+            text: 'Fases de Marco'
+        }
+    },    
+    yAxis: {
+        title: {
+            text: 'Cantidad de Versiones'
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    plotOptions: {
+        series: {
+            label: {
+                connectorAllowed: false
+            },
+            pointStart: 2010
+        }
+    },
+    <?php 
+    
+    ?>
             
-        var campo<?= $i ?> = <?php echo "{
-    label: '{$informacion[0]} ',
-    data: [{$informacion[1]}],
-    lineTension: 0,
-    fill: false,
-    borderColor: 'orange',
-    backgroundColor: 'transparent',
-    borderDash: [5, 5],
-    pointBorderColor: 'orange',
-    pointBackgroundColor: 'rgba(255,150,0,0.5)',
-    pointRadius: 5,
-    pointHoverRadius: 10,
-    pointHitRadius: 30,
-    pointBorderWidth: 2,
-    pointStyle: 'rectRounded'
-  };"; ?>
-        cars.push(campo<?= $i ?>);
-    <?php
-    }
-}
+    series: [<?=$informaciongeneral?>],
 
-?>
-    var speedData = {
-        labels: ["FASE 1", "FASE 2", "FASE 3", "FASE 4", "FASE 5"],
-        datasets: cars
-    };
-
-    var chartOptions = {
-        legend: {
-            display: true,
-            position: 'top',
-            labels: {
-                boxWidth: 80,
-                fontColor: 'black'
-            }
-        },
-        scales: {
-                    xAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Fases de Investigacion'
-                        }
-                    }],
-                    yAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Cantidad de Versiones'
-                        }
-                    }]
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
                 }
-    };
+            }
+        }]
+    }
 
-    var lineChart = new Chart(speedCanvas, {
-        type: 'line',
-        data: speedData,
-        options: chartOptions
-    });
+});
 </script>
+
+<div id="container"></div>

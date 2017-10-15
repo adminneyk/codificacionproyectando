@@ -162,7 +162,7 @@ if ($query->num_rows() > 0) {
        
             $query = $this->db->get_where('resumenentregablesgenerales ', array('id_parametrizacion' => $idparametrizacion));
        
-       echo  $this->db->last_query();
+       //echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;
         } else {

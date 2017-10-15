@@ -100,11 +100,12 @@ class Reportes extends CI_Controller {
         $informacion = "";
         if ($dato != "") {
             foreach ($dato->result() as $notificacion) {
-                $informacion .= "{$notificacion->nombre_idea}|{$notificacion->faseuno},"
+                $informacion .= "{name: '{$notificacion->nombre_idea}',data:[{$notificacion->faseuno},"
                         . "{$notificacion->fasedos},{$notificacion->fasetres},"
-                        . "{$notificacion->fasecuatro},{$notificacion->fasecinco}_";
+                        . "{$notificacion->fasecuatro},{$notificacion->fasecinco}]},";
             }
         }
+        
         $info['informaciongeneral'] = $informacion;
         $this->load->view('Reportes/vistaavances', $info);
     }
@@ -112,19 +113,19 @@ class Reportes extends CI_Controller {
     public function analizadorEntregable() {
         $parametrizacion = $this->input->post('parametrizaciones');
         $dato = $this->reportes_model->obtenerInformeGeneral($parametrizacion);
-        $datalabel = "";
-        $datainfo = "";
+        
+        $informacion = "{
+            name: 'Porcentaje de Versiones',
+            data: [";
         if ($dato != null) {
             foreach ($dato->result() as $info) {
                 $label = $info->nombre_entregable;
                 $dt = $info->conteoentregable;
-                $datalabel .= "{$label}|";
-                $datainfo .= "{$dt}|";
+                $informacion .= " {name: '{$label}',y: {$dt}},";
             }
         }
-        $infor['labels'] = $datalabel;
-        $infor['infor'] = $datainfo;
-
+        $informacion .= "]}";
+        $infor['informar']=$informacion;
         $this->load->view('Reportes/vistaEntregable', $infor);
     }
 
