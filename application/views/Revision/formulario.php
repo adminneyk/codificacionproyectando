@@ -80,6 +80,7 @@ if (r == true) {
                 //echo form_textarea($datatextarea);
                 //echo form_error('descritarea', '<div class="alert alert-danger">', '</div>');
                 ?>
+      
       <textarea name="ckeditor" class="ckeditor form-control" id="ckeditor" rows="1"><?=$contenido?></textarea>
   </div>
 </div>
@@ -130,6 +131,7 @@ if (r == true) {
 </div>
 </fieldset>
 </form>
+
 <script type="text/javascript">
 	
 var editor = CKEDITOR.replace( 'ckeditor', {
@@ -141,6 +143,5 @@ var editor = CKEDITOR.replace( 'ckeditor', {
     filebrowserFlashUploadUrl : '<?=base_url()?>application/libraries/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
     
 });
-
 CKFinder.setupCKEditor( editor, '../' );
 </script>

@@ -66,8 +66,6 @@
             <?php
            
         }
-        echo "<hr><button class='accordion' onclick='window.close()' >CERRAR VENTANA</button>";
-        
         ?>
         <script>
             var acc = document.getElementsByClassName("accordion");
@@ -85,9 +83,11 @@
                 }
             }
         </script>
+        
 <?php 
+ echo "<hr><button class='accordion' onclick='window.close();' >CLICK PARA CERRAR</button>";
         } else {
-            echo "<button class='accordion' onclick='window.close();' >NO SE ENCUENTRAN VERSIONES EN EL HOSTORICO CLICK PARA CERRAR</button>";
+            echo "<button class='accordion' onclick='window.close();' >NO SE ENCUENTRAN VERSIONES EN EL HISTORICO CLICK PARA CERRAR</button>";
         }
 ?>
     </body>
