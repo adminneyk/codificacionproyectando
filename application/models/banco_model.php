@@ -110,6 +110,15 @@ class Banco_model extends CI_Model {
             return false;
         }
     }
+    public function mostrarCorreos($idUsuario = 0) {
+        $dbdatos = $this->load->database('proyectandooracle', TRUE);
+        
+            $dbdatos->select('EST_EMAIL');
+            $dbdatos->where('CLI_NUMDCTO', $idUsuario);
+           return $dbdatos->get('art_estudiantes')->row()->EST_EMAIL;
+        
+        
+    }
 
 }
 
