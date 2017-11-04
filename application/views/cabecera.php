@@ -26,13 +26,18 @@ if(in_array($controlador, $this->session->userdata('permisos')) == FALSE){
 <script src="<?=base_url()?>application/asset/js/highcharts/modules/exporting.js"></script>
         <script src="<?=base_url()?>application/asset/js/genericas.js"></script>
         <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" type="text/css" href="<?=base_url()?>application/asset/css/jquery-ui.css" />
+		<link rel="stylesheet" type="text/css" href="<?=base_url()?>application/asset/css/ui.jqgrid.css" />
         <link rel="stylesheet" href="<?=base_url()?>application/asset/bootstrap/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="<?=base_url()?>application/asset/css/estilos.css">
         <script type='text/javascript' src="<?=base_url()?>application/asset/jquery/jquery-3.2.1.js"></script>
-
+        <script src="<?=base_url()?>application/asset/jquery/i18n/grid.locale-es.js" type="text/javascript"></script>
+    	<script src="<?=base_url()?>application/asset/jquery/jquery.jqGrid.min.js" type="text/javascript"></script>
+    	<script src="<?=base_url()?>application/asset/jquery/jquery-ui.js" type="text/javascript"></script>
       
     </head>
     <body>
+        
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">

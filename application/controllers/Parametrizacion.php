@@ -101,6 +101,7 @@ class Parametrizacion extends CI_Controller {
         }
         
         public function  gestionarMateria(){
+         $datos['materiasconfig'] = $this->parametrizacion_model->obtenerMateriasAsignadas();
          $datos['materias'] = $this->parametrizacion_model->obtenerMaterias();
          $datos['parametrizaciones'] = $this->parametrizacion_model->obtenerParametrizacion(1);
          $this->load->view('Parametrizacion/formulariocursos',$datos);
@@ -202,8 +203,6 @@ class Parametrizacion extends CI_Controller {
         
         $this->session->set_flashdata('correcto', 'Marco de Trabajo Asignada Correctamente!'); 
         redirect(base_url().'parametrizacion/parametrizarCursos');
-        
-        
         }
         
 }

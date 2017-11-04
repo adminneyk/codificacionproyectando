@@ -22,10 +22,19 @@ class Parametrizacion_model extends CI_Model {
             return false;
         }
     }
+    public function obtenerMateriasAsignadas() {
+        
+            $grupos = array();
+            
+            $query = $this->db->get_where('config',array());
+            foreach ($query->result() as $listparam) {
+               array_push($grupos, $listparam->MAT_CODIGO);
+            }
+            return $grupos;
+    }
     public function obtenerMaterias() {
-        $db_prueba = $this->load->database('proyectandooracle', TRUE);
-        $query = $db_prueba->get_where('art_materias',array());
-        //echo $db_prueba->last_query();
+      $dbdatos = $this->load->database('proyectandooracle', TRUE);   
+        $query = $dbdatos->get_where('art_materias',array());
         if ($query->num_rows() > 0) {
             return $query;
         } else {

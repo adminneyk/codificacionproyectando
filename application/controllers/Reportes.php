@@ -65,7 +65,8 @@ class Reportes extends CI_Controller {
     }
     public function bancoIdeasLista() {
         $data['nombreinforme'] = "Estadistica por Marco de Trabajo";
-        $data['listabanco'] = $this->reportes_model->obtenerIdeasBanco();
+        $datos =$this->reportes_model->obtenerIdeasBanco();
+        $data['listabanco'] = $datos;
         $this->load->view('cabecera');
         $this->load->view('menus');
         $this->load->view('Reportes/bancoIdeasLista', $data);

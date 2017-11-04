@@ -1,3 +1,4 @@
+
 <ol class="breadcrumb">
   <li><a href="<?=base_url()?>home">Home</a></li>
   <li> <a href="<?=base_url()?>reportes">Listado de Infomes e Indicadores</a></li>
@@ -20,42 +21,48 @@ if($listabanco==FALSE){
         <?php
 } else {
 ?>
+        
 <script type="text/javascript">
-    $("#exportar").click(function(){
-        $("#table2excel").table2excel({
-    // exclude CSS class
-    exclude: ".noExl",
-    name: "Worksheet Name",
-    filename: "SomeFile" //do not include extension
-  }); 
-});
-</script>
-    <button id="exportar" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span> Exportar a Excel</button><br><br>
-<br>
-<table  class="table table-striped" id="table2excel">
-   
-    <thead>
-        <tr>
-
-            <th>Nombre de la Idea</th>
-            <th>Descripción de la Idea</th>
-            <th>Onjetivo General</th>
-            <th>Objetivo Especifico</th>
-
-        </tr>
-    </thead>
-    <?php
-    foreach ($listabanco->result() as $parametros) {
-        ?>
-        <tr>
-            <td><?php echo $parametros->nombre_idea; ?></td>
-            <td><?php echo $parametros->descripcion_idea; ?></td>
-            <td><?php echo $parametros->objetivo_general; ?></td>
-            <td><?php echo $parametros->objetivo_especifico; ?></td>
-            <?php
-    }
+		var mydata = [];
+                <?php 
+                foreach ($listabanco->result() as $parametros) {
+                    ?>
+                mydata.push(<?=json_encode($parametros)?>);        
+                        <?php
+            }
     ?>
-</table>
-    <?php 
+    
+    
+    $(document).ready(function(){
+		$("#list").jqGrid({
+			datatype: "local",
+                        width: "auto",
+			height: "auto",
+                        
+			colNames:['#','Linea','Nombre de Idea', 'Descripcion','Objetivo General','Objetivo Especifico'],
+			colModel:[
+				{name:'id_idea',index:'id_idea',width:20},
+				{name:'nombre_linea',index:'nombre_linea'},
+				{name:'nombre_idea',index:'nombre_idea'},
+				{name:'descripcion_idea',index:'descripcion_idea'},
+				{name:'objetivo_general',index:'objetivo_general'},
+				{name:'objetivo_especifico',index:'objetivo_especifico'}
+				],
+			altRows: true,
+			pager:'#pager',
+			rowNum: 5,
+			rowList:[3,10,15,20]
+
+		});
+			for(var i=0;i<=mydata.length;i++)
+				jQuery("#list").jqGrid('addRowData',i+1,mydata[i]);
+			jQuery("#list").trigger("reloadGrid")
+		});
+		</script>
+        
+                <table id='list' style="min-width: 100%"></table>
+<div id='pager'></div>
+
+<?php 
 }
     ?>

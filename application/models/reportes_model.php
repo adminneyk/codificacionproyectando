@@ -25,7 +25,7 @@ class Reportes_model extends CI_Model {
     public function obtenerIdeasBanco() {
            $this->db->order_by("1", "asc");
        
-            $query = $this->db->get('ideas_banco');
+            $query = $this->db->get('informebancoideas');
         if ($query->num_rows() > 0) {
             return $query;
         } else {
