@@ -28,6 +28,7 @@ class Reportes extends CI_Controller {
 
     public function parametrizaciones() {
         $data['nombreinforme'] = "Parametrizaciones";
+        $data['para'] = $this->reportes_model->obtenerParametrizaciones();
         $this->load->view('cabecera');
         $this->load->view('menus');
         $this->load->view('Reportes/filtrador', $data);
@@ -37,10 +38,9 @@ class Reportes extends CI_Controller {
 
     public function consultar() {
 
-        $responsable = $this->input->post('responsable');
+        $id = $this->input->post('id');
 
-        $data['consulta'] = $this->reportes_model->obtenerParametrizaciones($responsable);
-        $data['responsable'] = $responsable;
+        $data['consulta'] = $this->reportes_model->obtenerParametrizacionesinforme($id);
         $this->load->view('Reportes/vistaparametrizaciones', $data);
     }
 

@@ -16,22 +16,20 @@ if(!empty($consulta)){
 <table  class="table table-striped" id="table2excel">
     <thead>
         <tr>
-            <th>Nombre de Parametrización</th>
-            <th>Nombre de Fase</th>
-            <th>Nombre de Actividad</th>
-            <th>Nombre de Entregable</th>
-            <th>Estado del Entregable</th>
+            <th>Nombre de parametrización</th>
+            <th>Nombre de fase</th>
+            <th>Nombre de actividad</th>
+            <th>Nombre de entregable</th>
         </tr>
     </thead>
     <?php
       foreach ($consulta->result() as $listaparametrizaciones) {
           ?>
     <tr>
-            <td><?=$listaparametrizaciones->PARAMETRIZACION?></td>
-            <td><?=$listaparametrizaciones->FASE?></td>
-            <td><?=$listaparametrizaciones->ACTIVIDAD?></td>
-            <td><?=$listaparametrizaciones->ENTREGABLE?></td>
-            <td><?=$listaparametrizaciones->ESTADO?></td>
+            <td><?=$listaparametrizaciones->nom_parametrizacion?></td>
+            <td><?=$listaparametrizaciones->nombre_fase?></td>
+            <td><?=$listaparametrizaciones->nombre_actividad?></td>
+            <td><?=$listaparametrizaciones->nombre_entregable?></td>
         </tr>
         <?php
       }

@@ -60,28 +60,6 @@ class Banco extends CI_Controller {
            array_push($integran, $usuario);
         }
         
-        $this->load->library('email');
-        $config['protocol'] = 'smtp';
-        $config["smtp_host"] = 'smtp.gmail.com';
-        $config["smtp_user"] = 'kptzmusic@gmail.com';
-        $config["smtp_pass"] = 'Admin2016';  
-        $config["smtp_port"] = '465';
-        $config['charset'] = 'utf-8';
-        $config['wordwrap'] = TRUE;
-        $config['validate'] = true;
-        $this->email->initialize($config);
-        $this->email->from('correo@gmail.com', 'Correos Proyectando');
-        $this->email->to('correo@gmail.com', 'Víctor Robles');
-        $this->email->subject("APROBACION");
-        $this->email->message(
-                "Email: adsadsadasdsadasdsad");
-        //Enviamos el email y si se produce bien o mal que avise con una flasdata
-        $mensajeenvio="";
-        if($this->email->send()){
-           $mensajeenvio = 'Se notifico a los integrantes';
-        }else{
-           $mensajeenvio = 'Error en el envio';
-        }
         
         if ($estado == 3) {
             $cierreIdeas = $this->banco_model->mostrarIntegrantesConteo($idea, $integran);
@@ -92,7 +70,7 @@ class Banco extends CI_Controller {
         }
         $this->banco_model->aprobarIdea($idea, $estado);
 
-        $this->session->set_flashdata('correcto', 'Idea Clasificada Correctamente '.$mensajeenvio.'!');
+        $this->session->set_flashdata('correcto', 'Idea Clasificada Correctamente !');
         redirect(base_url() . 'banco/bancoIdeas/' . $grupo, 'refresh');
     }
 

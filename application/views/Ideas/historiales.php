@@ -53,7 +53,7 @@ if (empty($versiones)) {
             	echo "Enviado";
             }
             if($versiones->estado==3){
-            	echo "Aprobado";
+            	echo "Historico";
             }
 
             if($versiones->estado==4){

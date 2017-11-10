@@ -11,10 +11,20 @@ class Reportes_model extends CI_Model {
     public function obtenerParametrizaciones($nombreusuario = "") {
            $this->db->order_by("1", "asc");
         if ($nombreusuario == "") {
-            $query = $this->db->get('vista_parametrizacion');
+            $query = $this->db->get('parametrizacion');
         } else {
              $query = $this->db->get_where('vista_parametrizacion', array('usuario'=>$nombreusuario));
         }
+       // echo  $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
+     public function obtenerParametrizacionesinforme($id = "") {
+             $query = $this->db->get_where('vista_parametrizacion', array('id_parametrizacion'=>$id));
+        
        // echo  $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query;

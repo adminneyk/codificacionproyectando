@@ -24,13 +24,13 @@ class Home extends CI_Controller {
                         //$grupos.=$listactividades->GRU_CODIGO.",";
                         array_push($grupos, $listactividades->GRU_CODIGO);
                     }
-                    //$grupos = substr($grupos, 0, -1);
                     $datos['listarevision'] = $this->notificaciones_model->obtenerRecordatorioRevision($grupos);
                     $datos['pendientesrevision'] = $this->notificaciones_model->obtenerPendientesBanco($grupos);
                     
                 }
                 if($perfil==3) {
                 $datos['devueltos'] = $this->notificaciones_model->obtenerDevoluciones($usuario);
+                $datos['paratrabajar'] = $this->notificaciones_model->pendientesarrancar($usuario);
                     
                 }
                 $this->load->view('Genericas/home',$datos);

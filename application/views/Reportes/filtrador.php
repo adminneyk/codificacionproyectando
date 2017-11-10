@@ -12,11 +12,11 @@ $(document).ready(function()
 	{
             $('#divmostrar').html('');
 	$("#buscar").click(function () {
-		var nombreresponsable= $("#usuario").val();
+		var idpara= $("#idpara").val();
 		$.ajax({
  			type: 'POST',
 			 url: '<?=base_url()?>reportes/consultar', 
- 			data: 'responsable='+nombreresponsable,
+ 			data: 'id='+idpara,
  			success: function(resp) { 
  			$('#divmostrar').html(resp);
  }
@@ -27,12 +27,26 @@ $(document).ready(function()
 
 <form class="form-horizontal">
 <fieldset>
-<legend>Filtro</legend>
+<legend>Parametrizaciones</legend>
 <div class="form-group">
-  <label class="col-md-4 control-label" for="usuario">Nombre de Usuario</label>  
+  <label class="col-md-4 control-label" for="usuario">Parametrizacion</label>  
   <div class="col-md-4">
-  <input name="usuario" class="form-control input-md" id="usuario" type="text" placeholder="Nombre de Usuario">
-    
+      <select id="idpara" name="idpara" class="form-control">
+      
+      
+      <?php
+
+if (!empty($para)) {
+    foreach ($para->result() as $pendiente) {
+        ?>
+      <option value="<?= $pendiente->id_parametrizacion; ?>"><?= $pendiente->nom_parametrizacion; ?> </option><?php
+                }
+                }
+            ?>
+      </select>
+      
+      
+      
   </div>
 </div>
 
