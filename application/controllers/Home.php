@@ -33,6 +33,7 @@ class Home extends CI_Controller {
                 $datos['paratrabajar'] = $this->notificaciones_model->pendientesarrancar($usuario);
                     
                 }
+                $datos['NADA']="";
                 $this->load->view('Genericas/home',$datos);
                 $this->load->view('footer');
 	}

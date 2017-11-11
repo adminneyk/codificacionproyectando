@@ -21,8 +21,6 @@ class Usuario_model extends CI_Model {
         $this->db->where('CLI_NUMDCTO', md5($documento));
 
         $querydata = $this->db->get();
-        //echo  $this->db->last_query();
-//die();
         $admin = FALSE;
         if ($querydata->num_rows() > 0) {
             $admin = true;
@@ -32,11 +30,12 @@ class Usuario_model extends CI_Model {
             $data = $query->row();
             $id = $data->CLI_NUMDCTO;
             if ($data->profesor == 1) {
-                $idpefil = 2;
                 if ($admin) {
-                    $permisos = array('reportes', 'revision', 'banco', 'home', 'parametrizacion', 'paramcurso','ideas');
-                    $nombreper="PROFESOR";
+                    $idpefil = 1;
+                    $permisos = array('reportes', 'home', 'parametrizacion', 'paramcurso');
+                    $nombreper="ADMINISTRADOR";
                 } else {
+                    $idpefil = 2;
                     $permisos = array('reportes', 'revision', 'banco', 'home','ideas');
                     $nombreper="PROFESOR";
                 }

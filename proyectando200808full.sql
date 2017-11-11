@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2017 a las 10:04:32
+-- Tiempo de generación: 11-11-2017 a las 17:31:43
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -130,23 +130,23 @@ CREATE TABLE IF NOT EXISTS `entregable` (
 --
 
 INSERT INTO `entregable` (`id_entregable`, `id_parametrizacion`, `id_actividad`, `nombre_entregable`, `descripcion_entregable`, `texto_ayuda`, `estado`) VALUES
-(1, 1, 1, 'Nombre de la idea', 'Escriba el nombre para su idea', 'debe ser un entregable claro', 1),
-(2, 1, 11, 'Objetivo general', 'describa el objetivo general del proyecto', 'Debe tener minimo un parrafo', 1),
-(3, 1, 12, 'Descripción del alcance', 'Defina el alcance que tendra su proyecto', 'recuerde que el alcance es lo que va a lograr y cumplir', 1),
-(4, 1, 13, 'Limitación de la idea', 'descripción del la limitación', 'hasta donde va a llegar', 1),
-(5, 1, 2, 'Justificación', 'Describa la justificación de su idea', 'Debe ser de un parrafo', 1),
-(6, 1, 3, 'Problema', 'Descripoción del problema encontrado', 'Debe ser de dos parrafos', 1),
-(7, 1, 4, 'Planteamiento del problema', 'Descripción del planteamiento del problema', 'no debe superar  dos parrafos', 1),
-(8, 1, 5, 'Tipo de investigación', 'Indique el tipo de investigación', 'Indique el tipo de investigación', 1),
-(9, 1, 6, 'Instrumentos de recolección', 'describa los instrunetos  de recolección de ideas.', 'entrevistas, enuestas etc', 1),
-(10, 1, 8, 'Muestra poblaconal', 'indique la población opjetico', 'es la poblacipon objetio de su investigacion.', 1),
-(11, 1, 9, 'Resultados de la investigación ', 'resultados de la investigacipon', 'tablas, calculos y graficos de los resultados', 1),
-(12, 1, 14, 'Agradecimientos', 'Descripción de los agradecimientos', 'describa con nombre propio  a quien otorga los agradecimientos', 1),
-(13, 1, 15, 'Dedicatoria', 'describa la dedicatoria', 'Indique con nombre propio las personas a quien dedica su idea.', 1),
-(14, 1, 16, 'Resumen', 'Resumen', 'Describa en un  parrafo de  208 caracteres el resumend e su idea,', 1),
-(15, 1, 10, 'Conclusiones de investigación', 'Conclusiones', 'Describa en un texto minimo de dos parrafos la conclusión dada de la inbvestigación', 1),
-(16, 1, 18, 'Prospectiva', 'Prospectiva', 'Es lo que quiere lograr con su proyecto', 1),
-(17, 1, 17, 'Recomendaciones', 'recomendaciones', 'describa las recomendaciones de su proyecto', 1);
+(1, 1, 1, 'Introducción', 'Introduccion a la idea del proyecto de grado a desarrollar', 'En este item ustedes deben especificar de que que se tratara su  futuro proyecto', 1),
+(2, 1, 11, 'Objetivos de la idea', 'Complemento de las objetivos generales y especificos del proyecto', 'Aqui deben escribir sus objetivos generales y especificos orientados a su idea de proyecto de grado', 1),
+(3, 1, 12, 'Determinacion del alcance', 'Determinacion de alcanze de proyecto', 'Aqui ustedes deben  concretar hasta donde va a llegar su idea de proyecto de grado ', 1),
+(4, 1, 13, 'Las limitaciones', 'Especificacion de las limitaciones de proyecto', 'Aqui ustedes deben identificar las limitaciones las cuales cuentan para el proyecto de grado', 1),
+(5, 1, 2, 'Justificación', 'Justificacion del  proyecto', 'Aqui usted debe especificar el porque de su idea  ', 1),
+(6, 1, 18, 'La Prospectiva', 'Propectiva del proyecto', 'Aqui deben mostrar la prospectiva que tienen del proyecto ', 1),
+(7, 1, 17, 'Recomendaciones', 'Recomendaciones', 'Aqui ustedes deben agregar las recomendaciones  para el proyecto ', 1),
+(8, 1, 3, 'La descripcion del problema', 'Descripcion del problema', 'Aqui se agrega la descripcion del proyecto de grado', 1),
+(9, 1, 4, 'Planteamiento del problema', 'Planteamiento del problema', 'Aqui ustedes deben agregar el planteamiento del problema a solucionar ', 1),
+(10, 1, 5, 'Tipo de Investigacion', 'Tipo de investigacion', 'Aqui deben agregar el tipo de inverstigacion utilizado en la recoleccion de la informacion ', 1),
+(11, 1, 6, 'Instrumentos de recolección', 'Instrumentos de recoleccion de investigacion', 'Aqui deben especificar los instrumentos de recoleccion de informacion', 1),
+(12, 1, 8, 'Muestra poblacional', 'La muestra poblacional', 'Aqui agrega la muestra poblacional de la investigacion ', 1),
+(13, 1, 9, 'Resultados de la investigación', 'Los resultados de investigacion', 'Aqui deben agregar los resultados los cuales fueron recaudados de la investigacion ', 1),
+(14, 1, 10, 'Conclusiones de investigación', 'Las conclusiones de investigacion', 'Aqui las conclusiones despues de la investigacion', 1),
+(15, 1, 14, 'Agradecimientos', 'Los agradecimientos', 'Aqui los agradecimientos del proyecto', 1),
+(16, 1, 15, 'Dedicatoria', 'Descripcion de la dedicatoria el proyecto', 'Aqui la dedicatoria del proyecto de grado ', 1),
+(17, 1, 16, 'Resumen', 'Descripcion del resumen', 'Aqui la descripcion del resumen', 1);
 
 -- --------------------------------------------------------
 
@@ -164,18 +164,7 @@ CREATE TABLE IF NOT EXISTS `equipos` (
   KEY `id_usuario` (`id_usuario`),
   KEY `id_idea` (`id_idea`),
   KEY `id_idea_2` (`id_idea`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `equipos`
---
-
-INSERT INTO `equipos` (`id_equipo`, `id_idea`, `id_usuario`, `estado`) VALUES
-(1, 22, 1033759479, 1),
-(2, 22, 1231231, 1),
-(3, 23, 3213213, 1),
-(4, 24, 1033759479, 1),
-(5, 25, 1231231, 1);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -250,24 +239,7 @@ CREATE TABLE IF NOT EXISTS `ideas` (
   PRIMARY KEY (`id_idea`),
   KEY `id_linea` (`id_linea`),
   KEY `id_grupo` (`id_grupo`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `ideas`
---
-
-INSERT INTO `ideas` (`id_idea`, `id_grupo`, `id_linea`, `nombre_idea`, `descripcion_idea`, `estado`, `objetivo_general`, `objetivo_especifico`) VALUES
-(1, 800, 1, 'Nombre de mi idea para el banco', 'Descripcion de mi idea para el banco', 2, 'Objetivo general de la idea del banco ', 'Objetivo especifico de la idea del banco'),
-(2, 800, 1, 'IDEA DE PRUEBA FINAL', 'Descripcion de mi idea para el banco', 2, 'Objetivo general de la idea del banco ', 'Objetivo especifico de la idea del banco'),
-(3, 800, 1, 'Nombre de mi idea para el banco AZUARES', 'Descripcion de mi idea para el banco', 2, 'Objetivo general de la idea del banco ', 'Objetivo especifico de la idea del banco'),
-(4, 800, 1, 'Nombre de mi idea para el banco', 'Descripcion de mi idea para el banco', 2, 'Objetivo general de la idea del banco ', 'Objetivo especifico de la idea del banco'),
-(5, 800, 1, 'Prueba par la profe', 'Descripcion de mi idea para el banco', 2, 'Objetivo general de la idea del banco ', 'Objetivo especifico de la idea del banco'),
-(20, 800, 1, 'Nombre de mi idea para el banco', 'Descripcion de mi idea para el banco', 2, 'Objetivo general de la idea del banco ', 'Objetivo especifico de la idea del banco'),
-(21, 800, 1, 'proyectando', 'Gestor de almacenamiento y maduración de ideas', 2, 'crear una herramienta que almacente y procese las ideas.', 'realizar investigación y recolleccipon de información'),
-(22, 800, 1, 'Nombre de Idea de prueba proyectando', 'DESC', 2, 'OBJETIVO GENERAL', 'OBJETIVO ESPECIFICO'),
-(23, 800, 1, 'Desarrollo de ideas de grado ', 'sistema para madurar las ideas de grado', 3, 'Ayudar a los estudiantes en la maduracion de sus ideas de grado', 'contruir un sistema que ayude en la generacion de informacion '),
-(24, 800, 1, 'Desarrollo de ideas de grado ', 'sistema para madurar las ideas de grado', 3, 'Ayudar a los estudiantes en la maduracion de sus ideas de grado', 'contruir un sistema que ayude en la generacion de informacion '),
-(25, 800, 1, 'Nombre de mi idea para el banco AZUARES', 'asldmasldsalmdsamdlsamdlamd', 3, 'asdñ,asñdsañdñsa,dñsa,dñas,dñas,d', 'asfmbasjfdsjknfksankjasnklnkasnd');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -285,16 +257,7 @@ CREATE TABLE IF NOT EXISTS `ideas_banco` (
   `objetivo_general` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL COMMENT 'Objetivos Generales de la Idea',
   `objetivo_especifico` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL COMMENT 'Objetivos Especificos de la Idea',
   PRIMARY KEY (`id_idea`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `ideas_banco`
---
-
-INSERT INTO `ideas_banco` (`id_idea`, `id_linea`, `nombre_idea`, `descripcion_idea`, `estado`, `objetivo_general`, `objetivo_especifico`) VALUES
-(1, 1, 'Desarrollo de ideas de grado ', 'sistema para madurar las ideas de grado', 1, 'Ayudar a los estudiantes en la maduracion de sus ideas de grado', 'contruir un sistema que ayude en la generacion de informacion '),
-(2, 1, 'Nombre de mi idea para el banco AZUARES', 'asldmasldsalmdsamdlsamdlamd', 1, 'asdñ,asñdsañdñsa,dñsa,dñas,dñas,d', 'asfmbasjfdsjknfksankjasnklnkasnd'),
-(3, 1, 'Nombre de Idea Registrada', 'Nombre de idea registrada por el usuario', 1, 'Objetivo general de la idea', 'Objetivo especifico');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -390,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `parametrizacion` (
 --
 
 INSERT INTO `parametrizacion` (`id_parametrizacion`, `nom_parametrizacion`, `descripcion_parametrizacion`, `id_responsable`, `estado`) VALUES
-(1, 'Ingeniera de software', 'jornada nocturna', 0, 1);
+(1, 'Marco de Trabajo de Ingenieria de Software', 'Descripcion del marco de trabajo para los estudiantes de materia de anteproyecto ', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -509,24 +472,7 @@ CREATE TABLE IF NOT EXISTS `versiones` (
   PRIMARY KEY (`id_version`),
   KEY `id_idea` (`id_idea`),
   KEY `id_entregable` (`id_entregable`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `versiones`
---
-
-INSERT INTO `versiones` (`id_version`, `id_idea`, `id_entregable`, `fecharegistro`, `entregable`, `revision`, `comentarios`, `estado`) VALUES
-(1, 22, 1, '2017-11-02 20:21:20', '<p>Version de prueba 001</p>\r\n', '', 'Mensaje de devolucion', 3),
-(2, 22, 1, '2017-11-02 20:21:22', '<p>Version de prueba 002</p>\r\n', '', 'Aprobado', 3),
-(3, 22, 2, '2017-11-02 20:30:15', '<p>general</p>\r\n', '', 'OK', 3),
-(4, 22, 3, '2017-11-02 20:37:45', '<p>ALCANCE</p>\r\n', '', 'OK', 3),
-(5, 22, 4, '2017-11-02 20:32:07', '<p>LIMITACI&Oacute;N</p>\r\n', '', 'OK', 3),
-(6, 22, 5, '2017-11-02 20:41:13', '<p>JUS</p>\r\n', '', 'PK', 3),
-(7, 22, 6, '2017-11-02 20:44:02', '<p>PROBLEMA</p>\r\n', '', 'OK', 3),
-(8, 22, 7, '2017-11-02 20:42:00', '<p>PLANTEAMIENTO</p>\r\n', '', '', 2),
-(10, 24, 1, '2017-11-09 19:33:52', '<p>REgistro Generado</p>\r\n', '', 'Aprobado', 3),
-(11, 23, 1, '2017-11-09 19:55:54', '<p>Version</p>\r\n', '', 'Devuelto', 5),
-(12, 23, 1, '2017-11-09 19:55:58', '<p>Version</p>\r\n', '', 'Aprobado', 3);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
