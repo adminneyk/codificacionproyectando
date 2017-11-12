@@ -1,9 +1,10 @@
+--FINAL LIMPIA
 -- phpMyAdmin SQL Dump
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2017 a las 17:31:43
+-- Tiempo de generación: 12-11-2017 a las 16:57:35
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -257,7 +258,14 @@ CREATE TABLE IF NOT EXISTS `ideas_banco` (
   `objetivo_general` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL COMMENT 'Objetivos Generales de la Idea',
   `objetivo_especifico` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL COMMENT 'Objetivos Especificos de la Idea',
   PRIMARY KEY (`id_idea`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `ideas_banco`
+--
+
+INSERT INTO `ideas_banco` (`id_idea`, `id_linea`, `nombre_idea`, `descripcion_idea`, `estado`, `objetivo_general`, `objetivo_especifico`) VALUES
+(1, 1, 'EATAPP', 'la idea es generar una apliacion para que se puedan pedir domicilios', 1, 'Generar una aplicacion para generar domicilios de forma facil', 'Desarrollar una aplicacion');
 
 -- --------------------------------------------------------
 
@@ -295,8 +303,8 @@ CREATE TABLE IF NOT EXISTS `linea` (
 --
 
 INSERT INTO `linea` (`id_linea`, `nombre_linea`, `descripcion_linea`, `estado`) VALUES
-(1, 'Linea de prueba', 'prUEBA DE LINEAS', 1),
-(2, 'Educacion', 'Aplicado a areas de educacion', 1),
+(1, 'Comidas', 'prUEBA DE LINEAS', 1),
+(2, 'Impacto Social', 'Aplicado a areas de educacion', 1),
 (3, 'Educacion', 'aplicaca a instutuciones educativas', 1);
 
 -- --------------------------------------------------------
@@ -451,7 +459,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `CLI_NUMDCTO`) VALUES
-(1, '0eb33bb157c40fef3884fa3faad1b418');
+(1, '77234bff7923691dd8c1985c7ae75ae3');
 
 -- --------------------------------------------------------
 
